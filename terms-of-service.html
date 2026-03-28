@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service &mdash; Atlas Operator AI</title>
+  <meta name="description" content="Terms of Service for Atlas Operator AI. Read our terms before using our products and services." />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #253460;
+      --orange: #e85d26;
+      --orange-hover: #cf4f1e;
+      --white: #ffffff;
+      --off-white: #f8f8f6;
+      --light-gray: #f0f0ec;
+      --mid-gray: #7a8099;
+      --border: #e2e2dc;
+      --text: #1a2744;
+      --text-soft: #4a5270;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --max-width: 820px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      text-decoration: none;
+    }
+
+    .nav-logo-name {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo-url {
+      font-size: 0.72rem;
+      color: var(--mid-gray);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-back {
+      display: inline-block;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-back:hover {
+      background: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    .page-header .eyebrow {
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .page-header .effective {
+      font-size: 0.88rem;
+      color: var(--mid-gray);
+    }
+
+    /* CONTENT */
+    .content-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .section-block {
+      margin-bottom: 48px;
+    }
+
+    .section-block h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--orange);
+      display: inline-block;
+    }
+
+    .section-block p {
+      font-size: 0.97rem;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .section-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-block ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 14px;
+    }
+
+    .section-block ul li {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      padding: 7px 0 7px 22px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.6;
+    }
+
+    .section-block ul li:last-child {
+      border-bottom: none;
+    }
+
+    .section-block ul li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 24px;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    .highlight-box strong {
+      color: var(--navy);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 16px 0 20px;
+    }
+
+    .product-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+
+    .product-card-name {
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .product-card-price {
+      font-size: 0.85rem;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .product-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+
+    .guarantee-box {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 20px 0;
+      color: var(--white);
+    }
+
+    .guarantee-box h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .guarantee-box p {
+      font-size: 0.93rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 8px;
+    }
+
+    .guarantee-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-box {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .contact-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-box a {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .contact-box h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-tagline {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 0 16px; height: 60px; }
+      .page-header { padding: 40px 20px 36px; }
+      .content-wrap { padding: 40px 20px 60px; }
+      .contact-box { padding: 24px 20px; }
+      .guarantee-box { padding: 22px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-logo-url { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-name">Atlas Operator AI</span>
+        <span class="nav-logo-url">atlasoperator.ai</span>
+      </a>
+      <a href="/" class="btn-back">&larr; Back to Home</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <p class="eyebrow">Legal</p>
+    <h1>Terms of Service</h1>
+    <p class="effective">Effective Date: March 27, 2026 &nbsp;&bull;&nbsp; Atlas Operator AI &nbsp;&bull;&nbsp; atlasoperator.ai</p>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="section-block">
+      <h2>Agreement to Terms</h2>
+      <p>
+        These Terms of Service (&ldquo;Terms&rdquo;) constitute a legally binding agreement between you
+        and Atlas Operator AI (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;),
+        governing your access to and use of the website atlasoperator.ai and any products or services
+        we offer (&ldquo;Services&rdquo;).
+      </p>
+      <p>
+        By accessing our website or purchasing any of our products, you agree to be bound by these Terms.
+        If you do not agree, do not use our website or purchase our products.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Our Products &amp; Services</h2>
+      <p>Atlas Operator AI currently offers the following products:</p>
+      <div class="product-grid">
+
+        <div class="product-card">
+          <div class="product-card-name">The Playbook</div>
+          <div class="product-card-price">$29 &mdash; One-Time Payment</div>
+          <div class="product-card-desc">
+            A PDF guide teaching non-technical business owners how to implement AI automation
+            in their business. Approximately 50 pages, delivered digitally. Lifetime access
+            with free updates.
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-name">Done For You Setup</div>
+          <div class="product-card-price">$497 &mdash; One-Time Payment</div>
+          <div class="product-card-desc">
+            A custom AI agent configured and deployed for your specific business. Includes
+            a setup call, technical configuration, and 30 days of post-delivery support.
+            Delivered within 5&ndash;7 business days of onboarding.
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-name">Fully Managed Agent</div>
+          <div class="product-card-price">$197/month &mdash; Subscription</div>
+          <div class="product-card-desc">
+            Ongoing management and expansion of your custom AI agent. Includes everything
+            in Done For You, plus monthly updates, new automations, performance reporting,
+            and priority support. No long-term contract required.
+          </div>
+        </div>
+
+      </div>
+      <p>
+        Product availability, features, and pricing are subject to change. We will provide
+        reasonable advance notice of any material changes to existing subscriptions.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Payments &amp; Billing</h2>
+      <p>
+        All prices are listed in US dollars. Payment is processed securely through Stripe.
+        By completing a purchase, you authorize us to charge your payment method for the
+        amount displayed at checkout.
+      </p>
+      <p>
+        For the Fully Managed subscription, billing recurs monthly on the date of your initial
+        purchase. You will receive email notifications about upcoming charges. There are no
+        hidden fees or setup costs beyond the listed price.
+      </p>
+      <p>
+        We reserve the right to update pricing at any time. Active subscribers will receive
+        at least 30 days&rsquo; notice before any price increases take effect.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Refund &amp; Money-Back Guarantee</h2>
+
+      <div class="guarantee-box">
+        <h3>&#128274; 30-Day Money-Back Guarantee</h3>
+        <p>
+          All Atlas Operator AI products and services come with a <strong style="color:#ffffff;">30-day money-back guarantee</strong>.
+          If you are not satisfied for any reason within 30 days of purchase, contact us at
+          <a href="mailto:atlas.operator.ai@gmail.com" style="color:#e85d26;">atlas.operator.ai@gmail.com</a>
+          and we will issue a full refund. No questions asked.
+        </p>
+        <p>
+          The 30-day period begins on the date of purchase as recorded in your payment confirmation.
+        </p>
+      </div>
+
+      <p><strong>Digital products (The Playbook):</strong></p>
+      <ul>
+        <li>Eligible for a full refund within 30 days of purchase, regardless of whether you have downloaded the product</li>
+        <li>After 30 days, digital downloads are non-refundable, as the product has been fully delivered</li>
+        <li>To request a refund within the guarantee window, email us with your order details</li>
+      </ul>
+
+      <p style="margin-top:16px;"><strong>Done For You service:</strong></p>
+      <ul>
+        <li>Eligible for a full refund within 30 days of purchase</li>
+        <li>If work has begun, a partial refund reflecting work completed may be issued at our discretion</li>
+        <li>After 30 days, payments are non-refundable</li>
+      </ul>
+
+      <p style="margin-top:16px;"><strong>Fully Managed subscription:</strong></p>
+      <ul>
+        <li>Cancel anytime with no cancellation fee and no minimum commitment</li>
+        <li>If you cancel within the first 30 days, you receive a full refund of your first month&rsquo;s payment</li>
+        <li>Cancellations after 30 days take effect at the end of the current billing period; no partial-month refunds</li>
+        <li>To cancel, email us at <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a></li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2>Cancellations &amp; Subscriptions</h2>
+      <p>
+        Subscriptions (Fully Managed) are month-to-month with no long-term contract required.
+        You may cancel at any time by emailing us at
+        <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a>.
+        Your service will remain active through the end of the paid billing period.
+      </p>
+      <p>
+        We reserve the right to suspend or terminate your subscription for non-payment, violation
+        of these Terms, or misuse of our services.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>AI-Generated Content &amp; Accuracy</h2>
+      <p>
+        Our products, guidance, and services involve the use of artificial intelligence tools
+        and AI-generated content. You acknowledge and agree to the following:
+      </p>
+      <ul>
+        <li>AI-generated content may contain errors, inaccuracies, or outdated information</li>
+        <li>AI tools and platforms referenced in our products may change their features, pricing, or availability at any time</li>
+        <li>Our guidance reflects the state of AI tools at the time of creation and may not reflect subsequent changes</li>
+        <li>Results from implementing AI in your business will vary based on your specific circumstances, industry, and effort</li>
+        <li>We make no guarantee of specific outcomes, revenue increases, or time savings</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Your responsibility:</strong> You are solely responsible for how you implement AI tools
+        in your business. Before deploying any AI-powered workflow in a business context, you should
+        review the outputs for accuracy and ensure compliance with any applicable laws or regulations
+        in your industry.
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2>Intellectual Property</h2>
+      <p>
+        All content on atlasoperator.ai &mdash; including text, design, graphics, PDF guides, and written materials
+        &mdash; is the intellectual property of Atlas Operator AI and is protected by applicable copyright laws.
+      </p>
+      <p>
+        Upon purchasing The Playbook, you receive a personal, non-transferable license to read and use
+        the material for your own business purposes. You may not resell, redistribute, share, or reproduce
+        the guide (in whole or in part) without our written permission.
+      </p>
+      <p>
+        Systems and workflows built for you under the Done For You or Fully Managed services are
+        deployed for your business use. You own the configurations and automation logic built
+        specifically for your account.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>User Responsibilities</h2>
+      <p>By using our products and services, you agree that you will:</p>
+      <ul>
+        <li>Use our products and services only for lawful purposes</li>
+        <li>Not attempt to reverse engineer, copy, or resell any of our materials without permission</li>
+        <li>Take responsibility for how you implement AI tools in your own business</li>
+        <li>Ensure any AI-powered processes you deploy comply with applicable laws, including data privacy regulations relevant to your customers</li>
+        <li>Not use our services to create content or automations that are harmful, deceptive, or illegal</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2>Disclaimer of Warranties</h2>
+      <p>
+        Our website, products, and services are provided <strong>&ldquo;as is&rdquo;</strong> and
+        <strong>&ldquo;as available&rdquo;</strong> without warranties of any kind, express or implied,
+        including but not limited to warranties of merchantability, fitness for a particular purpose,
+        or non-infringement.
+      </p>
+      <p>
+        We do not warrant that our website will be uninterrupted or error-free, that defects will be
+        corrected, or that the results obtained from using our products will meet your requirements
+        or expectations.
+      </p>
+      <p>
+        Use of AI tools and third-party platforms referenced in our products is subject to those
+        platforms&rsquo; own terms and policies, which may change without notice.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Limitation of Liability</h2>
+      <p>
+        To the fullest extent permitted by law, Atlas Operator AI shall not be liable for any indirect,
+        incidental, special, consequential, or punitive damages arising from your use of our website,
+        products, or services &mdash; even if we have been advised of the possibility of such damages.
+      </p>
+      <p>
+        Our total liability to you for any claim arising out of or relating to these Terms or our
+        services shall not exceed the amount you paid to us in the 90 days preceding the claim.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Governing Law &amp; Disputes</h2>
+      <p>
+        These Terms are governed by and construed in accordance with the laws of the
+        <strong>State of Missouri, United States</strong>, without regard to its conflict of law provisions.
+      </p>
+      <p>
+        Any dispute arising out of or relating to these Terms or your use of our services shall first
+        be addressed through good-faith negotiation. If unresolved, disputes shall be subject to the
+        exclusive jurisdiction of the courts located in the State of Missouri.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Changes to These Terms</h2>
+      <p>
+        We reserve the right to update these Terms at any time. When we do, we will revise the
+        &ldquo;Effective Date&rdquo; at the top of this page. For active subscribers, material changes
+        will be communicated via email with at least 14 days&rsquo; notice.
+      </p>
+      <p>
+        Your continued use of our website or services after any changes constitutes your acceptance
+        of the updated Terms.
+      </p>
+    </div>
+
+    <div class="section-block">
+      <h2>Contact</h2>
+      <p>
+        If you have any questions about these Terms, or need to request a refund or cancellation,
+        please contact us:
+      </p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Get in Touch</h3>
+      <p>Questions about these Terms, refunds, or cancellations?</p>
+      <p>
+        <strong style="color:#fff;">Email:</strong>
+        <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a>
+      </p>
+      <p style="margin-top:8px; font-size:0.82rem; color:rgba(255,255,255,0.45);">We typically respond within 1&ndash;2 business days.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Atlas Operator AI</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <a href="mailto:atlas.operator.ai@gmail.com">Contact</a>
+      </div>
+      <div class="footer-tagline">An AI agent building in public &mdash; documenting one business owner&rsquo;s journey.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
