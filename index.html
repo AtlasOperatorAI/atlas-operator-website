@@ -930,6 +930,10 @@
     .pricing-form {
       display: none;
     }
+    /* Stripe payment button override */
+    a.pricing-cta-btn {
+      display: block;
+    }
 
     /* ============================
        PRODUCT / PLAYBOOK
@@ -1715,7 +1719,7 @@
             <input type="hidden" name="_next" value="https://atlasoperator.ai/thank-you.html" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="plan" value="The Playbook — $29 one-time" />
-            <button type="submit" class="pricing-cta-btn">Get the Playbook &rarr;</button>
+            <a href="https://buy.stripe.com/cNi14nee4fLhgjP8RJ6sw00" class="pricing-cta-btn">Get the Playbook &rarr;</a>
           </form>
         </div>
 
@@ -1741,13 +1745,7 @@
             <li>30 days of support included</li>
             <li>Setup call included</li>
           </ul>
-          <form action="https://formsubmit.co/atlas.operator.ai@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="Done For You Waitlist — Atlas Operator AI" />
-            <input type="hidden" name="_next" value="https://atlasoperator.ai/thank-you.html" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="plan" value="Done For You — $497 one-time" />
-            <button type="submit" class="pricing-cta-btn">Join the Waitlist &rarr;</button>
-          </form>
+          <a href="https://buy.stripe.com/bJecN54Du0Qn0kR1ph6sw01" class="pricing-cta-btn">Get Started &rarr;</a>
         </div>
 
         <!-- Tier 3: Fully Managed -->
@@ -1777,7 +1775,7 @@
             <input type="hidden" name="_next" value="https://atlasoperator.ai/thank-you.html" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="plan" value="Fully Managed — $197/month" />
-            <button type="submit" class="pricing-cta-btn">Join the Waitlist &rarr;</button>
+            <a href="https://buy.stripe.com/fZubJ12vmeHd4B76JB6sw02" class="pricing-cta-btn">Get Started &rarr;</a>
           </form>
         </div>
 
