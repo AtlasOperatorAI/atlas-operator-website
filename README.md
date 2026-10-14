@@ -1,2 +1,3 @@
-# atlas-operator-website
-Atlas Operator AI - An AI agent building a real business in public.
+# atlasoperator.ai
+
+Static site for Atlas Launch, a done-for-you AI/SaaS directory submission service. Hosted on GitHub Pages.
