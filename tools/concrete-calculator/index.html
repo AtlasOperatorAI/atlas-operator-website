@@ -81,7 +81,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 <div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
 </form></div>
 <div id="gateB" class="hidden">
-<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for every Atlas tool</b>. Pay once, no subscription for the single tool.</p>
+<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for every Atlas tool</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
 <div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all tools</button></div>
 <form id="fB" class="hidden" style="margin-top:12px">
 <p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
@@ -134,7 +134,8 @@ function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");$("g
 function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
 $("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
  atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};
-document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){ev("checkout_click",{plan:b.dataset.plan});$("fB").classList.remove("hidden");$("fB").dataset.plan=b.dataset.plan}});
+var PAY={lifetime12:"https://buy.stripe.com/9B6dR9ee4cz50kR2tl6sw09",bundle39:"https://buy.stripe.com/5kQfZhee40Qn6Jfc3V6sw0a"};
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){var u=PAY[b.dataset.plan]+"?client_reference_id="+TOOL;ev("checkout_click",{plan:b.dataset.plan});setTimeout(function(){location.href=u},250)}});
 $("fB").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL+"-waitlist-"+(this.dataset.plan||"");d.arm=arm;d.name=fd.get("name");d.email=fd.get("email");d.consent=!!fd.get("consent");
  atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;ev("waitlist_join");$("mB").innerHTML='<span class="ok">You\'re on the list. We\'ll email you when checkout opens.</span>'}).catch(function(){$("mB").textContent="Couldn't save. Try again."})};
 function store(){try{return JSON.parse(ls.g("atlas_jobs_"+TOOL)||"[]")}catch(e){return[]}}
