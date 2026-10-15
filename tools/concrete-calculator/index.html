@@ -129,7 +129,7 @@ var arm=ls.g("atlas_arm");var fresh=false;if(arm!=="A"&&arm!=="B"){arm=Math.rand
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d)}
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
 if(fresh)whenReady(function(){ev("arm_assigned")});
-var unlocked=ls.g("atlas_pro_"+TOOL)==="1";
+var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
 function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);jobs()}
 function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
 $("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
