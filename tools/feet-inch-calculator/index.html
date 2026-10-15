@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feet and Inches Calculator with Fractions | Atlas Operator</title>
+<meta name="description" content="Free feet-inch-fraction calculator: add, subtract, multiply and divide 5' 7 3/8\" style measurements, plus stairs, rafters and board feet. No sign-up.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/feet-inch-calculator/">
+<meta name="theme-color" content="#07090e">
+<meta property="og:type" content="website"><meta property="og:title" content="Free Feet & Inches Calculator with Fractions"><meta property="og:description" content="Add and subtract feet-inch-fraction measurements, plus stairs, rafters and board feet. Free, no sign-up."><meta property="og:url" content="https://atlasoperator.ai/tools/feet-inch-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Feet and Inches Calculator","url":"https://atlasoperator.ai/tools/feet-inch-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","description":"Add, subtract, multiply and divide feet-inch-fraction measurements, and calculate stairs, rafters and board feet.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/"}},
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://atlasoperator.ai/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://atlasoperator.ai/#tools"},{"@type":"ListItem","position":3,"name":"Feet and Inches Calculator","item":"https://atlasoperator.ai/tools/feet-inch-calculator/"}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I add feet and inches with fractions?","acceptedAnswer":{"@type":"Answer","text":"Convert each measurement to inches (feet × 12 plus inches plus the fraction), add them, then convert back: divide by 12 for feet and keep the remainder as inches. 5' 7 3/8\" + 2' 6 3/4\" = 67.375 + 30.75 = 98.125 in = 8' 2 1/8\"."}},
+{"@type":"Question","name":"How many stairs do I need for a given rise?","acceptedAnswer":{"@type":"Answer","text":"Divide the total rise by the maximum riser height (7 3/4 in under the IRC) and round up to get the number of risers. Treads are one fewer than risers. A 108 in rise needs 14 risers of about 7 23/32 in and 13 treads."}},
+{"@type":"Question","name":"How do I calculate rafter length from pitch?","acceptedAnswer":{"@type":"Answer","text":"Rafter length = run × √(144 + pitch²) ÷ 12, where pitch is the rise per 12 in of run. A 12 ft run at 6/12 gives about 13' 5\"."}},
+{"@type":"Question","name":"How do I calculate board feet?","acceptedAnswer":{"@type":"Answer","text":"Board feet = thickness (in) × width (in) × length (ft) ÷ 12. A 2×6 that is 8 ft long is 8 board feet (nominal)."}}]}]}</script>
+<style>
+:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}
+.nav{border-bottom:1px solid var(--line)}.nav .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{display:flex;gap:9px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none}.logo i{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.crumb{font-size:.85rem;color:var(--mut);margin:16px 0 4px}.crumb a{color:var(--mut)}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:4px 0 6px;letter-spacing:-.02em}.lead{color:var(--mut);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--acc);color:#06101f;border-color:var(--acc);font-weight:700}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(min-width:640px){.f{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:16px}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(min-width:640px){.res{grid-template-columns:repeat(4,1fr)}}
+.big{background:#0a0e16;border:1px solid var(--line);border-radius:10px;padding:10px}.big b{display:block;font-size:1.35rem}.big span{font-size:.8rem;color:var(--mut)}
+.btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.pro h2{margin:0 0 4px;font-size:1.2rem}.lock{opacity:.55}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.small{font-size:.82rem;color:var(--mut)}.ok{color:#7ee2a8}.hidden{display:none}
+ul.jobs{list-style:none;padding:0;margin:8px 0 0}ul.jobs li{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:7px 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+#quote{display:none}
+@media print{body{background:#fff;color:#000}body>*{display:none!important}#quote{display:block!important;padding:24px;font:14px system-ui}#quote table{border-collapse:collapse;width:100%}#quote td{border:1px solid #ccc;padding:6px}}
+.calcrow{display:grid;grid-template-columns:1fr 80px 1fr;gap:8px;align-items:end}.calcrow select{text-align:center}
+</style>
+</head><body>
+<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
+<main class="w">
+<nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Feet-inch calculator</nav>
+<h1>Feet and Inches Calculator with Fractions</h1>
+<p class="lead">Add, subtract, multiply and divide tape-measure numbers like 5' 7 3/8", plus stairs, rafters and board feet. Free, no sign-up. Does the everyday math in Construction Master Pro ($39.99/yr).</p>
+
+<section class="card" aria-label="Calculator">
+<div class="tabs" role="tablist"><button role="tab" data-m="math" aria-selected="true">Feet-inch</button><button role="tab" data-m="stairs" aria-selected="false">Stairs</button><button role="tab" data-m="rafter" aria-selected="false">Rafter</button><button role="tab" data-m="bf" aria-selected="false">Board ft</button></div>
+<div data-p="math">
+<div class="calcrow"><label>Measurement A<input id="ma" value="5' 7 3/8&quot;" autocomplete="off"></label><label>Op<select id="mo"><option>+</option><option>-</option><option value="*">×</option><option value="/">÷</option></select></label><label id="lbm">Measurement B<input id="mb" value="2' 6 3/4&quot;" autocomplete="off"></label></div>
+<div class="f" style="margin-top:10px"><label>Round to<select id="den"><option value="16">1/16"</option><option value="8">1/8"</option><option value="32">1/32"</option><option value="4">1/4"</option></select></label></div>
+<p class="small">Type like 5' 7 3/8", 5ft 7-3/8in, 67.375 or 3/4. For × and ÷, B is a plain number.</p>
+</div>
+<div data-p="stairs" class="hidden"><div class="f">
+<label>Total rise<input id="sr" value="9'" autocomplete="off"></label><label>Max riser (in)<input id="smax" type="number" inputmode="decimal" step="any" value="7.75"></label><label>Tread depth (in)<input id="st" type="number" inputmode="decimal" step="any" value="10"></label></div></div>
+<div data-p="rafter" class="hidden"><div class="f">
+<label>Run (horizontal)<input id="rr" value="12'" autocomplete="off"></label><label>Pitch (rise per 12)<input id="rp" type="number" inputmode="decimal" step="any" value="6"></label><label>Overhang<input id="ro" value="0" autocomplete="off"></label></div></div>
+<div data-p="bf" class="hidden"><div class="f">
+<label>Thickness (in)<input id="bt" type="number" inputmode="decimal" step="any" value="2"></label><label>Width (in)<input id="bw" type="number" inputmode="decimal" step="any" value="6"></label><label>Length (ft)<input id="bl" type="number" inputmode="decimal" step="any" value="8"></label><label>Quantity<input id="bq" type="number" inputmode="numeric" step="1" value="1"></label><label>$ per board ft (optional)<input id="bp" type="number" inputmode="decimal" step="any"></label></div></div>
+<div class="res" aria-live="polite"><div class="big" style="grid-column:span 2"><b id="r1">–</b><span id="l1">result</span></div><div class="big"><b id="r2">–</b><span id="l2"></span></div><div class="big"><b id="r3">–</b><span id="l3"></span></div></div>
+<p class="small" id="r4"></p>
+</section>
+
+<section class="card pro" id="pro">
+<h2>Pro: saved cut lists &amp; branded PDF</h2>
+<p class="small">Save measurements and calculations to a job and print a branded cut list or quote.</p>
+<div id="gateA" class="hidden">
+<p><b>Register free to unlock Pro.</b></p>
+<form id="fA" class="f">
+<label>Name<input name="name" required autocomplete="name"></label>
+<label>Business<input name="business" autocomplete="organization"></label>
+<label>Email<input name="email" type="email" required autocomplete="email"></label>
+<label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+<label style="grid-column:1/-1;display:flex;gap:8px;align-items:flex-start"><input name="consent" type="checkbox" required style="width:auto;margin-top:4px"> <span>I agree that Atlas Operator AI may email me about this tool and new tools. Unsubscribe anytime. See the <a href="/privacy-policy.html">privacy policy</a>.</span></label>
+<div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
+</form></div>
+<div id="gateB" class="hidden">
+<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for every Atlas tool</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
+<div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all tools</button></div>
+<form id="fB" class="hidden" style="margin-top:12px">
+<p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
+<div class="f"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
+<label style="display:flex;gap:8px;margin-top:8px"><input name="consent" type="checkbox" required style="width:auto"> <span>Email me when Pro checkout opens. See the <a href="/privacy-policy.html">privacy policy</a>.</span></label>
+<div class="row"><button class="btn" type="submit">Notify me</button><span class="small" id="mB"></span></div>
+</form></div>
+<div id="proUI" class="lock">
+<div class="f" style="margin-top:10px"><label>Job name<input id="jn" placeholder="Smith deck stairs"></label><label>Your business<input id="biz" placeholder="Your company"></label><label>Customer<input id="cust" placeholder="Customer name"></label></div>
+<div class="row"><button class="btn" id="save">Save to job</button><button class="btn ghost" id="pdf">Branded PDF quote</button></div>
+<ul class="jobs" id="jobs"></ul>
+</div>
+<p class="small">Want this calculator branded on your own website? <a href="mailto:atlas.operator.ai@gmail.com?subject=Branded%20feet-inch%20calculator">Email us for a quote</a>.</p>
+</section>
+
+<section><h2>How it works</h2>
+<p>Every measurement is converted to inches (feet × 12 + inches + fraction), the math is done in inches, and the answer is converted back to feet, inches and the nearest fraction you choose.</p>
+<p><b>Stairs:</b> risers = total rise ÷ max riser, rounded up; treads = risers − 1; stringer = √(run² + rise²). <b>Rafter:</b> length = run × √(144 + pitch²) ÷ 12. <b>Board feet:</b> thickness × width × length (ft) ÷ 12. Always check local code before building stairs.</p>
+<h2>FAQ</h2>
+<details><summary>How do I add feet and inches with fractions?</summary><p>Convert each measurement to inches, add them, then convert back. 5' 7 3/8" + 2' 6 3/4" = 67.375 + 30.75 = 98.125 in = 8' 2 1/8".</p></details>
+<details><summary>How many stairs do I need for a given rise?</summary><p>Divide the total rise by the maximum riser height (7 3/4 in under the IRC) and round up to get the number of risers. Treads are one fewer than risers. A 108 in rise needs 14 risers of about 7 23/32 in and 13 treads.</p></details>
+<details><summary>How do I calculate rafter length from pitch?</summary><p>Rafter length = run × √(144 + pitch²) ÷ 12, where pitch is the rise per 12 in of run. A 12 ft run at 6/12 gives about 13' 5".</p></details>
+<details><summary>How do I calculate board feet?</summary><p>Board feet = thickness (in) × width (in) × length (ft) ÷ 12. A 2×6 that is 8 ft long is 8 board feet (nominal).</p></details>
+</section>
+</main>
+<footer><div class="w">© 2026 Atlas Operator AI, a division of REST ON REQUEST LLC · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · Estimates only; verify measurements and local code.</div></footer>
+<div id="quote"></div>
+<script src="/t.js" defer></script>
+<script src="fic.js"></script>
+<script>
+var last=null;
+(function(){
+var $=function(i){return document.getElementById(i)},mode="math";
+function set(a,b,c,d,la,lb,lc){$("r1").textContent=a;$("r2").textContent=b;$("r3").textContent=c;$("l1").textContent=la;$("l2").textContent=lb;$("l3").textContent=lc;$("r4").textContent=d}
+function n(id){var v=parseFloat($(id).value);return isFinite(v)?v:0}
+function run(){var den=+$("den").value||16,F=FIC.fmt;
+ if(mode==="math"){var o=$("mo").value,a=FIC.parse($("ma").value),b=(o==="*"||o==="/")?parseFloat($("mb").value):FIC.parse($("mb").value);$("lbm").firstChild.textContent=(o==="*"||o==="/")?"Number B":"Measurement B";
+  var r=FIC.op(a,o,b);if(!isFinite(r)){set("–","–","–","Check your input.","result","","");last=null;return}
+  set(F(r,den),(r).toFixed(4)+'"',(r/12).toFixed(4)+"'",(r*25.4).toFixed(1)+" mm · "+(r*2.54).toFixed(2)+" cm","feet-inches","decimal inches","decimal feet");last=$("ma").value+" "+$("mo").selectedOptions[0].text+" "+$("mb").value+" = "+F(r,den)}
+ else if(mode==="stairs"){var tr=FIC.parse($("sr").value),s=tr>0&&n("smax")>0?FIC.stairs(tr,n("smax"),n("st")):null;if(!s){set("–","–","–","","","","");last=null;return}
+  set(s.risers+" risers @ "+F(s.riser,16),s.treads+" treads","run "+F(s.totalRun,16),"Stringer ≈ "+F(s.stringer,16)+" · angle "+s.angleDeg.toFixed(1)+"°","risers","treads @ "+s.tread+'"',"total run");last="Stairs: rise "+F(tr,16)+" → "+s.risers+" risers @ "+F(s.riser,16)+", "+s.treads+" treads, run "+F(s.totalRun,16)}
+ else if(mode==="rafter"){var run_=FIC.parse($("rr").value),oh=FIC.parse($("ro").value)||0,p=n("rp");if(!(run_>0)){set("–","–","–","","","","");last=null;return}var r2=FIC.rafter(run_,p,oh);
+  set(F(r2.withOverhang,16),"rise "+F(r2.rise,16),r2.angleDeg.toFixed(2)+"°","Rafter without overhang: "+F(r2.length,16)+" · decimal "+(r2.withOverhang/12).toFixed(3)+" ft","rafter length","total rise","roof angle");last="Rafter: run "+F(run_,16)+" @ "+p+"/12 → "+F(r2.withOverhang,16)}
+ else{var bf=FIC.boardFeet(n("bt"),n("bw"),n("bl"),Math.max(1,Math.floor(n("bq"))||1)),cost=n("bp")?bf*n("bp"):0;set(bf.toFixed(2)+" bf",cost?"$"+cost.toFixed(2):"–",(bf/12).toFixed(3)+" ft³","","board feet","cost","volume");last="Board ft: "+n("bt")+"×"+n("bw")+"×"+n("bl")+"ft ×"+(Math.floor(n("bq"))||1)+" = "+bf.toFixed(2)+" bf"}}
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){mode=b.dataset.m;document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});document.querySelectorAll("[data-p]").forEach(function(p){p.classList.toggle("hidden",p.dataset.p!==mode)});run()}});
+document.querySelectorAll("input,select").forEach(function(e){if(!e.closest("#pro"))e.addEventListener("input",run)});run();
+window.__run=run;
+})();
+(function(){
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+/* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var $=function(i){return document.getElementById(i)},TOOL="feet-inch-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
+var arm=ls.g("atlas_arm");var fresh=false;if(arm!=="A"&&arm!=="B"){arm=Math.random()<0.5?"A":"B";ls.s("atlas_arm",arm);fresh=true}
+function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d)}
+function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
+if(fresh)whenReady(function(){ev("arm_assigned")});
+var unlocked=ls.g("atlas_pro_"+TOOL)==="1";
+function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);jobs()}
+function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
+$("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
+ atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};
+var PAY={lifetime12:"https://buy.stripe.com/9B6dR9ee4cz50kR2tl6sw09",bundle39:"https://buy.stripe.com/5kQfZhee40Qn6Jfc3V6sw0a"};
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){var u=PAY[b.dataset.plan]+"?client_reference_id="+TOOL;ev("checkout_click",{plan:b.dataset.plan});setTimeout(function(){location.href=u},250)}});
+$("fB").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL+"-waitlist-"+(this.dataset.plan||"");d.arm=arm;d.name=fd.get("name");d.email=fd.get("email");d.consent=!!fd.get("consent");
+ atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;ev("waitlist_join");$("mB").innerHTML='<span class="ok">You\'re on the list. We\'ll email you when checkout opens.</span>'}).catch(function(){$("mB").textContent="Couldn't save. Try again."})};
+function store(){try{return JSON.parse(ls.g("atlas_jobs_"+TOOL)||"[]")}catch(e){return[]}}
+function jobs(){var j=store(),ul=$("jobs");ul.innerHTML="";j.forEach(function(x,i){var li=document.createElement("li");li.textContent=x.name+" · "+x.line;var d=document.createElement("button");d.className="btn ghost";d.textContent="Delete";d.onclick=function(){j.splice(i,1);ls.s("atlas_jobs_"+TOOL,JSON.stringify(j));jobs()};li.appendChild(d);ul.appendChild(li)})}
+$("save").onclick=function(){if(!gate())return;var j=store();if(!last)return;j.unshift({name:$("jn").value||"Job "+(j.length+1),line:last,t:Date.now()});ls.s("atlas_jobs_"+TOOL,JSON.stringify(j.slice(0,50)));jobs()};
+$("pdf").onclick=function(){if(!gate())return;var e=function(s){return String(s||"").replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})};var j=store();
+ $("quote").innerHTML="<h1>"+e($("biz").value||"Cut list")+"</h1><p>Customer: "+e($("cust").value)+"<br>Job: "+e($("jn").value)+"<br>Date: "+new Date().toLocaleDateString()+"</p><table>"+j.map(function(x){return "<tr><td>"+e(x.name)+"</td><td>"+e(x.line)+"</td></tr>"}).join("")+(last?"<tr><td>Current</td><td>"+e(last)+"</td></tr>":"")+"</table><p style='font-size:11px;color:#666'>Prepared with atlasoperator.ai</p>";window.print()};
+render();
+})();
+</script>
+</body></html>
