@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Square Footage Calculator: Area in Sq Ft, Sq Yd and m² | Atlas Operator</title>
+<meta name="description" content="Free area and square footage calculator for rectangles, triangles, circles and L-shaped rooms. Feet-inch fractions or metric, waste % and cost. No sign-up.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/area-calculator/">
+<meta name="theme-color" content="#07090e">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Free Square Footage Calculator"><meta property="og:description" content="Add up rectangles, triangles, circles and L-shapes in sq ft, sq yd and m², with waste % and cost. Free, no sign-up."><meta property="og:url" content="https://atlasoperator.ai/tools/area-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Area and Square Footage Calculator","url":"https://atlasoperator.ai/tools/area-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","description":"Calculate square feet, square yards and square metres for rectangles, triangles, circles and L-shapes, with waste and material cost.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/"}},
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://atlasoperator.ai/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://atlasoperator.ai/#tools"},{"@type":"ListItem","position":3,"name":"Area Calculator","item":"https://atlasoperator.ai/tools/area-calculator/"}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I calculate square footage?","acceptedAnswer":{"@type":"Answer","text":"Multiply length by width in feet. A 12' × 10' room is 120 sq ft. For inches, convert to feet first: 12' 6\" is 12.5 ft, so 12' 6\" × 10' is 125 sq ft."}},
+{"@type":"Question","name":"How do I find the square footage of an L-shaped room?","acceptedAnswer":{"@type":"Answer","text":"Take the overall length × width as if it were a rectangle, then subtract the missing corner. A 20' × 15' outline missing an 8' × 6' corner is 300 − 48 = 252 sq ft."}},
+{"@type":"Question","name":"How do I convert square feet to square yards and square metres?","acceptedAnswer":{"@type":"Answer","text":"Divide square feet by 9 for square yards, and multiply by 0.0929 for square metres. 252 sq ft = 28 sq yd = 23.41 m²."}},
+{"@type":"Question","name":"How much extra flooring should I buy for waste?","acceptedAnswer":{"@type":"Answer","text":"A common allowance is about 10% for straight lay and more for diagonal or herringbone patterns. Check the manufacturer's guidance. 252 sq ft plus 10% is 277.2 sq ft."}}]}]}</script>
+<style>
+:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}
+.nav{border-bottom:1px solid var(--line)}.nav .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{display:flex;gap:9px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none}.logo i{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.crumb{font-size:.85rem;color:var(--mut);margin:16px 0 4px}.crumb a{color:var(--mut)}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:4px 0 6px;letter-spacing:-.02em}.lead{color:var(--mut);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--acc);color:#06101f;border-color:var(--acc);font-weight:700}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(min-width:640px){.f{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:16px}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(min-width:640px){.res{grid-template-columns:repeat(4,1fr)}}
+.big{background:#0a0e16;border:1px solid var(--line);border-radius:10px;padding:10px}.big b{display:block;font-size:1.35rem}.big span{font-size:.8rem;color:var(--mut)}
+.btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.pro h2{margin:0 0 4px;font-size:1.2rem}.lock{opacity:.55}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.small{font-size:.82rem;color:var(--mut)}.ok{color:#7ee2a8}.hidden{display:none}
+ul.jobs{list-style:none;padding:0;margin:8px 0 0}ul.jobs li{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:7px 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+#quote{display:none}
+@media print{body{background:#fff;color:#000}body>*{display:none!important}#quote{display:block!important;padding:24px;font:14px system-ui}#quote table{border-collapse:collapse;width:100%}#quote td{border:1px solid #ccc;padding:6px}}
+.shape{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:#0d1220}.shape .hd{display:flex;gap:8px;align-items:center;margin-bottom:8px}.shape .hd select{flex:1;margin:0}.shape .hd b{min-width:2ch}.shape .out{margin-top:8px;font-size:.9rem;color:var(--mut)}.shape .out b{color:var(--fg)}
+.x{padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+html[data-twa] #pro{display:none!important}
+</style>
+</head><body>
+<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
+<main class="w">
+<nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Area calculator</nav>
+<h1>Square Footage &amp; Area Calculator</h1>
+<p class="lead">Add up rectangles, triangles, circles and L-shaped rooms in feet-inches (5' 7 3/8") or metres. Get sq ft, sq yd and m², with waste % and material cost. Free, no sign-up.</p>
+
+<section class="card" aria-label="Calculator">
+<div class="tabs" role="tablist"><button role="tab" data-u="ftin" aria-selected="true">Feet &amp; inches</button><button role="tab" data-u="m" aria-selected="false">Metric (m)</button></div>
+<div id="shapes"></div>
+<div class="row" style="margin-top:0"><button class="btn ghost" id="add" type="button">+ Add area</button></div>
+<div class="f" style="margin-top:12px"><label>Waste % (optional)<input id="waste" type="number" inputmode="decimal" step="any" min="0" placeholder="e.g. 10"></label><label>Cost per sq ft (optional)<input id="cost" type="number" inputmode="decimal" step="any" min="0" placeholder="$ / sq ft"></label></div>
+<div class="res" aria-live="polite"><div class="big" style="grid-column:span 2"><b id="r1">–</b><span id="l1">square feet</span></div><div class="big"><b id="r2">–</b><span>square yards</span></div><div class="big"><b id="r3">–</b><span>square metres</span></div></div>
+<p class="small" id="r4"></p>
+</section>
+
+<section class="card pro" id="pro">
+<h2>Pro: saved jobs &amp; branded PDF</h2>
+<p class="small">Save area takeoffs to a job and print a branded estimate or quote.</p>
+<div id="gateA" class="hidden">
+<p><b>Register free to unlock Pro.</b></p>
+<form id="fA" class="f">
+<label>Name<input name="name" required autocomplete="name"></label>
+<label>Business<input name="business" autocomplete="organization"></label>
+<label>Email<input name="email" type="email" required autocomplete="email"></label>
+<label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+<label style="grid-column:1/-1;display:flex;gap:8px;align-items:flex-start"><input name="consent" type="checkbox" required style="width:auto;margin-top:4px"> <span>I agree that Atlas Operator AI may email me about this tool and new tools. Unsubscribe anytime. See the <a href="/privacy-policy.html">privacy policy</a>.</span></label>
+<div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
+</form></div>
+<div id="gateB" class="hidden">
+<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for every Atlas tool</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
+<div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all tools</button></div>
+<form id="fB" class="hidden" style="margin-top:12px">
+<p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
+<div class="f"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
+<label style="display:flex;gap:8px;margin-top:8px"><input name="consent" type="checkbox" required style="width:auto"> <span>Email me when Pro checkout opens. See the <a href="/privacy-policy.html">privacy policy</a>.</span></label>
+<div class="row"><button class="btn" type="submit">Notify me</button><span class="small" id="mB"></span></div>
+</form></div>
+<div id="proUI" class="lock">
+<div class="f" style="margin-top:10px"><label>Job name<input id="jn" placeholder="Smith kitchen floor"></label><label>Your business<input id="biz" placeholder="Your company"></label><label>Customer<input id="cust" placeholder="Customer name"></label></div>
+<div class="row"><button class="btn" id="save">Save to job</button><button class="btn ghost" id="pdf">Branded PDF quote</button></div>
+<ul class="jobs" id="jobs"></ul>
+</div>
+<p class="small">Want this calculator branded on your own website? <a href="mailto:atlas.operator.ai@gmail.com?subject=Branded%20area%20calculator">Email us for a quote</a>.</p>
+</section>
+
+<section><h2>How it works</h2>
+<p>Each area is worked out in the unit you type (square inches for feet-inch input, square metres for metric) and converted to square feet, then all areas are added. <b>Rectangle:</b> length × width. <b>Triangle:</b> base × height ÷ 2. <b>Circle:</b> π × diameter² ÷ 4. <b>L-shape:</b> overall length × overall width minus the missing corner (its length × width).</p>
+<p>1 sq yd = 9 sq ft and 1 sq ft = 0.09290304 m². Waste adds a percentage on top of the total; cost is the total with waste × your price per sq ft. Measurements are typed like a tape: 12' 6", 12ft 6in, 150 (inches) or 3/4.</p>
+<h2>FAQ</h2>
+<details><summary>How do I calculate square footage?</summary><p>Multiply length by width in feet. A 12' × 10' room is 120 sq ft. For inches, convert to feet first: 12' 6" is 12.5 ft, so 12' 6" × 10' is 125 sq ft.</p></details>
+<details><summary>How do I find the square footage of an L-shaped room?</summary><p>Take the overall length × width as if it were a rectangle, then subtract the missing corner. A 20' × 15' outline missing an 8' × 6' corner is 300 − 48 = 252 sq ft.</p></details>
+<details><summary>How do I convert square feet to square yards and square metres?</summary><p>Divide square feet by 9 for square yards, and multiply by 0.0929 for square metres. 252 sq ft = 28 sq yd = 23.41 m².</p></details>
+<details><summary>How much extra flooring should I buy for waste?</summary><p>A common allowance is about 10% for straight lay and more for diagonal or herringbone patterns. Check the manufacturer's guidance. 252 sq ft plus 10% is 277.2 sq ft.</p></details>
+</section>
+</main>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · Estimates only; verify measurements before ordering material.</div></footer>
+<div id="quote"></div>
+<script src="/t.js" defer></script>
+<script src="fic.js"></script>
+<script src="area.js"></script>
+<script>
+var last=null;
+(function(){
+var $=function(i){return document.getElementById(i)},unit="ftin",shapes=[],nid=0;
+var LBL={rect:["Length","Width"],tri:["Base","Height"],circle:["Diameter"],l:["Overall length","Overall width","Cut-out length","Cut-out width"]};
+var NAME={rect:"Rectangle",tri:"Triangle",circle:"Circle",l:"L-shape"};
+var DEF={ftin:{rect:["12'","10'"],tri:["10'","8'"],circle:["10'"],l:["20'","15'","8'","6'"]},m:{rect:["4","3"],tri:["3","2.5"],circle:["3"],l:["6","4.5","2.5","2"]}};
+function len(v){if(unit==="m"){var s=String(v||"").trim().replace(/\s*m$/i,"");if(!/^\d*\.?\d+$/.test(s))return NaN;return parseFloat(s)}return FIC.parse(v)}
+function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
+function add(type,vals){var s={id:++nid,type:type||"rect",v:vals||DEF[unit][type||"rect"].slice()};shapes.push(s);draw();run()}
+function draw(){var box=$("shapes");box.innerHTML="";shapes.forEach(function(s,i){var d=document.createElement("div");d.className="shape";d.dataset.id=s.id;
+ var hd='<div class="hd"><b>'+(i+1)+'.</b><select aria-label="Shape '+(i+1)+'">'+Object.keys(NAME).map(function(k){return '<option value="'+k+'"'+(k===s.type?" selected":"")+'>'+NAME[k]+'</option>'}).join("")+'</select>'+(shapes.length>1?'<button class="x" type="button" aria-label="Remove area '+(i+1)+'">✕</button>':'')+'</div>';
+ var fs='<div class="f">'+LBL[s.type].map(function(l,j){return '<label>'+l+(unit==="m"?" (m)":"")+'<input data-j="'+j+'" autocomplete="off" inputmode="'+(unit==="m"?"decimal":"text")+'"></label>'}).join("")+'</div><div class="out"></div>';
+ d.innerHTML=hd+fs;box.appendChild(d);
+ d.querySelectorAll("input").forEach(function(inp){inp.value=s.v[+inp.dataset.j]||"";inp.addEventListener("input",function(){s.v[+inp.dataset.j]=inp.value;run()})});
+ d.querySelector("select").addEventListener("change",function(){s.type=this.value;s.v=DEF[unit][s.type].slice();draw();run()});
+ var x=d.querySelector(".x");if(x)x.onclick=function(){shapes=shapes.filter(function(y){return y!==s});draw();run()}})}
+function run(){var list=[],lines=[],bad=0;
+ shapes.forEach(function(s,i){var v=s.v.map(len),raw=AREA.shape(s.type,{a:v[0],b:v[1],c:v[2],e:v[3]}),sq=AREA.toSqft(raw,unit),out=document.querySelector('.shape[data-id="'+s.id+'"] .out');
+  if(!isFinite(sq)){bad++;if(out)out.textContent=s.type==="l"?"Check your input: the cut-out must be smaller than the overall size.":"Check your input.";return}
+  list.push(sq);if(out)out.innerHTML="<b>"+f(sq,2)+" sq ft</b> · "+f(sq*AREA.M2_PER_SQFT,2)+" m²";lines.push(NAME[s.type]+" "+s.v.slice(0,LBL[s.type].length).join(" × ")+" = "+f(sq,2)+" sq ft")});
+ var w=parseFloat($("waste").value),c=parseFloat($("cost").value),t=AREA.totals(list,w,c);
+ if(!list.length){$("r1").textContent=$("r2").textContent=$("r3").textContent="–";$("r4").textContent="";last=null;return}
+ $("r1").textContent=f(t.gross,2);$("r2").textContent=f(t.sqyd,2);$("r3").textContent=f(t.m2,2);
+ var note=[];if(t.waste>0)note.push("Net "+f(t.net,2)+" sq ft + "+f(w,1)+"% waste ("+f(t.waste,2)+" sq ft)");if(t.cost>0)note.push("Material ≈ $"+f(t.cost,2)+" at $"+f(c,2)+"/sq ft");if(list.length>1)note.push(list.length+" areas added");if(bad)note.push(bad+" area"+(bad>1?"s":"")+" skipped (check input)");
+ $("r4").textContent=note.join(" · ");
+ last=lines.join("; ")+" → total "+f(t.gross,2)+" sq ft"+(t.waste>0?" incl. "+f(w,1)+"% waste":"")+(t.cost>0?", ≈ $"+f(t.cost,2):"")}
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){if(unit===b.dataset.u)return;unit=b.dataset.u;document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});shapes.forEach(function(s){s.v=DEF[unit][s.type].slice()});draw();run()}});
+$("add").onclick=function(){add("rect")};$("waste").addEventListener("input",run);$("cost").addEventListener("input",run);
+add("rect");
+window.__run=run;window.__area={add:add,shapes:function(){return shapes},unit:function(){return unit}};
+})();
+(function(){
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+/* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var $=function(i){return document.getElementById(i)},TOOL="area-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
+/* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
+var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
+var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm=Math.random()<0.5?"A":"B";ls.s("atlas_arm",arm);fresh=true}}
+if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1")}
+function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
+function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
+if(TWA)return;
+if(fresh)whenReady(function(){ev("arm_assigned")});
+var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
+function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);jobs()}
+function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
+$("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=TWA?"T":arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
+ atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};
+var PAY={lifetime12:"https://buy.stripe.com/9B6dR9ee4cz50kR2tl6sw09",bundle39:"https://buy.stripe.com/5kQfZhee40Qn6Jfc3V6sw0a"};
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){var u=PAY[b.dataset.plan]+"?client_reference_id="+TOOL;ev("checkout_click",{plan:b.dataset.plan});setTimeout(function(){location.href=u},250)}});
+if($("fB"))$("fB").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL+"-waitlist-"+(this.dataset.plan||"");d.arm=arm;d.name=fd.get("name");d.email=fd.get("email");d.consent=!!fd.get("consent");
+ atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;ev("waitlist_join");$("mB").innerHTML='<span class="ok">You\'re on the list. We\'ll email you when checkout opens.</span>'}).catch(function(){$("mB").textContent="Couldn't save. Try again."})};
+function store(){try{return JSON.parse(ls.g("atlas_jobs_"+TOOL)||"[]")}catch(e){return[]}}
+function jobs(){var j=store(),ul=$("jobs");ul.innerHTML="";j.forEach(function(x,i){var li=document.createElement("li");li.textContent=x.name+" · "+x.line;var d=document.createElement("button");d.className="btn ghost";d.textContent="Delete";d.onclick=function(){j.splice(i,1);ls.s("atlas_jobs_"+TOOL,JSON.stringify(j));jobs()};li.appendChild(d);ul.appendChild(li)})}
+$("save").onclick=function(){if(!gate())return;var j=store();if(!last)return;j.unshift({name:$("jn").value||"Job "+(j.length+1),line:last,t:Date.now()});ls.s("atlas_jobs_"+TOOL,JSON.stringify(j.slice(0,50)));jobs()};
+$("pdf").onclick=function(){if(!gate())return;var e=function(s){return String(s||"").replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})};var j=store();
+ $("quote").innerHTML="<h1>"+e($("biz").value||"Area estimate")+"</h1><p>Customer: "+e($("cust").value)+"<br>Job: "+e($("jn").value)+"<br>Date: "+new Date().toLocaleDateString()+"</p><table>"+j.map(function(x){return "<tr><td>"+e(x.name)+"</td><td>"+e(x.line)+"</td></tr>"}).join("")+(last?"<tr><td>Current</td><td>"+e(last)+"</td></tr>":"")+"</table><p style='font-size:11px;color:#666'>Prepared with atlasoperator.ai</p>";window.print()};
+render();
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
+</body></html>

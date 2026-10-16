@@ -1,0 +1,38 @@
+{
+ "id": "/tools/area-calculator/",
+ "name": "Area Calculator by Atlas",
+ "short_name": "Area",
+ "description": "Square footage for rectangles, triangles, circles and L-shapes, in sq ft, sq yd and m².",
+ "start_url": "/tools/area-calculator/?source=pwa",
+ "scope": "/tools/area-calculator/",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#07090e",
+ "theme_color": "#07090e",
+ "lang": "en",
+ "categories": [
+  "utilities",
+  "productivity",
+  "business"
+ ],
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
