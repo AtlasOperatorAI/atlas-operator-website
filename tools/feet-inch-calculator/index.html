@@ -33,6 +33,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 #quote{display:none}
 @media print{body{background:#fff;color:#000}body>*{display:none!important}#quote{display:block!important;padding:24px;font:14px system-ui}#quote table{border-collapse:collapse;width:100%}#quote td{border:1px solid #ccc;padding:6px}}
 .calcrow{display:grid;grid-template-columns:1fr 80px 1fr;gap:8px;align-items:end}.calcrow select{text-align:center}
+html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 </style>
 <style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
@@ -40,7 +41,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 <main class="w">
 <nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Feet-inch calculator</nav>
 <h1>Feet and Inches Calculator with Fractions</h1>
-<p class="lead">Add, subtract, multiply and divide tape-measure numbers like 5' 7 3/8", plus stairs, rafters and board feet. Free, no sign-up. Does the everyday math in Construction Master Pro ($39.99/yr).</p>
+<p class="lead">Add, subtract, multiply and divide tape-measure numbers like 5' 7 3/8", plus stairs, rafters and board feet. Free, no sign-up. <span class="twa-hide">Does the everyday math in Construction Master Pro ($39.99/yr).</span></p>
 
 <section class="card" aria-label="Calculator">
 <div class="tabs" role="tablist"><button role="tab" data-m="math" aria-selected="true">Feet-inch</button><button role="tab" data-m="stairs" aria-selected="false">Stairs</button><button role="tab" data-m="rafter" aria-selected="false">Rafter</button><button role="tab" data-m="bf" aria-selected="false">Board ft</button></div>
@@ -153,8 +154,9 @@ var $=function(i){return document.getElementById(i)},TOOL="feet-inch-calculator"
 /* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
 var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
 var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm=Math.random()<0.5?"A":"B";ls.s("atlas_arm",arm);fresh=true}}
-if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);document.documentElement.setAttribute("data-twa","1")}
+if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1")}
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
+if(TWA)return; /* app mode: free-only, no Pro UI or wording */
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
 if(fresh)whenReady(function(){ev("arm_assigned")});
 var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";

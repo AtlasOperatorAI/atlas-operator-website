@@ -39,6 +39,9 @@ with sync_playwright() as p:
             if errs:fails.append(f"{mode} {path} console: {errs[:3]}")
             if mode=="app":
                 bad=pg.evaluate("""()=>({slots:document.querySelectorAll('.ad-slot,.aff-slot,[data-ad],[data-affiliate],ins.adsbygoogle').length,stripe:[...document.querySelectorAll('a[href]')].filter(a=>/stripe\\.com|amazon\\.|amzn\\.to|tag=/.test(a.href)).length,pro:document.querySelectorAll('#gateB,[data-plan]').length,ads:document.querySelectorAll('script[src*="googlesyndication"],script[src*="adsbygoogle"]').length})""")
+                if path.startswith("/tools/"):
+                    pro=pg.evaluate("()=>(document.body.innerText.match(/\\bPro\\b/g)||[]).length")
+                    if pro:fails.append(f"app {path} shows 'Pro' text x{pro}")
                 if bad["slots"] or bad["stripe"] or bad["pro"] or bad["ads"]:fails.append(f"app {path} not clean {bad}")
             else:
                 w=pg.evaluate("""()=>{const m=document.querySelector('main')||document.body;const c=m.cloneNode(true);c.querySelectorAll('section.card,script,style,#pro,form').forEach(e=>e.remove());return (c.innerText||c.textContent).split(/\\s+/).filter(x=>/[A-Za-z]/.test(x)).length}""")
