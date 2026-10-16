@@ -34,7 +34,7 @@ with sync_playwright() as p:
             pg=ctx.new_page();errs=[]
             pg.on("console",lambda m:errs.append(m.text) if m.type=="error" else None);pg.on("pageerror",lambda e:errs.append(str(e)))
             u=B+path; u=q(u,"atlas_test=1"); u=q(u,"src=twa") if mode=="app" else u
-            r=pg.goto(u,wait_until="networkidle")
+            r=pg.goto(u,wait_until="load");pg.wait_for_timeout(1200)
             if r.status!=200:fails.append(f"{mode} {path} HTTP {r.status}")
             if errs:fails.append(f"{mode} {path} console: {errs[:3]}")
             if mode=="app":
@@ -46,12 +46,12 @@ with sync_playwright() as p:
             pg.close()
     for path,exp in CHECKS.items():
         pg=ctx.new_page();errs=[];pg.on("pageerror",lambda e:errs.append(str(e)))
-        pg.goto(B+path,wait_until="networkidle");pg.wait_for_timeout(300)
+        pg.goto(B+path,wait_until="load");pg.wait_for_timeout(1200);pg.wait_for_timeout(300)
         for k,v in exp.items():
             got=pg.eval_on_selector("#"+k,"e=>e.textContent.trim()")
             if got!=v:fails.append(f"{path} #{k}: got {got!r} want {v!r}")
         pg.close()
-    pg=ctx.new_page();pg.goto(B+"/guides/usd-to-mxn-travel-guide/?atlas_test=1",wait_until="networkidle");pg.wait_for_timeout(1500)
+    pg=ctx.new_page();pg.goto(B+"/guides/usd-to-mxn-travel-guide/?atlas_test=1",wait_until="load");pg.wait_for_timeout(1200);pg.wait_for_timeout(1500)
     rate=pg.eval_on_selector("#r","e=>parseFloat(e.value)");mx=pg.eval_on_selector("#m","e=>parseFloat(e.value)")
     if not(rate>5 and abs(mx-100*rate)<0.02):fails.append(f"usd-mxn rate={rate} m={mx}")
     print("USD->MXN live rate loaded:",rate)
