@@ -28,6 +28,18 @@ function budget(lines,home,R){var tot=0,bad=0,rows=(lines||[]).map(function(l){v
 function csv(b,home,meta){var q=function(s){s=String(s==null?"":s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
  var L=[["Item","Amount","Currency","In "+home].join(",")];b.rows.forEach(function(r){L.push([q(r.label),r.amount,r.cur,isFinite(r.home)?r.home.toFixed(decimals(home)):""].join(","))});
  L.push(["Total","","",b.total.toFixed(decimals(home))].join(","));if(meta)L.push(q(meta));return L.join("\n")}
-var API={FIAT:FIAT,SOURCES:SOURCES,parse:parse,rate:rate,convert:convert,tip:tip,decimals:decimals,load:load,budget:budget,csv:csv};
+/* Emoji flag for a currency (regional-indicator letters, no image assets). Multi-country currencies get a neutral symbol. */
+var SPECIAL={EUR:"EU",ANG:"CW",XCD:"AG",XAF:"CM",XOF:"SN",XPF:"PF"};
+function flag(code){code=String(code||"").toUpperCase();var cc=SPECIAL[code]||code.slice(0,2);if(!/^[A-Z]{2}$/.test(cc))return "🏳️";
+ return String.fromCodePoint(0x1F1E6+cc.charCodeAt(0)-65,0x1F1E6+cc.charCodeAt(1)-65)}
+/* Keypad: (current string, key, fresh) -> next string. Keys: 0-9 . C B(ackspace). Max 12 integer digits, 6 decimals. */
+function key(s,k,fresh){s=String(s==null?"0":s);if(k==="C")return "0";if(k==="B"){if(fresh)return "0";s=s.slice(0,-1);return s===""||s==="-"?"0":s}
+ if(fresh)s="0";
+ if(k==="."){return s.indexOf(".")>=0?s:s+"."}
+ if(!/^[0-9]$/.test(k))return s;var parts=s.split(".");
+ if(parts.length>1){if(parts[1].length>=6)return s;return s+k}
+ if(parts[0].replace(/^0+/,"").length>=12)return s;return s==="0"?k:s+k}
+function show(s){s=String(s);var p=s.split("."),i=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");return p.length>1?i+"."+p[1]:i}
+var API={flag:flag,key:key,show:show,FIAT:FIAT,SOURCES:SOURCES,parse:parse,rate:rate,convert:convert,tip:tip,decimals:decimals,load:load,budget:budget,csv:csv};
 if(typeof module!=="undefined"&&module.exports)module.exports=API;else root.CUR=API;
 })(this);
