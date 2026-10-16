@@ -30,10 +30,10 @@ details{background:var(--card);border:1px solid var(--line);border-radius:10px;p
 footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
 .ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
-<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
-<main class="w">
+<div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator home"><i></i><h1>Tile Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
+<main class="w ezbelow">
 <nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Tile calculator</nav>
-<h1>Tile Calculator (Tiles &amp; Boxes with Waste)</h1>
+<h2 class="ezh">Tile Calculator (Tiles &amp; Boxes with Waste)</h2>
 <p class="lead">Enter the floor or wall size (or total square feet), the tile size and the waste %. Get the tile count and boxes to buy. Free, no sign-up.</p>
 <section class="card" aria-label="Calculator">
 <div class="f"><label>Length (ft, or 10' 6")<input id="l" value="10" autocomplete="off"></label>
@@ -91,5 +91,19 @@ document.querySelectorAll("main input,main select").forEach(function(e){e.addEve
 run();window.__run=run;
 })();
 </script>
+<script>/* Easy-read main screen config (see /tools/easy.js). */
+(function(){
+function $t(i){if(i==="tw_"){return document.getElementById("tw").value+"×"+document.getElementById("th").value+" in"}var e=document.getElementById(i);return e?e.textContent.trim():""}
+function L(){return [{n:"ft",k:1,pad:"ftin"},{n:"m",k:3.28084,pad:"num"}]}
+function U(){var l=$t(this.labId);return /\(in\)/.test(l)?[{n:"in",k:1,pad:"num"},{n:"cm",k:0.393701,pad:"num"}]:[{n:"ft",k:1,pad:"num"},{n:"m",k:3.28084,pad:"num"}]}
+window.EZCFG={tool:"tile-calculator",card:'section.card[aria-label="Calculator"]',
+note:"Floor size and tile size → tiles. Other tile sizes, grout, waste %, boxes and cost are under More.",
+fields:[
+{id:"l",t:"#l",plain:"ft",lab:"Length",units:L},
+{id:"w",t:"#w",plain:"ft",lab:"Width",units:L},
+{chips:[[12,12],[12,24],[24,24],[6,24],[3,6]].map(function(o){return{n:o[0]+"×"+o[1],aria:"Tile "+o[0]+" by "+o[1]+" inches",on:function(){return +document.getElementById("tw").value===o[0]&&+document.getElementById("th").value===o[1]},go:function(){["tw","th"].forEach(function(id,i){var e=document.getElementById(id);e.value=o[i];e.dispatchEvent(new Event("input",{bubbles:true}))})}}}),aria:"Tile size in inches"}],
+result:function(){var b=$t("rb"),sq=document.getElementById("sq").value;return{v:$t("rt"),u:"tiles ("+$t("tw_")+")",sub:(b!=="–"?b+" boxes · ":"")+$t("ra")+" sq ft incl. waste"+(sq?" · using "+sq+" sq ft from More":"")}}};
+})();</script>
+<script src="/tools/easy.js"></script>
 <script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
 </body></html>

@@ -30,10 +30,10 @@ details{background:var(--card);border:1px solid var(--line);border-radius:10px;p
 footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
 .ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
-<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
-<main class="w">
+<div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator home"><i></i><h1>Paint Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
+<main class="w ezbelow">
 <nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Paint calculator</nav>
-<h1>Paint Coverage Calculator (Gallons per Room)</h1>
+<h2 class="ezh">Paint Coverage Calculator (Gallons per Room)</h2>
 <p class="lead">Enter the room size, doors, windows and number of coats. Get the paintable area and how many gallons to buy, using the coverage on your paint can.</p>
 <section class="card" aria-label="Calculator">
 <div class="f"><label>Room length (ft)<input id="l" value="12" autocomplete="off"></label>
@@ -98,5 +98,16 @@ document.querySelectorAll("main input,main select").forEach(function(e){e.addEve
 run();window.__run=run;
 })();
 </script>
+<script>/* Easy-read main screen config (see /tools/easy.js). */
+(function(){
+function $t(i){if(i==="tw_"){return document.getElementById("tw").value+"×"+document.getElementById("th").value+" in"}var e=document.getElementById(i);return e?e.textContent.trim():""}
+function L(){return [{n:"ft",k:1,pad:"ftin"},{n:"m",k:3.28084,pad:"num"}]}
+function U(){var l=$t(this.labId);return /\(in\)/.test(l)?[{n:"in",k:1,pad:"num"},{n:"cm",k:0.393701,pad:"num"}]:[{n:"ft",k:1,pad:"num"},{n:"m",k:3.28084,pad:"num"}]}
+window.EZCFG={tool:"paint-calculator",card:'section.card[aria-label="Calculator"]',
+note:"Room size → gallons. Doors, windows, coats, coverage, ceiling and primer are under More.",
+fields:[["l","Room length"],["w","Room width"],["h","Wall height"]].map(function(x){return{id:x[0],t:"#"+x[0],plain:"ft",lab:x[1],units:L}}),
+result:function(){var g=$t("rg");return{v:g,u:g==="1"?"gallon to buy":"gallons to buy",sub:$t("rexact")+" gal exact · "+$t("rarea")+" sq ft · "+$t("rq")+" qt"}}};
+})();</script>
+<script src="/tools/easy.js"></script>
 <script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
 </body></html>

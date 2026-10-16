@@ -13,4 +13,12 @@ t("tile 100 sqft, 12x12, 10% waste",()=>{const r=T.calc({areaFt2:100,tileW:12,ti
 t("tile 12x24 boxes of 8",()=>{const r=T.calc({areaFt2:100,tileW:12,tileH:24,waste:10,perBox:8});a.strictEqual(r.tiles,55);a.strictEqual(r.boxes,7)});
 t("tile 3x6 subway 30 sqft 15%",()=>{const r=T.calc({areaFt2:30,tileW:3,tileH:6,waste:15});a.strictEqual(r.tiles,276)});
 t("concrete 10x10x4 = 56 x 80lb",()=>{a.strictEqual(C.calc({a:10,b:10,c:4}).bags[80],56)});
+const E=require("../tools/easy.js"),FIC=require("../tools/feet-inch-calculator/fic.js");const typ=(keys,pad,b="")=>keys.reduce((x,k)=>E.key(x,k,pad),b);
+t("keypad: digits, decimal, clear, backspace",()=>{a.strictEqual(typ(["1","2",".","5"],"num"),"12.5");a.strictEqual(typ([".","5"],"num"),"0.5");a.strictEqual(typ(["1",".","."],"num"),"1.");a.strictEqual(typ(["0","7"],"num"),"7");a.strictEqual(typ(["B"],"num","12"),"1");a.strictEqual(typ(["C"],"num","99"),"")});
+t("keypad: num pad ignores ft/in/frac keys",()=>{a.strictEqual(typ(["5","'",'"',"/"],"num"),"5")});
+t("keypad: feet, inch and fraction keys build 5' 7 3/8\"",()=>{const b=typ(["5","'","7",'"',"3","/","8"],"ftin");a.strictEqual(b,"5' 7\" 3/8");a.strictEqual(E.norm(b),"5' 7 3/8\"");near(FIC.parse(E.norm(b)),67.375)});
+t("keypad: inch-only fraction and bare fraction",()=>{near(FIC.parse(E.norm(typ(["7",'"',"1","/","2"],"ftin"))),7.5);near(FIC.parse(E.norm(typ(["3","/","4"],"ftin"))),0.75)});
+t("keypad: ftin guards (one ft, one inch, no double slash)",()=>{a.strictEqual(typ(["5","'","'"],"ftin"),"5' ");a.strictEqual(typ(["'"],"ftin"),"");a.strictEqual(typ(["3","/","/"],"ftin"),"3/");a.strictEqual(typ(["1","/","2","."],"ftin"),"1/2")});
+t("keypad: backspace over ft mark",()=>{a.strictEqual(typ(["B"],"ftin","5' "),"5");a.strictEqual(typ(["B"],"ftin","5' 7"),"5'")});
+t("norm: bare number as feet for length fields",()=>{a.strictEqual(E.norm("12","ft"),"12'");a.strictEqual(E.norm("12.5","ft"),"12.5'");a.strictEqual(E.norm("12' 6","ft"),"12' 6");a.strictEqual(E.norm("3/","ft"),"3'")});
 console.log(`\n${n} tests passed`);

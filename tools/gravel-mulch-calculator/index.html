@@ -30,10 +30,10 @@ details{background:var(--card);border:1px solid var(--line);border-radius:10px;p
 footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
 .ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
-<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
-<main class="w">
+<div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator home"><i></i><h1>Gravel &amp; Mulch Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
+<main class="w ezbelow">
 <nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Gravel & mulch calculator</nav>
-<h1>Gravel &amp; Mulch Calculator (Cubic Yards &amp; Tons)</h1>
+<h2 class="ezh">Gravel &amp; Mulch Calculator (Cubic Yards &amp; Tons)</h2>
 <p class="lead">Enter the bed or driveway size and depth. Get cubic yards, an estimated weight in tons, and how many 2 or 3 cu ft bags you would need. Free, no sign-up.</p>
 <section class="card" aria-label="Calculator">
 <div class="f"><label>Shape<select id="shape"><option value="rect">Rectangle</option><option value="circle">Circle</option><option value="tri">Triangle</option></select></label>
@@ -95,5 +95,20 @@ document.querySelectorAll("main input,main select").forEach(function(e){e.addEve
 run();window.__run=run;
 })();
 </script>
+<script>/* Easy-read main screen config (see /tools/easy.js). */
+(function(){
+function $t(i){if(i==="tw_"){return document.getElementById("tw").value+"×"+document.getElementById("th").value+" in"}var e=document.getElementById(i);return e?e.textContent.trim():""}
+function L(){return [{n:"ft",k:1,pad:"ftin"},{n:"m",k:3.28084,pad:"num"}]}
+function U(){var l=$t(this.labId);return /\(in\)/.test(l)?[{n:"in",k:1,pad:"num"},{n:"cm",k:0.393701,pad:"num"}]:[{n:"ft",k:1,pad:"num"},{n:"m",k:3.28084,pad:"num"}]}
+window.EZCFG={tool:"gravel-mulch-calculator",card:'section.card[aria-label="Calculator"]',
+note:"Bed size and depth → cubic yards. Circles, triangles, pea gravel, tons per yard, waste % and cost are under More.",
+fields:[
+{chips:[["Gravel","gravel"],["Mulch","mulch"],["Sand","sand"],["Soil","topsoil"]].map(function(o){return{n:o[0],on:function(){return document.getElementById("mat").value===o[1]},go:function(){var s=document.getElementById("mat");s.value=o[1];s.dispatchEvent(new Event("change",{bubbles:true}))}}}),aria:"Material"},
+{id:"a",t:"#a",plain:"ft",lab:function(){return $t("la")},units:L},
+{id:"b",t:"#b",plain:"ft",lab:function(){return $t("lb")},units:L,hide:function(){return document.getElementById("wb").style.display==="none"}},
+{id:"depth",t:"#depth",lab:"Depth",ftin:false,units:function(){return [{n:"in",k:1,pad:"num"},{n:"cm",k:0.393701,pad:"num"}]}}],
+result:function(){return{v:$t("ryd"),u:"cubic yards",sub:$t("rt")+" tons · "+$t("rb2")+" bags of 2 cu ft"}}};
+})();</script>
+<script src="/tools/easy.js"></script>
 <script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
 </body></html>

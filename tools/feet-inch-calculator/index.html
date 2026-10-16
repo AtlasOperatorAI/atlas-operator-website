@@ -37,10 +37,10 @@ html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 </style>
 <style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
-<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
-<main class="w">
+<div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator home"><i></i><h1>Feet-Inch Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
+<main class="w ezbelow">
 <nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Feet-inch calculator</nav>
-<h1>Feet and Inches Calculator with Fractions</h1>
+<h2 class="ezh">Feet and Inches Calculator with Fractions</h2>
 <p class="lead">Add, subtract, multiply and divide tape-measure numbers like 5' 7 3/8", plus stairs, rafters and board feet. Free, no sign-up. <span class="twa-hide">Does the everyday math in Construction Master Pro ($39.99/yr).</span></p>
 
 <section class="card" aria-label="Calculator">
@@ -176,5 +176,20 @@ $("pdf").onclick=function(){if(!gate())return;var e=function(s){return String(s|
 render();
 })();
 </script>
+<script>/* Easy-read main screen config (see /tools/easy.js). */
+(function(){
+function $t(i){if(i==="tw_"){return document.getElementById("tw").value+"×"+document.getElementById("th").value+" in"}var e=document.getElementById(i);return e?e.textContent.trim():""}
+function L(){return [{n:"ft",k:1,pad:"ftin"},{n:"m",k:3.28084,pad:"num"}]}
+function U(){var l=$t(this.labId);return /\(in\)/.test(l)?[{n:"in",k:1,pad:"num"},{n:"cm",k:0.393701,pad:"num"}]:[{n:"ft",k:1,pad:"num"},{n:"m",k:3.28084,pad:"num"}]}
+window.EZCFG={tool:"feet-inch-calculator",card:'section.card[aria-label="Calculator"]',proText:'🧾 Pro: saved cut lists &amp; PDF<small>On the web: save measurements, print a cut list</small>',
+note:"Type 5 ft 7 in 3 ⁄ 8 for 5' 7 3/8\". Stairs, rafters, board feet and rounding are under More.",
+onField:function(){var b=document.querySelector('.tabs button[data-m="math"]');if(b&&b.getAttribute("aria-selected")!=="true")b.click()},
+fields:[
+{id:"ma",t:"#ma",lab:"A",ftin:false,units:function(){return [{n:"",k:1,pad:"ftin"}]}},
+{chips:[["+","+","Add"],["−","-","Subtract"],["×","*","Multiply"],["÷","/","Divide"]].map(function(o){return{n:o[0],aria:o[2],on:function(){return document.getElementById("mo").value===o[1]},go:function(){var s=document.getElementById("mo");s.value=o[1];s.dispatchEvent(new Event("input",{bubbles:true}))}}}),aria:"Operation"},
+{id:"mb",t:"#mb",lab:function(){var o=document.getElementById("mo").value;return o==="*"||o==="/"?"× number":"B"},ftin:false,units:function(){var o=document.getElementById("mo").value;return [{n:"",k:1,pad:(o==="*"||o==="/")?"num":"ftin"}]}}],
+result:function(){var m=document.querySelector('.tabs button[aria-selected="true"]'),r2=$t("r2");return{v:$t("r1"),u:$t("l1"),sub:(m&&m.dataset.m==="math"&&r2!=="–")?r2+" · "+$t("r3"):[r2,$t("r3")].filter(function(x){return x&&x!=="–"}).join(" · ")}}};
+})();</script>
+<script src="/tools/easy.js"></script>
 <script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
 </body></html>
