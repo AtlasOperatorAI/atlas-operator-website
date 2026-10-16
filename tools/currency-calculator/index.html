@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Easy Currency Calculator: Offline, No Ads, Travel Mode | Atlas Operator</title>
+<meta name="description" content="Free, simple currency converter for 150+ currencies. Travel mode with big two-way conversion, quick price checks and tip. Works offline with the last rates. No ads.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/currency-calculator/">
+<meta name="theme-color" content="#07090e">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Easy Currency Calculator (no ads, works offline)"><meta property="og:description" content="Convert 150+ currencies with a travel mode, favorites and tip. Works offline. Free, no ads."><meta property="og:url" content="https://atlasoperator.ai/tools/currency-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Easy Currency Calculator", "url": "https://atlasoperator.ai/tools/currency-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Simple currency converter with a travel mode, favorites, tip and offline last-known rates. No ads.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#tools"}, {"@type": "ListItem", "position": 3, "name": "Currency Calculator", "item": "https://atlasoperator.ai/tools/currency-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open it once with a connection and the rates are saved on your device. Offline it uses those saved rates and shows the date of the rates it is using."}}, {"@type": "Question", "name": "How often are rates updated?", "acceptedAnswer": {"@type": "Answer", "text": "Once a day. Each time you open the calculator online it fetches the newest daily rates."}}, {"@type": "Question", "name": "Why is my bank's rate different?", "acceptedAnswer": {"@type": "Answer", "text": "These are mid-market reference rates. Banks, card networks and exchange booths add a margin or fee on top."}}, {"@type": "Question", "name": "How do I use travel mode?", "acceptedAnswer": {"@type": "Answer", "text": "Pick your home currency and the currency of the country you're visiting. Type a price you see and the home price appears in large type. Tap the flip button to convert the other way."}}]}]}</script>
+<style>
+:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}
+.nav{border-bottom:1px solid var(--line)}.nav .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{display:flex;gap:9px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none}.logo i{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.crumb{font-size:.85rem;color:var(--mut);margin:16px 0 4px}.crumb a{color:var(--mut)}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:4px 0 6px;letter-spacing:-.02em}.lead{color:var(--mut);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--acc);color:#06101f;border-color:var(--acc);font-weight:700}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(min-width:640px){.f{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:16px}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(min-width:640px){.res{grid-template-columns:repeat(4,1fr)}}
+.big{background:#0a0e16;border:1px solid var(--line);border-radius:10px;padding:10px}.big b{display:block;font-size:1.35rem}.big span{font-size:.8rem;color:var(--mut)}
+.btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.pro h2{margin:0 0 4px;font-size:1.2rem}.lock{opacity:.55}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.small{font-size:.82rem;color:var(--mut)}.ok{color:#7ee2a8}.hidden{display:none}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+.x{padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;margin-top:10px}.swap{font-size:1.25rem;padding:9px 14px;margin-bottom:1px}
+.hero{margin-top:14px;text-align:center;padding:16px 10px}.hero b{font-size:clamp(1.8rem,8vw,2.6rem);word-break:break-word}.hero span{display:block;margin-top:4px}
+input.huge{font-size:1.8rem;padding:12px;text-align:center}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.chip{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}.chip button,.chipb{background:transparent;border:0;color:var(--fg);font:inherit;font-size:.9rem;padding:7px 11px;cursor:pointer}.chip button+button{color:var(--mut);border-left:1px solid var(--line);padding:7px 9px}
+.chipb{border:1px solid var(--line);border-radius:999px}.chipb[aria-pressed=true]{background:var(--acc);color:#06101f;border-color:var(--acc);font-weight:700}
+.qh{font-size:1rem;margin:16px 0 6px}table.qt{width:100%;border-collapse:collapse}table.qt td{padding:7px 4px;border-top:1px solid var(--line)}table.qt td:last-child{text-align:right;font-weight:600}
+.bl{grid-template-columns:2fr 1.3fr 1fr auto!important;align-items:end;margin-bottom:8px}
+html[data-twa] #pro{display:none!important}
+</style>
+</head><body>
+<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
+<main class="w">
+<nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Currency calculator</nav>
+<h1>Easy Currency Calculator</h1>
+<p class="lead">Convert between 150+ currencies with daily mid-market rates. A travel mode for prices on the go, and it works offline with the last rates you loaded. No ads, no sign-up.</p>
+
+<section class="card" aria-label="Calculator">
+<div class="tabs" role="tablist"><button role="tab" data-m="conv" aria-selected="true">Converter</button><button role="tab" data-m="trip" aria-selected="false">Travel</button></div>
+<div id="conv">
+<label>Amount<input id="amt" type="text" inputmode="decimal" autocomplete="off" value="100"></label>
+<div class="pair"><label>From<select id="from"></select></label><button class="x swap" id="swap" type="button" aria-label="Swap currencies" title="Swap">⇄</button><label>To<select id="to"></select></label></div>
+<div class="big hero" aria-live="polite"><b id="out">–</b><span id="rateline"></span></div>
+<div class="row"><button class="btn ghost" id="fav" type="button" aria-pressed="false">☆ Save pair</button></div>
+<div id="favs" class="chips" aria-label="Favorite pairs"></div>
+</div>
+<div id="trip" class="hidden">
+<div class="pair"><label>Home currency<select id="home"></select></label><button class="x swap" id="flip" type="button" aria-label="Flip direction" title="Flip">⇅</button><label>Trip currency<select id="away"></select></label></div>
+<label style="margin-top:10px"><span id="tinl">Price in trip currency</span><input id="tamt" class="huge" type="text" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+<div class="big hero" aria-live="polite"><b id="tout">–</b><span id="trate"></span></div>
+<div class="f" style="margin-top:10px"><label>Tip % (optional)<input id="tip" type="text" inputmode="decimal" autocomplete="off" placeholder="0"></label><div class="chips" id="tipchips" style="align-self:end"></div></div>
+<p class="small" id="tipout"></p>
+<h3 class="qh">Quick price check</h3>
+<table class="qt" id="quick" aria-label="Quick price check"></table>
+</div>
+<p class="small" id="asof">Loading rates…</p>
+</section>
+
+<section class="card pro" id="pro">
+<h2>Pro: trip budget &amp; CSV</h2>
+<p class="small">Add costs in any currency and see the trip total in your home currency. Export as CSV.</p>
+<div id="gateA" class="hidden">
+<p><b>Register free to unlock Pro.</b></p>
+<form id="fA" class="f">
+<label>Name<input name="name" required autocomplete="name"></label>
+<label>Business<input name="business" autocomplete="organization"></label>
+<label>Email<input name="email" type="email" required autocomplete="email"></label>
+<label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+<label style="grid-column:1/-1;display:flex;gap:8px;align-items:flex-start"><input name="consent" type="checkbox" required style="width:auto;margin-top:4px"> <span>I agree that Atlas Operator AI may email me about this tool and new tools. Unsubscribe anytime. See the <a href="/privacy-policy.html">privacy policy</a>.</span></label>
+<div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
+</form></div>
+<div id="gateB" class="hidden">
+<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for every Atlas tool</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
+<div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all tools</button></div>
+<form id="fB" class="hidden" style="margin-top:12px">
+<p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
+<div class="f"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
+<label style="display:flex;gap:8px;margin-top:8px"><input name="consent" type="checkbox" required style="width:auto"> <span>Email me when Pro checkout opens. See the <a href="/privacy-policy.html">privacy policy</a>.</span></label>
+<div class="row"><button class="btn" type="submit">Notify me</button><span class="small" id="mB"></span></div>
+</form></div>
+<div id="proUI" class="lock">
+<div id="blines"></div>
+<div class="row"><button class="btn ghost" id="badd" type="button">+ Add cost</button><button class="btn" id="bcsv" type="button">Export CSV</button></div>
+<p id="btot" class="small"></p>
+</div>
+</section>
+
+<section><h2>How it works</h2>
+<p>Rates are daily mid-market reference rates, all quoted against the euro. To convert A to B we use rate(B) ÷ rate(A) × amount. The latest rates are saved on your device, so the calculator keeps working offline and shows the date of the rates it is using.</p>
+<p>Rates come from the free <a href="https://github.com/fawazahmed0/exchange-api" rel="noopener">fawazahmed0 currency-api</a> (CC0), with <a href="https://frankfurter.dev" rel="noopener">Frankfurter</a> (European Central Bank reference rates) as a backup. <b>For information only, not for trading.</b> Banks, cards and exchange booths add fees and spreads, so what you pay will differ.</p>
+<h2>FAQ</h2>
+<details><summary>Does it work offline?</summary><p>Yes. Open it once with a connection and the rates are saved on your device. Offline it uses those saved rates and shows "Rates as of" with their date.</p></details>
+<details><summary>How often are rates updated?</summary><p>Once a day. Each time you open the calculator online it fetches the newest daily rates.</p></details>
+<details><summary>Why is my bank's rate different?</summary><p>These are mid-market reference rates. Banks, card networks and exchange booths add a margin or fee on top.</p></details>
+<details><summary>How do I use travel mode?</summary><p>Pick your home currency and the currency of the country you're visiting. Type a price you see and the home price appears in large type. Tap ⇅ to convert the other way. The quick table shows common amounts at a glance, and you can add a tip.</p></details>
+</section>
+</main>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · Rates: fawazahmed0 currency-api (CC0) / Frankfurter (ECB). For information only, not for trading.</div></footer>
+<script src="/t.js" defer></script>
+<script src="cur.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var KEY="atlas_fx_rates",R=null,meta=null,mode=ls.g("atlas_fx_mode")||"conv",dir=ls.g("atlas_fx_dir")||"in";
+var st={};try{st=JSON.parse(ls.g("atlas_fx_state")||"{}")}catch(e){}
+var favs=[];try{favs=JSON.parse(ls.g("atlas_fx_favs")||"[]")}catch(e){}
+var DN=null;try{DN=new Intl.DisplayNames(["en"],{type:"currency"})}catch(e){}
+function nm(c){try{return DN?DN.of(c):c}catch(e){return c}}
+function save(){ls.s("atlas_fx_state",JSON.stringify({amt:$("amt").value,from:$("from").value,to:$("to").value,home:$("home").value,away:$("away").value,tip:$("tip").value}))}
+function num(v){v=String(v==null?"":v).replace(/[\s,]/g,"").replace(/[^\d.\-]/g,"");return v===""?NaN:parseFloat(v)}
+function fmt(n,c,dp){if(!isFinite(n))return "–";var d=dp==null?CUR.decimals(c):dp;return n.toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d})+" "+c}
+function fr(n){if(!isFinite(n))return "–";var a=Math.abs(n),d=a>=100?2:a>=1?4:a>=0.01?5:8;return n.toLocaleString("en-US",{maximumFractionDigits:d})}
+var POP=["USD","EUR","GBP","JPY","CAD","AUD","MXN","CHF","CNY","INR"];
+function fill(){var codes=Object.keys(R).sort(),opts=POP.filter(function(c){return R[c]}).concat(["—"]).concat(codes).map(function(c){return c==="—"?'<option disabled>──────────</option>':'<option value="'+c+'">'+c+" · "+nm(c)+"</option>"}).join("");
+ ["from","to","home","away"].forEach(function(id){var s=$(id),v=s.value;s.innerHTML=opts;s.value=v||""});
+ function pick(id,v,d){$(id).value=R[v]?v:d}pick("from",st.from,"USD");pick("to",st.to,"EUR");pick("home",st.home,"USD");pick("away",st.away,"EUR")}
+function asof(){if(!meta){$("asof").textContent="No rates yet. Connect to the internet once to load them.";return}
+ var d=new Date(meta.date+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"});
+ $("asof").innerHTML="Rates as of <b>"+d+"</b>"+(meta.offline?" (saved on this device, offline)":"")+" · Source: "+meta.srcName+". Mid-market reference rates, for information only, not for trading."}
+function conv(){if(!R)return;var a=num($("amt").value),f=$("from").value,t=$("to").value,v=CUR.convert(a,f,t,R);
+ $("out").textContent=isFinite(v)?fmt(v,t):"–";$("rateline").textContent="1 "+f+" = "+fr(CUR.rate(f,t,R))+" "+t+" · 1 "+t+" = "+fr(CUR.rate(t,f,R))+" "+f;
+ var k=f+"-"+t,on=favs.indexOf(k)>=0;$("fav").textContent=(on?"★ Saved":"☆ Save pair");$("fav").setAttribute("aria-pressed",on);save()}
+function drawFavs(){var b=$("favs");b.innerHTML="";favs.forEach(function(k){var p=k.split("-"),c=document.createElement("span");c.className="chip";var go=document.createElement("button");go.type="button";go.textContent=p[0]+" → "+p[1];go.onclick=function(){if(!R||!R[p[0]]||!R[p[1]])return;$("from").value=p[0];$("to").value=p[1];conv()};
+ var x=document.createElement("button");x.type="button";x.textContent="×";x.setAttribute("aria-label","Remove "+p[0]+" to "+p[1]);x.onclick=function(){favs=favs.filter(function(y){return y!==k});ls.s("atlas_fx_favs",JSON.stringify(favs));drawFavs();conv()};c.appendChild(go);c.appendChild(x);b.appendChild(c)})}
+function trip(){if(!R)return;var h=$("home").value,w=$("away").value,src=dir==="in"?w:h,dst=dir==="in"?h:w,a=num($("tamt").value);
+ $("tinl").textContent="Price in "+src+" ("+nm(src)+")";var v=CUR.convert(a,src,dst,R);$("tout").textContent=isFinite(v)?fmt(v,dst):"0 "+dst;
+ $("trate").textContent="1 "+src+" = "+fr(CUR.rate(src,dst,R))+" "+dst;
+ var p=num($("tip").value),q=document.querySelectorAll("#tipchips button");q.forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.t===p))});
+ if(isFinite(a)&&a>0&&isFinite(p)&&p>0){var t=CUR.tip(a,p);$("tipout").textContent="Tip "+fmt(t.tip,src)+" · Total "+fmt(t.total,src)+" = "+fmt(CUR.convert(t.total,src,dst,R),dst)}else $("tipout").textContent="";
+ var base=[1,5,10,20,50,100,200,500,1000],m=CUR.rate(src,dst,R),sc=m<0.02?100:m<0.2?10:1;
+ $("quick").innerHTML=base.map(function(x){x=x*sc;return "<tr><td>"+fmt(x,src,0)+"</td><td>"+fmt(x*m,dst)+"</td></tr>"}).join("");save()}
+function all(){conv();trip();asof()}
+function setRates(p,offline){R=p.rates;meta={date:p.date,src:p.src,srcName:p.srcName,offline:!!offline};fill();drawFavs();all();window.__fx={rates:R,meta:meta}}
+/* restore last-known rates first, then refresh from the network */
+var cached=null;try{cached=JSON.parse(ls.g(KEY)||"null")}catch(e){}
+if(cached&&cached.rates)setRates(cached,!navigator.onLine);else asof();
+["amt","from","to"].forEach(function(i){$(i).addEventListener(i==="amt"?"input":"change",conv)});
+["tamt","home","away","tip"].forEach(function(i){$(i).addEventListener(/amt|tip/.test(i)?"input":"change",trip)});
+$("swap").onclick=function(){var f=$("from").value;$("from").value=$("to").value;$("to").value=f;conv()};
+$("flip").onclick=function(){dir=dir==="in"?"out":"in";ls.s("atlas_fx_dir",dir);trip()};
+$("fav").onclick=function(){var k=$("from").value+"-"+$("to").value,i=favs.indexOf(k);if(i>=0)favs.splice(i,1);else favs.unshift(k);favs=favs.slice(0,12);ls.s("atlas_fx_favs",JSON.stringify(favs));drawFavs();conv()};
+$("tipchips").innerHTML=[10,15,18,20].map(function(t){return '<button type="button" class="chipb" data-t="'+t+'">'+t+"%</button>"}).join("");
+document.querySelectorAll("#tipchips button").forEach(function(b){b.onclick=function(){$("tip").value=$("tip").value===b.dataset.t?"":b.dataset.t;trip()}});
+function setMode(m){mode=m;ls.s("atlas_fx_mode",m);document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",String(x.dataset.m===m))});$("conv").classList.toggle("hidden",m!=="conv");$("trip").classList.toggle("hidden",m!=="trip")}
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){setMode(b.dataset.m)}});
+if(st.amt!=null)$("amt").value=st.amt;if(st.tip)$("tip").value=st.tip;setMode(new URLSearchParams(location.search).get("mode")==="travel"?"trip":mode);
+function get(u){return fetch(u,{cache:"no-cache",credentials:"omit"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})}
+window.__fxReady=CUR.load(get).then(function(p){ls.s(KEY,JSON.stringify(p));setRates(p,!navigator.onLine);return p}).catch(function(){if(R){meta.offline=true;asof()}else asof();return null});
+window.__fxApi={all:all,setRates:setRates};
+})();
+</script>
+<script>
+(function(){
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+/* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var $=function(i){return document.getElementById(i)},TOOL="currency-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
+/* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
+var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
+var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm=Math.random()<0.5?"A":"B";ls.s("atlas_arm",arm);fresh=true}}
+if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1")}
+function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
+function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
+if(TWA)return;
+if(fresh)whenReady(function(){ev("arm_assigned")});
+var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
+function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);bud()}
+function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
+$("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=TWA?"T":arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
+ atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};
+var PAY={lifetime12:"https://buy.stripe.com/9B6dR9ee4cz50kR2tl6sw09",bundle39:"https://buy.stripe.com/5kQfZhee40Qn6Jfc3V6sw0a"};
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){var u=PAY[b.dataset.plan]+"?client_reference_id="+TOOL;ev("checkout_click",{plan:b.dataset.plan});setTimeout(function(){location.href=u},250)}});
+if($("fB"))$("fB").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL+"-waitlist-"+(this.dataset.plan||"");d.arm=arm;d.name=fd.get("name");d.email=fd.get("email");d.consent=!!fd.get("consent");
+ atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;ev("waitlist_join");$("mB").innerHTML='<span class="ok">You\'re on the list. We\'ll email you when checkout opens.</span>'}).catch(function(){$("mB").textContent="Couldn't save. Try again."})};
+var BL=[];try{BL=JSON.parse(ls.g("atlas_fx_budget")||"[]")}catch(e){}if(!BL.length)BL=[{label:"Hotel",amount:"",cur:""},{label:"Food",amount:"",cur:""}];
+function bsave(){ls.s("atlas_fx_budget",JSON.stringify(BL))}
+function R_(){return window.__fx&&window.__fx.rates}
+function bud(){var R=R_(),box=$("blines");if(!box)return;var home=($("home")&&$("home").value)||"USD",away=($("away")&&$("away").value)||"EUR",codes=R?Object.keys(R).sort():[away];box.innerHTML="";
+ BL.forEach(function(l,i){if(!l.cur)l.cur=away;var d=document.createElement("div");d.className="f bl";d.innerHTML='<label>Item<input data-k="label"></label><label>Amount<input data-k="amount" inputmode="decimal"></label><label>Currency<select data-k="cur">'+codes.map(function(c){return "<option>"+c+"</option>"}).join("")+'</select></label>';
+  d.querySelectorAll("[data-k]").forEach(function(inp){inp.value=l[inp.dataset.k]||"";inp.addEventListener(inp.tagName==="SELECT"?"change":"input",function(){l[inp.dataset.k]=inp.value;bsave();btot()})});
+  var x=document.createElement("button");x.className="x";x.type="button";x.textContent="✕";x.setAttribute("aria-label","Remove cost "+(i+1));x.onclick=function(){BL.splice(i,1);bsave();bud()};d.appendChild(x);box.appendChild(d)});btot()}
+function bcalc(){var R=R_(),home=($("home")&&$("home").value)||"USD";if(!R)return null;return{home:home,b:CUR.budget(BL.filter(function(l){return l.amount!==""}).map(function(l){return{label:l.label,amount:parseFloat(String(l.amount).replace(/,/g,"")),cur:l.cur}}),home,R)}}
+function btot(){var c=bcalc();$("btot").textContent=c?"Trip total: "+c.b.total.toLocaleString("en-US",{minimumFractionDigits:CUR.decimals(c.home),maximumFractionDigits:CUR.decimals(c.home)})+" "+c.home+" (home currency, set in Travel)"+(c.b.bad?" · "+c.b.bad+" line(s) skipped":""):""}
+$("badd").onclick=function(){BL.push({label:"",amount:"",cur:""});bsave();bud()};
+$("bcsv").onclick=function(){if(!gate())return;var c=bcalc();if(!c)return;var m=window.__fx.meta,t=CUR.csv(c.b,c.home,"Rates as of "+m.date+" ("+m.srcName+"); for information only, not for trading"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv"}));a.download="trip-budget.csv";document.body.appendChild(a);a.click();a.remove();ev("csv_export")};
+["home","away"].forEach(function(i){var e=$(i);if(e)e.addEventListener("change",bud)});if(window.__fxReady)window.__fxReady.then(bud);
+render();
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
+</body></html>
