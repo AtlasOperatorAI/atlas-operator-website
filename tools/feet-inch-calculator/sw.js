@@ -1,5 +1,5 @@
 /* Offline cache for /tools/feet-inch-calculator/. Same-origin GET only; analytics (Railway) and Stripe are never cached. */
-const CACHE="atlas-feet-inch-calculator-v1";
+const CACHE="atlas-feet-inch-calculator-v2";
 const SCOPE="/tools/feet-inch-calculator/";
 const ASSETS=[SCOPE,SCOPE+"fic.js",SCOPE+"manifest.webmanifest",SCOPE+"icons/icon-192.png",SCOPE+"icons/icon-512.png",SCOPE+"icons/maskable-512.png","/t.js"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});
