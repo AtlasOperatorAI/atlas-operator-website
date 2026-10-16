@@ -4,4 +4,4 @@ function q(k){try{return new URLSearchParams(location.search).get(k)||""}catch(e
 window.atlasUTM=function(){return{utm_source:q("utm_source"),utm_medium:q("utm_medium"),utm_campaign:q("utm_campaign"),referrer:document.referrer||""}};
 window.atlasPost=function(p,d){try{var b=JSON.stringify(d);return fetch(E+p,{method:"POST",headers:{"Content-Type":"text/plain"},body:b,keepalive:true,credentials:"omit"})}catch(e){return Promise.reject(e)}};
 if(navigator.webdriver||/^(localhost|127\.)/.test(location.hostname))return;
-var d=atlasUTM();d.site="atlas";d.path=location.pathname;atlasPost("/hit",d)})();
+var d=atlasUTM();d.site="atlas";d.path=location.pathname;atlasPost("/hit",d).catch(function(){})})();

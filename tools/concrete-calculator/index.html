@@ -127,7 +127,7 @@ document.querySelectorAll("input,select").forEach(function(e){if(e.closest(".car
 /* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 var arm=ls.g("atlas_arm");var fresh=false;if(arm!=="A"&&arm!=="B"){arm=Math.random()<0.5?"A":"B";ls.s("atlas_arm",arm);fresh=true}
-function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d)}
+function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
 if(fresh)whenReady(function(){ev("arm_assigned")});
 var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
