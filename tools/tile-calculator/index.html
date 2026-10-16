@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tile Calculator: How Many Tiles and Boxes (with Waste) | Atlas Operator</title>
+<meta name="description" content="Free tile calculator. Enter the area and tile size to get the number of tiles and boxes, with a waste allowance for cuts and breakage. No sign-up.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/tile-calculator/">
+<meta name="theme-color" content="#07090e">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Tile Calculator: How Many Tiles and Boxes (with Waste) | Atlas Operator"><meta property="og:description" content="Free tile calculator. Enter the area and tile size to get the number of tiles and boxes, with a waste allowance for cuts and breakage. No sign-up."><meta property="og:url" content="https://atlasoperator.ai/tools/tile-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Tile Calculator", "url": "https://atlasoperator.ai/tools/tile-calculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web", "description": "Free tile calculator. Enter the area and tile size to get the number of tiles and boxes, with a waste allowance for cuts and breakage. No sign-up.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#tools"}, {"@type": "ListItem", "position": 3, "name": "Tile Calculator", "item": "https://atlasoperator.ai/tools/tile-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many tiles do I need for 100 square feet?", "acceptedAnswer": {"@type": "Answer", "text": "Add waste first: 100 sq ft + 10% is 110 sq ft. With 12 × 12 in tiles (1 sq ft each) that's 110 tiles. With 12 × 24 in tiles (2 sq ft each) it's 55."}}, {"@type": "Question", "name": "How much extra tile should I buy?", "acceptedAnswer": {"@type": "Answer", "text": "A common allowance is about 10% for a straight lay and about 15% for diagonal or herringbone patterns, with more for small rooms with many cuts."}}, {"@type": "Question", "name": "How do I convert tile size to square feet?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply the tile's width by its length in inches and divide by 144. A 12 × 24 in tile is 2 sq ft."}}, {"@type": "Question", "name": "Should I count grout lines?", "acceptedAnswer": {"@type": "Answer", "text": "Grout joints make each tile cover slightly more area, so leaving them out gives a slightly higher, more cautious count. Enter the joint width to include them."}}]}]}</script>
+<style>:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}
+.nav{border-bottom:1px solid var(--line)}.nav .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{display:flex;gap:9px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none}.logo i{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.crumb{font-size:.85rem;color:var(--mut);margin:16px 0 4px}.crumb a{color:var(--mut)}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:4px 0 6px;letter-spacing:-.02em}.lead{color:var(--mut);margin:0 0 16px}
+h2{margin-top:28px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(min-width:640px){.f{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:16px}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(min-width:640px){.res{grid-template-columns:repeat(4,1fr)}}
+.big{background:#0a0e16;border:1px solid var(--line);border-radius:10px;padding:10px}.big b{display:block;font-size:1.35rem}.big span{font-size:.8rem;color:var(--mut)}
+.btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.small{font-size:.82rem;color:var(--mut)}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}table.t td,table.t th{border:1px solid var(--line);padding:7px 9px;text-align:left}table.t th{background:#0d1220}
+.tw{overflow-x:auto}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+.rel{list-style:none;padding:0}.rel li{border-top:1px solid var(--line);padding:8px 0}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+.ad-slot,.aff-slot{display:none!important}</style>
+</head><body>
+<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
+<main class="w">
+<nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Tile calculator</nav>
+<h1>Tile Calculator (Tiles &amp; Boxes with Waste)</h1>
+<p class="lead">Enter the floor or wall size (or total square feet), the tile size and the waste %. Get the tile count and boxes to buy. Free, no sign-up.</p>
+<section class="card" aria-label="Calculator">
+<div class="f"><label>Length (ft, or 10' 6")<input id="l" value="10" autocomplete="off"></label>
+<label>Width (ft)<input id="w" value="8" autocomplete="off"></label>
+<label>…or total sq ft<input id="sq" type="number" inputmode="decimal" min="0" step="any" placeholder="overrides L × W"></label>
+<label>Tile width (in)<input id="tw" type="number" inputmode="decimal" min="0" step="any" value="12"></label>
+<label>Tile length (in)<input id="th" type="number" inputmode="decimal" min="0" step="any" value="24"></label>
+<label>Grout joint (in)<input id="g" type="number" inputmode="decimal" min="0" step="any" value="0"></label>
+<label>Waste %<select id="waste"><option value="10">10% straight lay</option><option value="15">15% diagonal / herringbone</option><option value="5">5% simple, few cuts</option><option value="20">20% complex room</option></select></label>
+<label>Tiles per box (optional)<input id="pb" type="number" inputmode="numeric" min="0" step="1" placeholder="from the box label"></label>
+<label>$ per sq ft (optional)<input id="pr" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 3.50"></label></div>
+<div class="res" aria-live="polite"><div class="big"><b id="rt">–</b><span>tiles</span></div><div class="big"><b id="rb">–</b><span>boxes</span></div><div class="big"><b id="ra">–</b><span>sq ft incl. waste</span></div><div class="big"><b id="rc">–</b><span>tile cost</span></div></div>
+<p class="small" id="note"></p>
+</section>
+<!-- AFFILIATE SLOT "tile-calculator-results": placeholder only. No affiliate links until programs approve us. Renders nothing; removed in app mode. --><div class="aff-slot" data-slot="tile-calculator-results" hidden></div>
+<section class="guide"><h2>How many tiles do I need?</h2>
+<p>A tile estimate has three parts: the area to cover, the area of one tile, and an allowance for the tiles you'll cut, break or set aside as spares.</p>
+<h3>1. Measure the area</h3>
+<p>For a rectangular floor or wall, multiply length × width in feet. For an L-shaped bathroom, split it into two rectangles and add them, or use the <a href="/tools/area-calculator/">area calculator</a> and type the total into the "total sq ft" box. Leave out spots that won't be tiled, such as under a fitted vanity or a tub, if you're sure of them.</p>
+<h3>2. Area of one tile</h3>
+<p>Tile sizes are given in inches, so multiply width × length and divide by 144 to get square feet. A 12 × 24 in tile is 288 ÷ 144 = 2 sq ft, a 12 × 12 is 1 sq ft, and a 3 × 6 in subway tile is 0.125 sq ft (8 tiles per square foot). Grout joints make each tile cover a little more. Enter the joint width to include it, or leave it at 0 for a slightly cautious count.</p>
+<h3>3. Add waste</h3>
+<p>Every row that meets a wall needs a cut, and offcuts often can't be reused. A common rule of thumb is to add about 10% for a straight lay and about 15% for diagonal or herringbone patterns, with more for small, awkward rooms. Your installer or the tile maker may recommend a different figure, so follow them if they do.</p>
+<p><b>Worked example:</b> an 8 × 10 ft bathroom floor is 80 sq ft. With 10% waste that's 88 sq ft. 12 × 24 tiles cover 2 sq ft each, so 88 ÷ 2 = 44 tiles. Sold 8 to a box, that's 44 ÷ 8 = 5.5, so buy 6 boxes (48 tiles). Laid diagonally at 15%, it's 92 sq ft = 46 tiles, still 6 boxes.</p>
+<h3>Why buy a few spares</h3>
+<p>Colour and shade can vary between production runs (often marked as a lot or batch number on the box). Buying all your tile at once from the same lot, and keeping a few spare tiles after the job, makes a future repair much easier to match.</p>
+<h3>Tiles per square foot</h3>
+<div class="tw"><table class="t"><tr><th>Tile size</th><th>Sq ft per tile</th><th>Tiles per sq ft</th></tr>
+<tr><td>3 × 6 in</td><td>0.125</td><td>8</td></tr><tr><td>4 × 4 in</td><td>0.111</td><td>9</td></tr><tr><td>6 × 6 in</td><td>0.25</td><td>4</td></tr><tr><td>12 × 12 in</td><td>1</td><td>1</td></tr><tr><td>12 × 24 in</td><td>2</td><td>0.5</td></tr><tr><td>18 × 18 in</td><td>2.25</td><td>0.444</td></tr><tr><td>24 × 24 in</td><td>4</td><td>0.25</td></tr></table></div>
+<h3>Walls and backsplashes</h3>
+<p>For a wall, measure the width and the height you're tiling and multiply, then subtract windows and large openings. A kitchen backsplash 12 ft long and 18 in high is 12 × 1.5 = 18 sq ft. In 3 × 6 in subway tile (8 per sq ft) with 10% waste that's 19.8 sq ft × 8 = 158.4, so 159 tiles. Outlets and switch boxes still need cut tiles around them, so don't subtract them. Trim pieces such as bullnose or edge profiles are sold by the linear foot or piece, so measure the edges you need to finish separately.</p>
+<h3>Common mistakes</h3>
+<div class="tw"><table class="t"><tr><th>Mistake</th><th>Fix</th></tr><tr><td>Dividing square feet by tile inches</td><td>Convert the tile to sq ft first (in × in ÷ 144)</td></tr><tr><td>No waste allowance</td><td>Add about 10% for straight lay, about 15% for diagonal</td></tr><tr><td>Rounding boxes down</td><td>Always round boxes up; partial boxes aren't sold</td></tr><tr><td>Mixing lots</td><td>Check the lot number on every box before you start</td></tr></table></div>
+<p>Related: <a href="/guides/flooring-square-footage-with-waste/">flooring square footage with waste</a>, <a href="/tools/area-calculator/">area calculator</a>, <a href="/guides/feet-inch-to-decimal-chart/">feet-inch to decimal chart</a>.</p></section>
+<!-- AD SLOT "tile-calculator-guide": placeholder only. No ad code until an AdSense publisher ID is approved and a consent tool is in place. Renders nothing; removed in app mode. --><div class="ad-slot" data-slot="tile-calculator-guide" hidden></div>
+<h2>FAQ</h2><details><summary>How many tiles do I need for 100 square feet?</summary><p>Add waste first: 100 sq ft + 10% is 110 sq ft. With 12 × 12 in tiles (1 sq ft each) that's 110 tiles. With 12 × 24 in tiles (2 sq ft each) it's 55.</p></details><details><summary>How much extra tile should I buy?</summary><p>A common allowance is about 10% for a straight lay and about 15% for diagonal or herringbone patterns, with more for small rooms with many cuts.</p></details><details><summary>How do I convert tile size to square feet?</summary><p>Multiply the tile's width by its length in inches and divide by 144. A 12 × 24 in tile is 2 sq ft.</p></details><details><summary>Should I count grout lines?</summary><p>Grout joints make each tile cover slightly more area, so leaving them out gives a slightly higher, more cautious count. Enter the joint width to include them.</p></details>
+</main>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/guides/">Guides</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a> · Estimates only; verify before you buy material.</div></footer>
+<script src="/t.js" defer></script>
+<script src="fic.js"></script>
+<script src="tile.js"></script>
+<script>
+(function(){
+function ftv(v){var s=String(v||"").trim();if(/^\d*\.?\d+$/.test(s))return parseFloat(s);var i=FIC.parse(s);return isFinite(i)&&i>0?i/12:NaN}
+function num(id){var v=parseFloat(document.getElementById(id).value);return isFinite(v)?v:NaN}
+function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
+function prefill(keys){try{var p=new URLSearchParams(location.search);keys.forEach(function(k){var v=p.get(k),e=document.getElementById(k);if(v!==null&&e&&/^[\d.'" \/a-z-]{1,20}$/i.test(v))e.value=v})}catch(e){}}
+var $=function(i){return document.getElementById(i)};prefill(["l","w","sq","tw","th","waste","pb"]);
+function run(){var sq=num("sq"),A=sq>0?sq:ftv($("l").value)*ftv($("w").value);
+ var r=TILE.calc({areaFt2:A,tileW:num("tw"),tileH:num("th"),groutIn:num("g"),waste:parseFloat($("waste").value),perBox:num("pb"),pricePerFt2:num("pr")});
+ if(!r){["rt","rb","ra","rc"].forEach(function(i){$(i).textContent="–"});$("note").textContent="Check the area and tile size.";return}
+ $("rt").textContent=r.tiles.toLocaleString();$("rb").textContent=r.boxes?r.boxes:"–";$("ra").textContent=f(r.areaWithWaste,1);$("rc").textContent=r.cost?"$"+f(r.cost,2):"–";
+ $("note").textContent=f(A,1)+" sq ft + "+$("waste").value+"% = "+f(r.areaWithWaste,1)+" sq ft ÷ "+f(r.tileFt2,3)+" sq ft per tile"+(r.boxes?" · "+r.boxes+" boxes = "+(r.boxes*Math.floor(num("pb")))+" tiles":"")}
+document.querySelectorAll("main input,main select").forEach(function(e){e.addEventListener("input",run);e.addEventListener("change",run)});
+run();window.__run=run;
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
+</body></html>

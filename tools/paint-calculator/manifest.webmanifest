@@ -1,0 +1,38 @@
+{
+ "id": "/tools/paint-calculator/",
+ "name": "Paint calculator by Atlas",
+ "short_name": "Paint",
+ "description": "Gallons of paint for walls and ceilings, minus doors and windows.",
+ "start_url": "/tools/paint-calculator/?source=pwa",
+ "scope": "/tools/paint-calculator/",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#07090e",
+ "theme_color": "#07090e",
+ "lang": "en",
+ "categories": [
+  "utilities",
+  "productivity",
+  "business"
+ ],
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

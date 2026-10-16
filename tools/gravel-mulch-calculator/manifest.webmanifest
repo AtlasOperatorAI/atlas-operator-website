@@ -1,0 +1,38 @@
+{
+ "id": "/tools/gravel-mulch-calculator/",
+ "name": "Gravel & mulch calculator by Atlas",
+ "short_name": "Gravel",
+ "description": "Cubic yards, tons and bags of gravel, mulch, sand and topsoil.",
+ "start_url": "/tools/gravel-mulch-calculator/?source=pwa",
+ "scope": "/tools/gravel-mulch-calculator/",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#07090e",
+ "theme_color": "#07090e",
+ "lang": "en",
+ "categories": [
+  "utilities",
+  "productivity",
+  "business"
+ ],
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

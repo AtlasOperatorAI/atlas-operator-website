@@ -8,14 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta property="og:type" content="website"><meta property="og:title" content="Free Concrete Calculator: Slab, Bags & Cost"><meta property="og:description" content="Cubic yards, bag counts and cost for slabs, footings and columns. Free, no sign-up."><meta property="og:url" content="https://atlasoperator.ai/tools/concrete-calculator/"><meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"Concrete Calculator","url":"https://atlasoperator.ai/tools/concrete-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","description":"Calculate cubic yards, 40/60/80 lb bag counts and cost for concrete slabs, footings and columns.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/"}},
-{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://atlasoperator.ai/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://atlasoperator.ai/#tools"},{"@type":"ListItem","position":3,"name":"Concrete Calculator","item":"https://atlasoperator.ai/tools/concrete-calculator/"}]},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How do I calculate cubic yards of concrete?","acceptedAnswer":{"@type":"Answer","text":"Multiply length (ft) by width (ft) by thickness (in) divided by 12 to get cubic feet, then divide by 27. A 10 x 10 ft slab 4 in thick is 33.3 cu ft, or about 1.23 cubic yards."}},
-{"@type":"Question","name":"How many 80 lb bags of concrete do I need?","acceptedAnswer":{"@type":"Answer","text":"An 80 lb bag of premixed concrete yields about 0.60 cu ft, a 60 lb bag about 0.45 cu ft and a 40 lb bag about 0.30 cu ft. Divide your total cubic feet by the yield and round up. A 10 x 10 ft, 4 in slab needs about 56 bags of 80 lb."}},
-{"@type":"Question","name":"How much extra concrete should I order?","acceptedAnswer":{"@type":"Answer","text":"Most contractors add 5 to 10 percent for spillage, uneven subgrade and form bowing. Use the waste field to add it."}},
-{"@type":"Question","name":"Bags or ready-mix?","acceptedAnswer":{"@type":"Answer","text":"Bags are practical for small jobs up to roughly 1 cubic yard. Above that, ready-mix delivery is usually cheaper and faster. Check your supplier's minimum order."}}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Concrete Calculator", "url": "https://atlasoperator.ai/tools/concrete-calculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web", "description": "Calculate cubic yards, 40/60/80 lb bag counts and cost for concrete slabs, footings and columns.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#tools"}, {"@type": "ListItem", "position": 3, "name": "Concrete Calculator", "item": "https://atlasoperator.ai/tools/concrete-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate cubic yards of concrete?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply length (ft) by width (ft) by thickness (in) divided by 12 to get cubic feet, then divide by 27. A 10 x 10 ft slab 4 in thick is 33.3 cu ft, or about 1.23 cubic yards."}}, {"@type": "Question", "name": "How many 80 lb bags of concrete do I need?", "acceptedAnswer": {"@type": "Answer", "text": "An 80 lb bag of premixed concrete yields about 0.60 cu ft, a 60 lb bag about 0.45 cu ft and a 40 lb bag about 0.30 cu ft. Divide your total cubic feet by the yield and round up. A 10 x 10 ft, 4 in slab needs about 56 bags of 80 lb."}}, {"@type": "Question", "name": "How much extra concrete should I order?", "acceptedAnswer": {"@type": "Answer", "text": "Most contractors add 5 to 10 percent for spillage, uneven subgrade and form bowing. Use the waste field to add it."}}, {"@type": "Question", "name": "Bags or ready-mix?", "acceptedAnswer": {"@type": "Answer", "text": "Bags are practical for small jobs up to roughly 1 cubic yard. Above that, ready-mix delivery is usually cheaper and faster. Check your supplier's minimum order."}}, {"@type": "Question", "name": "Is a 4 inch slab thick enough?", "acceptedAnswer": {"@type": "Answer", "text": "4 in is common for patios, walkways and shed floors. Driveways and heavier loads are often 5–6 in. Follow local code and your contractor for structural work."}}, {"@type": "Question", "name": "How many bags of concrete are in a yard?", "acceptedAnswer": {"@type": "Answer", "text": "At typical yields, a cubic yard (27 cu ft) is 45 bags of 80 lb, 60 bags of 60 lb or 90 bags of 40 lb."}}]}]}</script>
 <style>
 :root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
 *{box-sizing:border-box}body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
@@ -40,6 +33,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 #quote{display:none}
 @media print{body{background:#fff;color:#000}body>*{display:none!important}#quote{display:block!important;padding:24px;font:14px system-ui}#quote table{border-collapse:collapse;width:100%}#quote td{border:1px solid #ccc;padding:6px}}
 </style>
+<style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
 <header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
 <main class="w">
@@ -98,6 +92,33 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 <p class="small">Want this calculator branded on your own website? <a href="mailto:atlas.operator.ai@gmail.com?subject=Branded%20concrete%20calculator">Email us for a quote</a>.</p>
 </section>
 
+<!-- AFFILIATE SLOT "concrete-calculator-results": placeholder only. No affiliate links until programs approve us. Renders nothing; removed in app mode. --><div class="aff-slot" data-slot="concrete-calculator-results" hidden></div>
+<section class="guide" id="guide"><h2>Concrete estimating guide</h2>
+<p>Concrete is ordered by volume, in cubic yards for ready-mix or in bags that each make a known number of cubic feet. Getting the volume right means fewer half-empty bags and fewer emergency runs to the store before the pour sets.</p>
+<h3>The formula</h3>
+<p><b>Cubic feet = length (ft) × width (ft) × thickness (in) ÷ 12.</b> Divide cubic feet by 27 to get cubic yards. The ÷ 12 turns inches into feet. Forgetting it is the most common reason an estimate comes out twelve times too big.</p>
+<h3>Worked example: 10 × 10 ft patio, 4 in thick</h3>
+<p>10 × 10 × 4 ÷ 12 = 33.3 cu ft. 33.3 ÷ 27 = 1.23 cubic yards. With the typical bag yields below that's 56 bags of 80 lb, 75 bags of 60 lb or 112 bags of 40 lb. With 10% extra for an uneven base and spillage it's 36.7 cu ft: 62 × 80 lb, 82 × 60 lb or 123 × 40 lb.</p>
+<h3>Bag yields and bags per cubic yard</h3>
+<div class="tw"><table class="t"><tr><th>Bag</th><th>Typical yield</th><th>Bags per cubic yard</th></tr><tr><td>80 lb</td><td>≈ 0.60 cu ft</td><td>45</td></tr><tr><td>60 lb</td><td>≈ 0.45 cu ft</td><td>60</td></tr><tr><td>40 lb</td><td>≈ 0.30 cu ft</td><td>90</td></tr></table></div>
+<p>Yields vary a little by brand and mix, so check the yield printed on the bag you're buying.</p>
+<h3>Footings and columns</h3>
+<p>A footing is a long rectangle measured in feet along its length and inches across its width and depth: <b>length (ft) × width (in) ÷ 12 × depth (in) ÷ 12</b>. A 20 ft footing 12 in wide and 12 in deep is 20 cu ft, about 0.74 yd³. A round column or sonotube is <b>π × (diameter in ÷ 24)² × height (ft)</b>. A 12 in tube 4 ft tall is 3.14 cu ft, which is 6 bags of 80 lb after rounding up.</p>
+<h3>How thick should a slab be?</h3>
+<p>4 in is a common thickness for patios, walkways and shed floors. Driveways and slabs that carry heavier loads are often 5–6 in, usually with reinforcement and a compacted base. Local code, soil conditions and your engineer or contractor decide what's right for a structural job. This calculator only does the volume math.</p>
+<h3>Bags or ready-mix?</h3>
+<p>Mixing by hand or in a small mixer is practical up to roughly a cubic yard. Past that, a ready-mix truck is usually faster and gives a more consistent pour. Ask local suppliers about minimum orders and short-load fees, then compare using the cost fields above.</p>
+<h3>Planning checklist</h3>
+<ul><li><b>Measure the formed area</b> after the forms are set, not the sketch. Forms that end up a few inches larger add up over a whole slab.</li><li><b>Check the base.</b> Compacted gravel under a slab is common practice, and an uneven base changes the real thickness. Measure depth at several points.</li><li><b>Plan the pour sequence.</b> With bags, decide how many you can mix and place before the first batch stiffens, and where control joints will go.</li><li><b>Weather.</b> Hot, windy or freezing conditions affect curing. Follow the instructions on the bag or the advice of your ready-mix supplier.</li></ul>
+<h3>Common mistakes</h3>
+<div class="tw"><table class="t"><tr><th>Mistake</th><th>What happens</th><th>Fix</th></tr>
+<tr><td>Multiplying by inches</td><td>Volume 12× too high</td><td>Divide thickness in inches by 12</td></tr>
+<tr><td>Forgetting ÷ 27</td><td>Ordering cubic feet as yards</td><td>Cubic feet ÷ 27 = cubic yards</td></tr>
+<tr><td>No extra for waste</td><td>Running short mid-pour</td><td>Add 5–10%</td></tr>
+<tr><td>Rounding bags down</td><td>A few bags short</td><td>Always round up</td></tr>
+<tr><td>Ignoring a sloped base</td><td>Thick spots use more</td><td>Measure depth in several places and average</td></tr></table></div>
+<p>More: <a href="/guides/bags-of-concrete-for-10x10-slab/">bags of concrete for a 10×10 slab</a>, <a href="/guides/concrete-for-fence-posts/">concrete for fence posts</a>, <a href="/guides/bags-of-concrete-per-yard/">bags per cubic yard</a>, <a href="/tools/gravel-mulch-calculator/">gravel calculator</a> for the base.</p></section>
+<!-- AD SLOT "concrete-calculator-guide": placeholder only. No ad code until an AdSense publisher ID is approved and a consent tool is in place. Renders nothing; removed in app mode. --><div class="ad-slot" data-slot="concrete-calculator-guide" hidden></div>
 <section><h2>How it works</h2>
 <p><b>Slab:</b> length (ft) × width (ft) × thickness (in) ÷ 12 = cubic feet. <b>Footing:</b> length (ft) × width (in) ÷ 12 × depth (in) ÷ 12. <b>Column:</b> π × (diameter in ÷ 24)² × height (ft). Multiply by quantity, add waste, then divide by 27 for cubic yards.</p>
 <p>Bag counts use typical premixed yields: 80 lb ≈ 0.60 ft³, 60 lb ≈ 0.45 ft³, 40 lb ≈ 0.30 ft³, rounded up. Check the yield printed on your brand's bag.</p>
@@ -106,9 +127,11 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 <details><summary>How many 80 lb bags of concrete do I need?</summary><p>An 80 lb bag of premixed concrete yields about 0.60 cu ft, a 60 lb bag about 0.45 cu ft and a 40 lb bag about 0.30 cu ft. Divide your total cubic feet by the yield and round up. A 10 × 10 ft, 4 in slab needs about 56 bags of 80 lb.</p></details>
 <details><summary>How much extra concrete should I order?</summary><p>Most contractors add 5 to 10 percent for spillage, uneven subgrade and form bowing. Use the waste field to add it.</p></details>
 <details><summary>Bags or ready-mix?</summary><p>Bags are practical for small jobs up to roughly 1 cubic yard. Above that, ready-mix delivery is usually cheaper and faster. Check your supplier's minimum order.</p></details>
+<details><summary>Is a 4 inch slab thick enough?</summary><p>4 in is common for patios, walkways and shed floors. Driveways and heavier loads are often 5–6 in. Follow local code and your contractor for structural work.</p></details>
+<details><summary>How many bags of concrete are in a yard?</summary><p>At typical yields, a cubic yard (27 cu ft) is 45 bags of 80 lb, 60 bags of 60 lb or 90 bags of 40 lb.</p></details>
 </section>
 </main>
-<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · Estimates only; confirm quantities with your supplier.</div></footer>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/guides/">Guides</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · Estimates only; confirm quantities with your supplier.</div></footer>
 <div id="quote"></div>
 <script src="/t.js" defer></script>
 <script src="calc.js"></script>
@@ -150,5 +173,8 @@ $("pdf").onclick=function(){if(!gate())return;var r=last.r,o=last.o,e=function(s
 render();
 })();
 </script>
+<script>/* Prefill from the URL, e.g. ?shape=column&a=10&b=3, used by the guide pages. Numbers only. */
+(function(){try{var p=new URLSearchParams(location.search);if(![].some.call("shape a b c qty waste bag".split(" "),function(k){return p.has(k)}))return;var s=p.get("shape"),t=s&&document.querySelector('.tabs button[data-s="'+s.replace(/[^a-z]/g,"")+'"]');if(t)t.click();
+["a","b","c","qty","waste","bag"].forEach(function(k){var v=p.get(k),e=document.getElementById(k);if(v!==null&&e&&/^\d*\.?\d+$/.test(v)){e.value=v;e.dispatchEvent(new Event("input",{bubbles:true}))}})}catch(e){}})();</script>
 <script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
 </body></html>

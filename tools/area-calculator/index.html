@@ -8,14 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta property="og:type" content="website"><meta property="og:title" content="Free Square Footage Calculator"><meta property="og:description" content="Add up rectangles, triangles, circles and L-shapes in sq ft, sq yd and m², with waste % and cost. Free, no sign-up."><meta property="og:url" content="https://atlasoperator.ai/tools/area-calculator/"><meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"Area and Square Footage Calculator","url":"https://atlasoperator.ai/tools/area-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","description":"Calculate square feet, square yards and square metres for rectangles, triangles, circles and L-shapes, with waste and material cost.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/"}},
-{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://atlasoperator.ai/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://atlasoperator.ai/#tools"},{"@type":"ListItem","position":3,"name":"Area Calculator","item":"https://atlasoperator.ai/tools/area-calculator/"}]},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How do I calculate square footage?","acceptedAnswer":{"@type":"Answer","text":"Multiply length by width in feet. A 12' × 10' room is 120 sq ft. For inches, convert to feet first: 12' 6\" is 12.5 ft, so 12' 6\" × 10' is 125 sq ft."}},
-{"@type":"Question","name":"How do I find the square footage of an L-shaped room?","acceptedAnswer":{"@type":"Answer","text":"Take the overall length × width as if it were a rectangle, then subtract the missing corner. A 20' × 15' outline missing an 8' × 6' corner is 300 − 48 = 252 sq ft."}},
-{"@type":"Question","name":"How do I convert square feet to square yards and square metres?","acceptedAnswer":{"@type":"Answer","text":"Divide square feet by 9 for square yards, and multiply by 0.0929 for square metres. 252 sq ft = 28 sq yd = 23.41 m²."}},
-{"@type":"Question","name":"How much extra flooring should I buy for waste?","acceptedAnswer":{"@type":"Answer","text":"A common allowance is about 10% for straight lay and more for diagonal or herringbone patterns. Check the manufacturer's guidance. 252 sq ft plus 10% is 277.2 sq ft."}}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Area and Square Footage Calculator", "url": "https://atlasoperator.ai/tools/area-calculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web", "description": "Calculate square feet, square yards and square metres for rectangles, triangles, circles and L-shapes, with waste and material cost.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#tools"}, {"@type": "ListItem", "position": 3, "name": "Area Calculator", "item": "https://atlasoperator.ai/tools/area-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate square footage?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply length by width in feet. A 12' × 10' room is 120 sq ft. For inches, convert to feet first: 12' 6\" is 12.5 ft, so 12' 6\" × 10' is 125 sq ft."}}, {"@type": "Question", "name": "How do I find the square footage of an L-shaped room?", "acceptedAnswer": {"@type": "Answer", "text": "Take the overall length × width as if it were a rectangle, then subtract the missing corner. A 20' × 15' outline missing an 8' × 6' corner is 300 − 48 = 252 sq ft."}}, {"@type": "Question", "name": "How do I convert square feet to square yards and square metres?", "acceptedAnswer": {"@type": "Answer", "text": "Divide square feet by 9 for square yards, and multiply by 0.0929 for square metres. 252 sq ft = 28 sq yd = 23.41 m²."}}, {"@type": "Question", "name": "How much extra flooring should I buy for waste?", "acceptedAnswer": {"@type": "Answer", "text": "A common allowance is about 10% for straight lay and more for diagonal or herringbone patterns. Check the manufacturer's guidance. 252 sq ft plus 10% is 277.2 sq ft."}}, {"@type": "Question", "name": "How many square feet is a 12x12 room?", "acceptedAnswer": {"@type": "Answer", "text": "12 × 12 = 144 sq ft, which is 16 square yards or about 13.38 m²."}}, {"@type": "Question", "name": "How do I measure square footage of a room with a closet?", "acceptedAnswer": {"@type": "Answer", "text": "Measure the main room and the closet as separate rectangles, work out each area, and add them together."}}]}]}</script>
 <style>
 :root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
 *{box-sizing:border-box}body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
@@ -43,6 +36,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 .x{padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
 html[data-twa] #pro{display:none!important}
 </style>
+<style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
 </head><body>
 <header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
 <main class="w">
@@ -89,6 +83,30 @@ html[data-twa] #pro{display:none!important}
 <p class="small">Want this calculator branded on your own website? <a href="mailto:atlas.operator.ai@gmail.com?subject=Branded%20area%20calculator">Email us for a quote</a>.</p>
 </section>
 
+<!-- AFFILIATE SLOT "area-calculator-results": placeholder only. No affiliate links until programs approve us. Renders nothing; removed in app mode. --><div class="aff-slot" data-slot="area-calculator-results" hidden></div>
+<section class="guide" id="guide"><h2>Square footage guide</h2>
+<p>Flooring, carpet, paint, sod, roofing and many other materials are sold by area, so a good square footage figure is the first step of almost any home project. Here's how to measure and calculate it without the usual slip-ups.</p>
+<h3>Measuring a room</h3>
+<p>Measure wall to wall at floor level along the longest straight runs. Write each number in feet and inches, such as 12' 6", and round to the nearest inch for flooring. Sketch the room on paper and write the measurements on the sketch. That makes it obvious when a closet or bay needs to be added separately.</p>
+<h3>Rectangles</h3>
+<p>Length × width. Convert inches to feet first by dividing by 12: 12' 6" × 10' 3" = 12.5 × 10.25 = 128.1 sq ft. That's 14.24 sq yd or 11.90 m².</p>
+<h3>L-shapes and irregular rooms</h3>
+<p>There are two equivalent ways. You can split the room into rectangles and add them, or measure the whole outline as a rectangle and subtract the missing corner. A 20' × 15' outline missing an 8' × 6' corner is 300 − 48 = 252 sq ft. Splitting it into a 12' × 15' piece (180) and an 8' × 9' piece (72) also gives 252.</p>
+<h3>Triangles and circles</h3>
+<p>A triangle is base × height ÷ 2, where the height is measured at a right angle to the base. A circle is π × diameter² ÷ 4, or π × radius². A 10 ft round patio is 3.1416 × 100 ÷ 4 = 78.5 sq ft.</p>
+<h3>Converting units</h3>
+<div class="tw"><table class="t"><tr><th>From</th><th>To</th><th>Do this</th></tr><tr><td>sq ft</td><td>sq yd</td><td>÷ 9</td></tr><tr><td>sq yd</td><td>sq ft</td><td>× 9</td></tr><tr><td>sq ft</td><td>m²</td><td>× 0.0929</td></tr><tr><td>m²</td><td>sq ft</td><td>× 10.764</td></tr><tr><td>sq in</td><td>sq ft</td><td>÷ 144</td></tr></table></div>
+<p>Note that a square yard is 9 sq ft, not 3: it's 3 ft × 3 ft. Carpet is often priced per square yard, so check which unit a quote uses (see <a href="/guides/square-feet-to-square-yards-carpet/">sq ft to sq yd for carpet</a>).</p>
+<h3>Adding waste</h3>
+<p>Materials that get cut need extra. A common allowance is around 10% for straight-laid flooring and tile and 15% or more for diagonal or patterned layouts. Use the manufacturer's guidance when it's given. 252 sq ft + 10% = 277.2 sq ft, and you round up to whole boxes.</p>
+<h3>Worked example: a whole floor</h3>
+<p>Say you're flooring a living room of 15' 4" × 12' plus an entry nook of 4' × 3' 6". The living room is 15.333 × 12 = 184 sq ft and the nook is 4 × 3.5 = 14 sq ft, so the net area is 198 sq ft. Add 10% waste: 217.8 sq ft. If the flooring comes in boxes covering 20 sq ft, you need 217.8 ÷ 20 = 10.9, so 11 boxes. In the calculator, add the two rooms as separate rectangles, type 10 in the waste box, and the total appears with waste included.</p>
+<h3>Metric rooms</h3>
+<p>Switch to Metric and type metres: a 4.2 × 3.6 m room is 15.12 m², which is 162.75 sq ft or 18.08 sq yd.</p>
+<h3>Common mistakes</h3>
+<div class="tw"><table class="t"><tr><th>Mistake</th><th>Fix</th></tr><tr><td>12' 6" typed as 12.6 ft</td><td>6 in is 0.5 ft, so use 12.5</td></tr><tr><td>sq ft ÷ 3 for sq yd</td><td>Divide by 9</td></tr><tr><td>Missing closets and alcoves</td><td>Add them as extra areas</td></tr><tr><td>Measuring only one wall in an out-of-square room</td><td>Measure both ends and use the larger</td></tr></table></div>
+<p>More: <a href="/guides/square-footage-of-a-room/">square footage of a room</a>, <a href="/guides/flooring-square-footage-with-waste/">flooring with waste</a>, <a href="/tools/tile-calculator/">tile calculator</a>, <a href="/tools/paint-calculator/">paint calculator</a>.</p></section>
+<!-- AD SLOT "area-calculator-guide": placeholder only. No ad code until an AdSense publisher ID is approved and a consent tool is in place. Renders nothing; removed in app mode. --><div class="ad-slot" data-slot="area-calculator-guide" hidden></div>
 <section><h2>How it works</h2>
 <p>Each area is worked out in the unit you type (square inches for feet-inch input, square metres for metric) and converted to square feet, then all areas are added. <b>Rectangle:</b> length × width. <b>Triangle:</b> base × height ÷ 2. <b>Circle:</b> π × diameter² ÷ 4. <b>L-shape:</b> overall length × overall width minus the missing corner (its length × width).</p>
 <p>1 sq yd = 9 sq ft and 1 sq ft = 0.09290304 m². Waste adds a percentage on top of the total; cost is the total with waste × your price per sq ft. Measurements are typed like a tape: 12' 6", 12ft 6in, 150 (inches) or 3/4.</p>
@@ -97,9 +115,11 @@ html[data-twa] #pro{display:none!important}
 <details><summary>How do I find the square footage of an L-shaped room?</summary><p>Take the overall length × width as if it were a rectangle, then subtract the missing corner. A 20' × 15' outline missing an 8' × 6' corner is 300 − 48 = 252 sq ft.</p></details>
 <details><summary>How do I convert square feet to square yards and square metres?</summary><p>Divide square feet by 9 for square yards, and multiply by 0.0929 for square metres. 252 sq ft = 28 sq yd = 23.41 m².</p></details>
 <details><summary>How much extra flooring should I buy for waste?</summary><p>A common allowance is about 10% for straight lay and more for diagonal or herringbone patterns. Check the manufacturer's guidance. 252 sq ft plus 10% is 277.2 sq ft.</p></details>
+<details><summary>How many square feet is a 12x12 room?</summary><p>12 × 12 = 144 sq ft, which is 16 square yards or about 13.38 m².</p></details>
+<details><summary>How do I measure square footage of a room with a closet?</summary><p>Measure the main room and the closet as separate rectangles, work out each area, and add them together.</p></details>
 </section>
 </main>
-<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · Estimates only; verify measurements before ordering material.</div></footer>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/guides/">Guides</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · Estimates only; verify measurements before ordering material.</div></footer>
 <div id="quote"></div>
 <script src="/t.js" defer></script>
 <script src="fic.js"></script>
@@ -166,5 +186,8 @@ $("pdf").onclick=function(){if(!gate())return;var e=function(s){return String(s|
 render();
 })();
 </script>
+<script>/* Prefill from the URL, e.g. ?l=12'6"&w=10&waste=10, used by the guide pages. */
+(function(){try{var p=new URLSearchParams(location.search),ok=function(v){return v!==null&&/^[\d.'" \/]{1,16}$/.test(v)};var i0=document.querySelector('#shapes input[data-j="0"]'),i1=document.querySelector('#shapes input[data-j="1"]');
+[[i0,p.get("l")],[i1,p.get("w")],[document.getElementById("waste"),p.get("waste")]].forEach(function(x){if(x[0]&&ok(x[1])){x[0].value=x[1];x[0].dispatchEvent(new Event("input",{bubbles:true}))}})}catch(e){}})();</script>
 <script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
 </body></html>

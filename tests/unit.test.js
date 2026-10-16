@@ -1,0 +1,16 @@
+/* Run: node tests/unit.test.js */
+const a=require("assert"),GM=require("../tools/gravel-mulch-calculator/gm.js"),P=require("../tools/paint-calculator/paint.js"),T=require("../tools/tile-calculator/tile.js"),C=require("../tools/concrete-calculator/calc.js");
+const near=(x,y,e=1e-6)=>a.ok(Math.abs(x-y)<e,`${x} != ${y}`);let n=0;const t=(name,fn)=>{fn();n++;console.log("ok -",name)};
+t("gravel 10x10 at 3in = 0.926 yd3, 1.30 t",()=>{const r=GM.calc({a:10,b:10,depthIn:3,tpy:1.4});near(r.ft3,25);near(r.yd3,25/27);near(r.tons,25/27*1.4)});
+t("mulch 20x5 at 3in with 2cu ft bags",()=>{const r=GM.calc({a:20,b:5,depthIn:3,tpy:0.3});near(r.ft3,25);a.strictEqual(r.bags2,13);a.strictEqual(r.bags3,9)});
+t("gravel circle 10ft dia 4in",()=>{const r=GM.calc({shape:"circle",a:10,depthIn:4});near(r.ft3,Math.PI*25*4/12)});
+t("gravel waste and cost",()=>{const r=GM.calc({a:27,b:12,depthIn:1,waste:10,pricePerYd:50});near(r.yd3,1.1);near(r.cost,55)});
+t("gravel bad input",()=>{a.strictEqual(GM.calc({a:0,b:5,depthIn:3}),null);a.strictEqual(GM.calc({a:5,b:5,depthIn:0}),null)});
+t("paint 12x10x8 room, 1 door 2 windows, 2 coats @350",()=>{const r=P.calc({length:12,width:10,height:8,doors:1,windows:2,coats:2,coverage:350});near(r.walls,352);near(r.netWalls,302);near(r.gallons,604/350);a.strictEqual(r.buyGallons,2)});
+t("paint with ceiling",()=>{const r=P.calc({length:12,width:10,height:8,coats:2,coverage:400,ceiling:true});near(r.ceiling,120);near(r.gallons,(352+120)*2/400)});
+t("paint primer 1 coat",()=>{const r=P.calc({length:10,width:10,height:8,coats:2,coverage:320,primer:true});near(r.primerGal,1)});
+t("tile 100 sqft, 12x12, 10% waste",()=>{const r=T.calc({areaFt2:100,tileW:12,tileH:12,waste:10});a.strictEqual(r.tiles,110)});
+t("tile 12x24 boxes of 8",()=>{const r=T.calc({areaFt2:100,tileW:12,tileH:24,waste:10,perBox:8});a.strictEqual(r.tiles,55);a.strictEqual(r.boxes,7)});
+t("tile 3x6 subway 30 sqft 15%",()=>{const r=T.calc({areaFt2:30,tileW:3,tileH:6,waste:15});a.strictEqual(r.tiles,276)});
+t("concrete 10x10x4 = 56 x 80lb",()=>{a.strictEqual(C.calc({a:10,b:10,c:4}).bags[80],56)});
+console.log(`\n${n} tests passed`);

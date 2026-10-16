@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paint Calculator: How Many Gallons for a Room? | Atlas Operator</title>
+<meta name="description" content="Free paint coverage calculator. Wall area minus doors and windows, coats, optional ceiling and primer. Gallons and quarts to buy. No sign-up.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/paint-calculator/">
+<meta name="theme-color" content="#07090e">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Paint Calculator: How Many Gallons for a Room? | Atlas Operator"><meta property="og:description" content="Free paint coverage calculator. Wall area minus doors and windows, coats, optional ceiling and primer. Gallons and quarts to buy. No sign-up."><meta property="og:url" content="https://atlasoperator.ai/tools/paint-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Paint Coverage Calculator", "url": "https://atlasoperator.ai/tools/paint-calculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web", "description": "Free paint coverage calculator. Wall area minus doors and windows, coats, optional ceiling and primer. Gallons and quarts to buy. No sign-up.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#tools"}, {"@type": "ListItem", "position": 3, "name": "Paint Coverage Calculator", "item": "https://atlasoperator.ai/tools/paint-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many gallons of paint do I need for a 12x10 room?", "acceptedAnswer": {"@type": "Answer", "text": "With 8 ft walls, one door and two windows, the net wall area is about 302 sq ft. Two coats at 350 sq ft per gallon is 1.73 gallons, so buy 2 gallons."}}, {"@type": "Question", "name": "How much does a gallon of paint cover?", "acceptedAnswer": {"@type": "Answer", "text": "Many interior paints list about 350–400 sq ft per gallon per coat on smooth, primed walls. Rough or porous surfaces get less. Use the number on your paint's label."}}, {"@type": "Question", "name": "Do I subtract doors and windows?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A typical door is about 20 sq ft and a window about 15 sq ft. Subtract them from the wall area before dividing by coverage."}}, {"@type": "Question", "name": "Do I need two coats?", "acceptedAnswer": {"@type": "Answer", "text": "Usually, especially when you're changing colour or painting new drywall. One coat can be enough when you repaint the same colour over a sound surface."}}]}]}</script>
+<style>:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}
+.nav{border-bottom:1px solid var(--line)}.nav .w{display:flex;justify-content:space-between;align-items:center;height:56px}
+.logo{display:flex;gap:9px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none}.logo i{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.crumb{font-size:.85rem;color:var(--mut);margin:16px 0 4px}.crumb a{color:var(--mut)}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:4px 0 6px;letter-spacing:-.02em}.lead{color:var(--mut);margin:0 0 16px}
+h2{margin-top:28px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(min-width:640px){.f{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:16px}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(min-width:640px){.res{grid-template-columns:repeat(4,1fr)}}
+.big{background:#0a0e16;border:1px solid var(--line);border-radius:10px;padding:10px}.big b{display:block;font-size:1.35rem}.big span{font-size:.8rem;color:var(--mut)}
+.btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.small{font-size:.82rem;color:var(--mut)}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}table.t td,table.t th{border:1px solid var(--line);padding:7px 9px;text-align:left}table.t th{background:#0d1220}
+.tw{overflow-x:auto}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+.rel{list-style:none;padding:0}.rel li{border-top:1px solid var(--line);padding:8px 0}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+.ad-slot,.aff-slot{display:none!important}</style>
+</head><body>
+<header class="nav"><div class="w"><a class="logo" href="/"><i></i>Atlas Operator</a><a href="/#tools" style="color:var(--mut);text-decoration:none">All tools</a></div></header>
+<main class="w">
+<nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Paint calculator</nav>
+<h1>Paint Coverage Calculator (Gallons per Room)</h1>
+<p class="lead">Enter the room size, doors, windows and number of coats. Get the paintable area and how many gallons to buy, using the coverage on your paint can.</p>
+<section class="card" aria-label="Calculator">
+<div class="f"><label>Room length (ft)<input id="l" value="12" autocomplete="off"></label>
+<label>Room width (ft)<input id="w" value="10" autocomplete="off"></label>
+<label>Wall height (ft)<input id="h" value="8" autocomplete="off"></label>
+<label>Doors<input id="doors" type="number" inputmode="numeric" min="0" step="1" value="1"></label>
+<label>Windows<input id="windows" type="number" inputmode="numeric" min="0" step="1" value="2"></label>
+<label>Coats<input id="coats" type="number" inputmode="numeric" min="1" step="1" value="2"></label>
+<label>Coverage (sq ft / gallon)<input id="cov" type="number" inputmode="decimal" min="1" step="any" value="350"></label>
+<label>Include ceiling<select id="ceil"><option value="0">No</option><option value="1">Yes</option></select></label>
+<label>Primer coat<select id="primer"><option value="0">No</option><option value="1">Yes</option></select></label></div>
+<div class="res" aria-live="polite"><div class="big"><b id="rg">–</b><span>gallons to buy</span></div><div class="big"><b id="rexact">–</b><span>gallons (exact)</span></div><div class="big"><b id="rarea">–</b><span>paintable sq ft</span></div><div class="big"><b id="rq">–</b><span>quarts (exact need)</span></div></div>
+<p class="small" id="note"></p>
+</section>
+<!-- AFFILIATE SLOT "paint-calculator-results": placeholder only. No affiliate links until programs approve us. Renders nothing; removed in app mode. --><div class="aff-slot" data-slot="paint-calculator-results" hidden></div>
+<section class="guide"><h2>How to estimate paint for a room</h2>
+<p>Paint is easy to over- or under-buy because the label gives coverage per gallon, while rooms are measured in feet. The fix is to turn the room into one number, the paintable square footage, and divide it by the coverage on the can.</p>
+<h3>1. Wall area</h3>
+<p>Add up the length of every wall (the perimeter) and multiply by the wall height. For a rectangular room that's 2 × (length + width) × height. A 12 × 10 ft room with 8 ft walls has 2 × 22 × 8 = 352 sq ft of wall.</p>
+<h3>2. Subtract doors and windows</h3>
+<p>This calculator takes off 20 sq ft per door (a standard 3 ft × 6 ft 8 in door) and 15 sq ft per window (3 × 5 ft). If yours are much bigger, such as patio doors or picture windows, measure them and adjust the count. One door and two windows bring the example down to 352 − 20 − 30 = 302 sq ft.</p>
+<h3>3. Multiply by coats, divide by coverage</h3>
+<p>Most interior paints list roughly 350–400 sq ft per gallon for one coat on a smooth surface. Check your product's label and use that number. Two coats on 302 sq ft is 604 sq ft of painting. At 350 sq ft per gallon that's 604 ÷ 350 = 1.73 gallons, so buy 2 gallons.</p>
+<h3>Ceilings and primer</h3>
+<p>A flat ceiling's area is simply length × width (120 sq ft in the example). Turn on "Include ceiling" to add it, but remember ceiling paint is often a different product, so you may want to run the ceiling separately with its own coverage. Primer is usually one coat, and it covers about the same area per gallon as paint. Its estimate is shown separately.</p>
+<h3>When to expect lower coverage</h3>
+<ul><li><b>Rough or textured walls</b> (knockdown, stucco, block) soak up more paint. Lower the coverage number.</li>
+<li><b>New drywall</b> is porous until it's primed.</li>
+<li><b>Big colour changes</b>, such as dark to light or bright reds and yellows, may need an extra coat.</li>
+<li><b>Rollers vs sprayers.</b> Spraying loses some paint to overspray.</li></ul>
+<h3>Quick reference (2 coats, 350 sq ft/gal, 8 ft walls, 1 door, 2 windows)</h3>
+<div class="tw"><table class="t"><tr><th>Room</th><th>Net wall area</th><th>Gallons needed</th><th>Buy</th></tr>
+<tr><td>10 × 10 ft</td><td>270 sq ft</td><td>1.54</td><td>2 gal</td></tr>
+<tr><td>12 × 10 ft</td><td>302 sq ft</td><td>1.73</td><td>2 gal</td></tr>
+<tr><td>12 × 12 ft</td><td>334 sq ft</td><td>1.91</td><td>2 gal</td></tr>
+<tr><td>14 × 12 ft</td><td>366 sq ft</td><td>2.09</td><td>2 gal + 1 qt</td></tr>
+<tr><td>16 × 14 ft</td><td>430 sq ft</td><td>2.46</td><td>2 gal + 2 qt, or 3 gal</td></tr></table></div>
+<h3>Trim, doors and accent walls</h3>
+<p>Trim and doors are usually painted in a different sheen, and sometimes a different colour, so estimate them separately. A quart often covers the trim in an average room. For an accent wall, paint only that wall's area: width × height minus any openings, times the coats, divided by coverage. A 12 ft wall at 8 ft high with two coats is 192 sq ft of painting, a little over half a gallon at 350 sq ft per gallon, so a gallon (or two quarts if the colour is sold that way) covers it with some left for touch-ups.</p>
+<h3>Common mistakes</h3>
+<div class="tw"><table class="t"><tr><th>Mistake</th><th>Fix</th></tr><tr><td>Using floor area instead of wall area</td><td>Walls = perimeter × height, not length × width</td></tr><tr><td>Forgetting the second coat</td><td>Most colour changes need two coats; multiply the area by the coats</td></tr><tr><td>Trusting the best-case label number on rough walls</td><td>Lower the coverage for texture or bare drywall</td></tr><tr><td>Buying exactly the minimum</td><td>Keep a little for touch-ups; tinted paint can be hard to match later</td></tr></table></div>
+<p>Related: <a href="/tools/area-calculator/">area calculator</a> for odd-shaped walls and gables, <a href="/tools/feet-inch-calculator/">feet-inch calculator</a> for adding measurements, and the <a href="/guides/square-footage-of-a-room/">room square footage guide</a>.</p></section>
+<!-- AD SLOT "paint-calculator-guide": placeholder only. No ad code until an AdSense publisher ID is approved and a consent tool is in place. Renders nothing; removed in app mode. --><div class="ad-slot" data-slot="paint-calculator-guide" hidden></div>
+<h2>FAQ</h2><details><summary>How many gallons of paint do I need for a 12x10 room?</summary><p>With 8 ft walls, one door and two windows, the net wall area is about 302 sq ft. Two coats at 350 sq ft per gallon is 1.73 gallons, so buy 2 gallons.</p></details><details><summary>How much does a gallon of paint cover?</summary><p>Many interior paints list about 350–400 sq ft per gallon per coat on smooth, primed walls. Rough or porous surfaces get less. Use the number on your paint's label.</p></details><details><summary>Do I subtract doors and windows?</summary><p>Yes. A typical door is about 20 sq ft and a window about 15 sq ft. Subtract them from the wall area before dividing by coverage.</p></details><details><summary>Do I need two coats?</summary><p>Usually, especially when you're changing colour or painting new drywall. One coat can be enough when you repaint the same colour over a sound surface.</p></details>
+</main>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/guides/">Guides</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a> · Estimates only; verify before you buy material.</div></footer>
+<script src="/t.js" defer></script>
+<script src="fic.js"></script>
+<script src="paint.js"></script>
+<script>
+(function(){
+function ftv(v){var s=String(v||"").trim();if(/^\d*\.?\d+$/.test(s))return parseFloat(s);var i=FIC.parse(s);return isFinite(i)&&i>0?i/12:NaN}
+function num(id){var v=parseFloat(document.getElementById(id).value);return isFinite(v)?v:NaN}
+function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
+function prefill(keys){try{var p=new URLSearchParams(location.search);keys.forEach(function(k){var v=p.get(k),e=document.getElementById(k);if(v!==null&&e&&/^[\d.'" \/a-z-]{1,20}$/i.test(v))e.value=v})}catch(e){}}
+var $=function(i){return document.getElementById(i)};prefill(["l","w","h","doors","windows","coats","cov"]);
+function run(){var r=PAINT.calc({length:ftv($("l").value),width:ftv($("w").value),height:ftv($("h").value),doors:Math.max(0,num("doors")||0),windows:Math.max(0,num("windows")||0),coats:num("coats"),coverage:num("cov"),ceiling:$("ceil").value==="1",primer:$("primer").value==="1"});
+ if(!r){["rg","rexact","rarea","rq"].forEach(function(i){$(i).textContent="–"});$("note").textContent="Check the room size.";return}
+ $("rg").textContent=r.buyGallons;$("rexact").textContent=f(r.gallons,2);$("rarea").textContent=f(r.paintable,0);$("rq").textContent=r.quarts;
+ $("note").textContent="Walls "+f(r.walls,0)+" sq ft − openings "+f(r.openings,0)+" = "+f(r.netWalls,0)+" sq ft"+(r.ceiling?" + ceiling "+f(r.ceiling,0):"")+" × "+r.coats+" coats ÷ "+f(r.coverage,0)+" sq ft/gal"+(r.primerGal?" · primer ≈ "+f(r.primerGal,2)+" gal (1 coat)":"")}
+document.querySelectorAll("main input,main select").forEach(function(e){e.addEventListener("input",run);e.addEventListener("change",run)});
+run();window.__run=run;
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
+</body></html>
