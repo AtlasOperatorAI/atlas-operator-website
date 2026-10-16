@@ -24,7 +24,7 @@ h1{font-size:.95rem;margin:0;font-weight:700;color:var(--mut)}
 .cur{display:flex;align-items:center;gap:10px;background:transparent;border:0;color:var(--fg);font:inherit;cursor:pointer;padding:4px;text-align:left;flex-shrink:0}
 .cur .fl{font-size:2.1rem;line-height:1}.cur b{display:block;font-size:1.35rem;line-height:1.1}.cur small{display:block;font-size:.72rem;color:var(--mut)}
 .num{flex:1;min-width:0;text-align:right;font-weight:700;font-size:2.6rem;line-height:1.1;letter-spacing:-.02em;background:transparent;border:0;color:var(--fg);font-family:inherit;padding:0;outline:none;caret-color:transparent;width:100%}
-.num.m{font-size:2rem}.num.s{font-size:1.5rem}#outv{overflow-wrap:anywhere}
+.num.m{font-size:2.05rem}.num.s{font-size:1.6rem}.num.xs{font-size:1.25rem}#outv{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .side.from{border-color:#33456b}
 .mid{display:flex;justify-content:center;margin:-14px 0;position:relative;z-index:1}
 .swap{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#1b2438;color:var(--fg);font-size:1.3rem;cursor:pointer}
@@ -148,7 +148,7 @@ function nm(c){try{return DN?DN.of(c):c}catch(e){return c}}
 function save(){ls.s("atlas_fx_v2",JSON.stringify({from:from,to:to,amt:amt,home:$("home").value||st.home,away:$("away").value||st.away}))}
 function fmt(n,c){if(!isFinite(n))return "–";var d=CUR.decimals(c);return n.toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d})}
 function fr(n){if(!isFinite(n))return "–";var a=Math.abs(n),d=a>=100?2:a>=1?4:a>=0.01?5:8;return n.toLocaleString("en-US",{maximumFractionDigits:d})}
-function size(el,t){el.classList.toggle("m",t.length>9&&t.length<=13);el.classList.toggle("s",t.length>13)}
+function size(el,t){var n=t.length;el.classList.toggle("m",n>7&&n<=10);el.classList.toggle("s",n>10&&n<=14);el.classList.toggle("xs",n>14)}
 function draw(){$("ffrom").textContent=CUR.flag(from);$("fto").textContent=CUR.flag(to);$("cfrom").textContent=from;$("cto").textContent=to;
  $("pfrom").setAttribute("aria-label","From "+from+" "+nm(from)+". Tap to change");$("pto").setAttribute("aria-label","To "+to+" "+nm(to)+". Tap to change");
  var a=CUR.show(amt);$("amt").value=a;size($("amt"),a);
