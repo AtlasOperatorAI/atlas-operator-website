@@ -14,6 +14,6 @@ License: https://www.pexels.com/license/ . Unsplash was not used (its site block
 ## App screenshots (our own, rendered with Playwright at 390px, Oct 20 2026)
 - img/app-concrete.jpg: https://atlasoperator.ai/tools/concrete-calculator/
 - img/app-currency.jpg: https://atlasoperator.ai/tools/currency-calculator/
-- img/app-gold.jpg: https://sellyourgrail-gold-production.up.railway.app (first screen is the registration/welcome gate)
-- img/platicalo.png: copied from /workspace/atlasoperator/whatsapp-translate/mockups/after-popup-owner.png
+- img/app-gold.jpg: https://sellyourgrail-gold-production.up.railway.app (first screen is the registration/welcome gate; the calculator is not reachable without registering)
+- img/platicalo.png: cropped (header, on/off toggle, usage card) from /workspace/atlasoperator/whatsapp-translate/mockups/after-popup-free.png
 No AI-generated people, no paid stock.
