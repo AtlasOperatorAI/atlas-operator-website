@@ -1,85 +1,165 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Atlas Operator: simple apps, and simple tools built for your business</title>
-<meta name="description" content="Atlas Operator makes simple, single-purpose apps: calculators, a WhatsApp translator, and custom tools built for one business. By G & K Strategies LLC.">
+<title>Atlas Operator | Simple apps for small businesses</title>
+<meta name="description" content="Simple phone apps for small businesses. Try our free calculators, or tell us what you need and we'll build a simple tool with your name on it.">
 <link rel="canonical" href="https://atlasoperator.ai/">
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3d91'/%3E%3Cpath d='M9 24 16 7l7 17h-4l-3-8-3 8z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#fff8f0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f4d3a'/%3E%3Cpath d='M9 24 16 7l7 17h-4l-3-8-3 8z' fill='%23fff8f0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/","email":"atlas.operator.ai@gmail.com","parentOrganization":{"@type":"Organization","name":"G & K Strategies LLC"},"address":{"@type":"PostalAddress","streetAddress":"117 S Lexington St","addressLocality":"Harrisonville","addressRegion":"MO","postalCode":"64701","addressCountry":"US"}}
 </script>
 <style>
-:root{--fg:#111;--mut:#333;--bg:#fff;--alt:#f3f5f8;--line:#c9d1dc;--acc:#0b3d91}
+:root{--cream:#fff8f0;--sand:#f6eadb;--green:#1f4d3a;--green2:#2e6b52;--orange:#d9682b;--ink:#1d1b18;--soft:#4a4540;--line:#e6d7c3}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font:20px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
-a{color:var(--acc)}.w{max-width:960px;margin:0 auto;padding:0 22px}
-nav{border-bottom:2px solid var(--line)}nav .w{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;padding:14px 22px}
-nav .b{font-weight:800;font-size:24px;color:var(--fg);text-decoration:none;margin-right:auto}nav a{font-weight:600}
-section{padding:56px 0;border-bottom:2px solid var(--line)}section.alt{background:var(--alt)}
-h1{font-size:46px;line-height:1.15;margin:0 0 18px}h2{font-size:36px;line-height:1.2;margin:0 0 14px}h3{font-size:26px;margin:0 0 6px}
-p{margin:0 0 16px;max-width:42em}.lead{font-size:24px}
-.btn{display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:21px;padding:14px 24px;border-radius:10px;text-decoration:none;margin:6px 10px 6px 0}
-.btn.o{background:#fff;color:var(--acc);border:3px solid var(--acc)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
-.card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:22px}.card p{margin:0 0 10px}
-.tag{display:inline-block;background:#fff3c4;color:#5a4300;border:2px solid #d9b600;font-weight:700;font-size:16px;padding:2px 10px;border-radius:999px;margin-bottom:8px}
-ol li,ul li{margin-bottom:8px}
-label{display:block;font-weight:700;margin:14px 0 4px}input,textarea{width:100%;font:inherit;padding:12px;border:2px solid #555;border-radius:8px}
-footer{padding:28px 0;font-size:17px;color:var(--mut)}
-@media(max-width:600px){body{font-size:19px}h1{font-size:36px}h2{font-size:30px}.lead{font-size:21px}section{padding:40px 0}}
+body{margin:0;font:19px/1.65 "Nunito Sans",system-ui,sans-serif;color:var(--ink);background:var(--cream)}
+img{max-width:100%;display:block}a{color:var(--green)}
+.w{max-width:1140px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 14px;color:var(--ink)}
+h1{font-size:clamp(40px,6vw,64px)}h2{font-size:clamp(32px,4.4vw,46px)}h3{font-size:25px}
+p{margin:0 0 16px}.lead{font-size:clamp(20px,2.2vw,23px);color:var(--soft)}
+.eyebrow{display:inline-block;font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.btn{display:inline-block;font-weight:800;font-size:19px;padding:16px 28px;border-radius:999px;text-decoration:none;margin:6px 10px 6px 0;border:0;cursor:pointer;font-family:inherit}
+.btn.main{background:var(--orange);color:#fff;box-shadow:0 6px 18px rgba(217,104,43,.3)}.btn.main:hover{background:#c25a22}
+.btn.alt{background:#fff;color:var(--green);border:2px solid var(--green)}
+nav{position:sticky;top:0;z-index:9;background:rgba(255,248,240,.95);border-bottom:1px solid var(--line)}
+nav .w{display:flex;align-items:center;gap:22px;padding:12px 22px}
+.logo{display:flex;align-items:center;gap:10px;font-family:Fraunces,serif;font-weight:700;font-size:23px;color:var(--ink);text-decoration:none;margin-right:auto}
+.logo i{width:34px;height:34px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:var(--cream);font-style:normal;font-size:18px}
+nav .links a{font-weight:700;text-decoration:none;color:var(--ink);margin-left:20px}nav .btn{padding:10px 20px;font-size:17px;margin:0}
+.hero{padding:64px 0 72px}.hero .w{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero .photo{position:relative}.hero .photo img{border-radius:28px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.hero .photo .phone{position:absolute;left:-46px;bottom:-30px;width:170px}
+.checks{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px 22px;font-weight:700}
+.checks li:before{content:"✓";color:var(--green2);font-weight:800;margin-right:8px}
+.phone{background:#141414;border-radius:34px;padding:9px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.phone img{border-radius:26px;width:100%}
+section{padding:80px 0}.sand{background:var(--sand)}.green{background:var(--green);color:#fff}.green h2,.green h3{color:#fff}
+.center{text-align:center;max-width:760px;margin:0 auto 44px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{background:#fff;border-radius:24px;padding:30px;box-shadow:0 4px 20px rgba(60,40,20,.07)}
+.card img.ph{border-radius:16px;aspect-ratio:3/2;object-fit:cover;width:100%;margin-bottom:20px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+.step{background:#fff;border-radius:24px;padding:30px}
+.step b{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--orange);color:#fff;font-size:24px;font-family:Fraunces,serif;margin-bottom:14px}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;align-items:start}
+.app .phone{max-width:230px;margin:0 auto 16px}.app{text-align:center}
+.app .pp{background:#fff;border-radius:22px;padding:10px;box-shadow:0 20px 40px rgba(0,0,0,.18);max-width:240px;margin:0 auto 16px}.app .pp img{border-radius:14px}
+.tag{display:inline-block;background:#fde6d6;color:#8a3a10;font-weight:800;font-size:14px;padding:4px 12px;border-radius:999px;margin-bottom:8px}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.split .imgs{position:relative}.split .imgs img.ph{border-radius:28px;aspect-ratio:1/1;object-fit:cover;width:85%}
+.split .imgs .phone{position:absolute;right:0;bottom:-30px;width:200px}
+.list{padding-left:0;list-style:none}.list li{padding:6px 0 6px 36px;position:relative}.list li:before{content:"→";position:absolute;left:0;color:var(--orange);font-weight:800}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.trust div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:24px}
+.trust strong{display:block;font-size:21px;margin-bottom:6px}
+details{background:#fff;border-radius:18px;padding:20px 26px;margin-bottom:12px}
+summary{font-weight:800;font-size:21px;cursor:pointer}details p{margin:12px 0 0}
+.form{background:#fff;border-radius:28px;padding:36px;box-shadow:0 4px 20px rgba(60,40,20,.08)}
+label{display:block;font-weight:800;margin:16px 0 6px}input,textarea{width:100%;font:inherit;padding:14px 16px;border:2px solid #cbbba6;border-radius:14px;background:#fffdfa}
+input:focus,textarea:focus{outline:3px solid #f2b48d;border-color:var(--orange)}
+footer{padding:30px 0;font-size:16px;color:var(--soft);background:var(--sand)}
+.sm{display:none}@media(max-width:520px){.lg{display:none}.sm{display:inline}.logo{font-size:20px;white-space:nowrap}}
+.credit{font-size:13px;color:var(--soft);margin-top:8px}
+@media(max-width:900px){.hero .w,.split,.two{grid-template-columns:1fr}.steps,.trust{grid-template-columns:1fr}.apps{grid-template-columns:1fr 1fr}
+ nav .links{display:none}.hero{padding:36px 0 56px}.hero .photo{margin:0 0 20px 40px}.hero .photo .phone{width:130px;left:-40px}section{padding:60px 0}.split .imgs{margin-bottom:40px}.split .imgs .phone{width:150px}}
+@media(max-width:520px){.apps{grid-template-columns:1fr}.btn{display:block;text-align:center;margin:10px 0}nav .btn{display:inline-block}.form{padding:24px}}
 </style></head><body>
-<nav><div class="w"><a class="b" href="/">Atlas Operator</a><a href="#apps">Our apps</a><a href="#custom">Custom tools</a><a href="#contact">Contact</a></div></nav>
 
-<header><section><div class="w">
-<h1>Simple apps that do one job well.</h1>
-<p class="lead">We make small, single-purpose tools: calculators, a WhatsApp translator, and custom tools built for one business.</p>
-<a class="btn" href="#apps">See our apps</a><a class="btn o" href="#custom">Get a tool built</a>
-</div></section></header>
+<nav><div class="w"><a class="logo" href="/"><i>A</i>Atlas Operator</a>
+<span class="links"><a href="#apps">Our apps</a><a href="#custom">Custom tools</a><a href="#how">How it works</a><a href="#faq">Questions</a></span>
+<a class="btn main" href="#contact"><span class="lg">Tell us what you need</span><span class="sm">Contact us</span></a></div></nav>
 
-<section id="apps" class="alt"><div class="w">
-<h2>Our apps</h2>
-<p>Open one, get your answer, close it. No sign-up and no ads.</p>
-<div class="grid">
-<div class="card"><h3>Concrete Calculator</h3><p>Bags or yards of concrete for a slab, footing or post.</p><span class="tag">Coming to Google Play</span><br><a href="/tools/concrete-calculator/">Use it free on the web</a></div>
-<div class="card"><h3>Area Calculator</h3><p>Square feet of a room, yard or floor, with waste added.</p><span class="tag">Coming to Google Play</span><br><a href="/tools/area-calculator/">Use it free on the web</a></div>
-<div class="card"><h3>Feet-Inch Calculator</h3><p>Add, subtract and convert feet, inches and fractions.</p><span class="tag">Coming to Google Play</span><br><a href="/tools/feet-inch-calculator/">Use it free on the web</a></div>
-<div class="card"><h3>Currency Calculator</h3><p>Dollars, pesos and more, with rates saved for offline use.</p><span class="tag">Coming to Google Play</span><br><a href="/tools/currency-calculator/">Use it free on the web</a></div>
-<div class="card"><span class="tag">Coming soon</span><h3>Platícalo</h3><p>A Chrome extension for WhatsApp Web. Tap a message to translate it between Spanish and English. It never sends anything for you.</p></div>
+<header class="hero"><div class="w">
+<div>
+<span class="eyebrow">For contractors, shops and local businesses</span>
+<h1>Simple apps that make your work easier.</h1>
+<p class="lead">No training, no complicated software. Just a simple tool on your phone that answers the question you get asked every day. Try ours for free, or let us build one with your business name on it.</p>
+<a class="btn main" href="#contact">Tell us what you need</a><a class="btn alt" href="#apps">Try it free</a>
+<ul class="checks"><li>No credit card to try</li><li>Works on any phone</li><li>Friendly, real people</li></ul>
 </div>
-<p style="margin-top:22px">More free web tools: <a href="/tools/paint-calculator/">Paint</a> · <a href="/tools/tile-calculator/">Tile</a> · <a href="/tools/gravel-mulch-calculator/">Gravel &amp; mulch</a> · <a href="/guides/">Guides</a></p>
+<div class="photo"><img src="img/p3933017.jpg" alt="Smiling shop owner standing at the door of her flower shop">
+<div class="phone"><img src="img/app-concrete.jpg" alt="Our Concrete Calculator on a phone"></div></div>
+</div></header>
+
+<section class="sand"><div class="w">
+<div class="center"><span class="eyebrow">What it does for you</span><h2>Less guessing. Fewer phone calls. Happier customers.</h2>
+<p class="lead">Every business has a question it answers over and over. A simple app answers it in seconds, any time, for you or your customers.</p></div>
+<div class="two">
+<div class="card"><img class="ph" src="img/p8487341.jpg" alt="Contractor in a hard hat smiling on a job site" style="object-position:50% 25%"><h3>For you and your crew</h3><p>How many bags of concrete? How many boxes of tile? Get the answer on the job site, without a notepad or a call to the office.</p></div>
+<div class="card"><img class="ph" src="img/p6263112.jpg" alt="Jeweler measuring a ring with a caliper"><h3>For your customers</h3><p>Let customers see a price or an estimate on their own phone, with your name and colors on it. They show up ready to buy.</p></div>
+</div></div></section>
+
+<section id="apps"><div class="w">
+<div class="center"><span class="eyebrow">Try it free</span><h2>Our apps</h2><p class="lead">These work right now in your phone's web browser. Nothing to sign up for. Tap one and try it.</p></div>
+<div class="apps">
+<div class="app"><div class="phone"><img src="img/app-concrete.jpg" alt="Concrete Calculator screen"></div><span class="tag">Coming to Google Play</span><h3>Concrete Calculator</h3><p>How many bags or yards you need for a slab, footing or post.</p><a class="btn alt" href="/tools/concrete-calculator/">Try it free</a></div>
+<div class="app"><div class="phone"><img src="img/app-currency.jpg" alt="Currency Calculator screen"></div><span class="tag">Coming to Google Play</span><h3>Currency Calculator</h3><p>Dollars to pesos and back, even when you're offline.</p><a class="btn alt" href="/tools/currency-calculator/">Try it free</a></div>
+<div class="app"><div class="phone"><img src="img/app-gold.jpg" alt="Sell Your Grail Gold Calculator welcome screen"></div><span class="tag">Built for a gold buyer</span><h3>Gold Calculator</h3><p>A tool we built for Sell Your Grail, a gold-buying business.</p><a class="btn alt" href="https://sellyourgrail-gold-production.up.railway.app">See it live</a></div>
+<div class="app"><div class="pp"><img src="img/platicalo.png" alt="Platícalo window: on/off switch and daily translations left"></div><span class="tag">Coming soon</span><h3>Platícalo</h3><p>Tap a WhatsApp message to read it in English or Spanish. It never sends anything for you.</p></div>
+</div>
+<p style="text-align:center;margin-top:30px">More free calculators: <a href="/tools/area-calculator/">Area</a> · <a href="/tools/feet-inch-calculator/">Feet &amp; inches</a> · <a href="/tools/paint-calculator/">Paint</a> · <a href="/tools/tile-calculator/">Tile</a> · <a href="/tools/gravel-mulch-calculator/">Gravel &amp; mulch</a> <br><small>Area and Feet-Inch are also coming to Google Play.</small></p>
 </div></section>
 
-<section><div class="w">
-<h2>One tool for every job</h2>
-<p>Most work comes down to a few repeat questions. How much do I need? What does it cost? What did they say? We think every trade and every industry deserves a simple tool for each of those questions: one screen, one answer, nothing else to learn.</p>
+<section id="custom" class="sand"><div class="w split">
+<div class="imgs"><img class="ph" src="img/p5414041.jpg" alt="Florist smiling and talking on the phone in her shop" style="object-position:50% 20%"><div class="phone"><img src="img/app-gold.jpg" alt="A custom tool built for one business"></div></div>
+<div><span class="eyebrow">Built just for you</span><h2>Your own simple app, with your name on it.</h2>
+<p class="lead">Tell us the one thing you wish your customers or crew could figure out on their own. We'll turn it into a simple app that looks like your business.</p>
+<ul class="list"><li>A price calculator for your service</li><li>A "how much do I need" estimator for your customers</li><li>A buy-price calculator for a gold, jewelry or pawn shop</li><li>A one-screen tool your staff uses every day</li></ul>
+<p><strong>A real example:</strong> we built the <a href="https://sellyourgrail-gold-production.up.railway.app">Sell Your Grail Gold Calculator</a> for Sell Your Grail, a gold-buying business. Customers open it on their phone and work out what their gold is worth.</p>
+<a class="btn main" href="#contact">Tell us what you need</a></div>
 </div></section>
 
-<section id="custom" class="alt"><div class="w">
-<h2>A simple tool, built for your business</h2>
-<p class="lead">We build small, branded tools for one business: your name, your numbers, your customers.</p>
-<p><strong>Example:</strong> the <a href="https://sellyourgrail-gold-production.up.railway.app">Sell Your Grail Gold Calculator</a>. Customers enter what they have and see what it's worth, on a page built for that one shop.</p>
-<h3 style="margin-top:24px">Ideas</h3>
-<ul><li>A price or quote calculator for your service</li><li>A materials estimator for your customers</li><li>A buy-price calculator for a shop</li><li>A one-page tool your staff uses every day</li></ul>
-<h3 style="margin-top:24px">How it works</h3>
-<ol><li>Tell us what the tool should do.</li><li>We reply with a plan and a price.</li><li>We build it, you try it, we adjust it.</li></ol>
+<section id="how"><div class="w">
+<div class="center"><span class="eyebrow">How it works</span><h2>Three easy steps. No tech skills needed.</h2></div>
+<div class="steps">
+<div class="step"><b>1</b><h3>Tell us what you need</h3><p>Send us a short note in your own words. "I want customers to see a price for…" is plenty.</p></div>
+<div class="step"><b>2</b><h3>Get a clear quote</h3><p>We reply with a simple plan and a clear price before any work starts. No surprises.</p></div>
+<div class="step"><b>3</b><h3>Start using it</h3><p>We build it, you try it on your phone, and we adjust it until it feels right. Then share the link.</p></div>
+</div></div></section>
+
+<section class="green"><div class="w">
+<div class="center"><h2>Who you're working with</h2></div>
+<div class="trust">
+<div><strong>A real Missouri business</strong>Atlas Operator is run by G &amp; K Strategies LLC, 117 S Lexington St, Harrisonville, MO.</div>
+<div><strong>A real person answers</strong>Write to atlas.operator.ai@gmail.com and you'll hear back from us, not a robot phone tree.</div>
+<div><strong>No credit card to try</strong>Our calculators are free to use. No sign-up, no ads.</div>
+<div><strong>You own your app</strong>A custom tool we build for you is yours, with your name and your colors.</div>
+<div><strong>Privacy-friendly</strong>Our calculators don't ask for your name or email, and they don't track you across the web.</div>
+<div><strong>A real example</strong>See the <a style="color:#fff" href="https://sellyourgrail-gold-production.up.railway.app">Gold Calculator</a> we built for Sell Your Grail, a gold-buying business.</div>
+</div></div></section>
+
+<section id="faq" class="sand"><div class="w" style="max-width:860px">
+<div class="center"><span class="eyebrow">Questions</span><h2>New to all this? Start here.</h2></div>
+<details open><summary>What is this, exactly?</summary><p>We make small apps that do one job, like working out how much concrete to buy or what gold is worth. You can use our free ones, or we can build one just for your business.</p></details>
+<details><summary>Do I need to be good with computers?</summary><p>No. If you can open a link on your phone, you can use these. We set everything up for you.</p></details>
+<details><summary>How much does a custom tool cost?</summary><p>It depends on what it needs to do. Tell us about it and we'll give you a clear quote first. You decide before any work starts.</p></details>
+<details><summary>How long does it take?</summary><p>Simple tools are usually quick. We'll give you a time estimate along with your quote.</p></details>
+<details><summary>Will it work on my phone?</summary><p>Yes. Everything we make works in the web browser on iPhone, Android, tablets and computers. Nothing to install.</p></details>
+<details><summary>Do I have to download anything?</summary><p>No. You open a link. Some of our calculators are also coming to Google Play for people who like having an app icon.</p></details>
+<details><summary>Can my customers use it too?</summary><p>Yes. That's often the point. Put the link on your website, your Facebook page, or send it by text.</p></details>
+<details><summary>What if I'm not sure what I need?</summary><p>That's fine. Tell us what slows you down or what customers keep asking, and we'll suggest something simple.</p></details>
 </div></section>
 
-<section id="contact"><div class="w">
-<h2>Tell us about your tool</h2>
-<p>Email us at <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a>, or fill this in. It opens your email app with the message ready to send.</p>
-<form id="f">
-<label for="n">Your name</label><input id="n" required>
-<label for="b">Business</label><input id="b">
-<label for="m">What should the tool do?</label><textarea id="m" rows="5" required></textarea>
-<button class="btn" type="submit" style="border:0;cursor:pointer;margin-top:18px">Write the email</button>
-</form>
-</div></section>
+<section id="contact"><div class="w two" style="align-items:center">
+<div><span class="eyebrow">Let's talk</span><h2>Tell us what you need.</h2>
+<p class="lead">A few sentences is plenty. We'll write back with ideas and a clear quote.</p>
+<p>Prefer plain email? Write to <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a>.</p>
+<img src="img/p3906984.jpg" alt="Smiling café owner in an apron" style="border-radius:24px;aspect-ratio:3/2;object-fit:cover;margin-top:20px"></div>
+<form class="form" id="f">
+<label for="n">Your name</label><input id="n" required autocomplete="name">
+<label for="b">Your business</label><input id="b" autocomplete="organization" placeholder="e.g. Smith Concrete">
+<label for="m">What should your app do?</label><textarea id="m" rows="5" required placeholder="e.g. Let customers see what their gold is worth"></textarea>
+<button class="btn main" type="submit" style="margin-top:20px;width:100%">Send my message</button>
+<p class="credit">This opens your email app with your message filled in. Just press send.</p>
+</form></div></section>
 
-<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company, 117 S Lexington St, Harrisonville, MO 64701 · <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms-of-service.html">Terms</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/guides/">Guides</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a></div></footer>
+<footer><div class="w">© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company, 117 S Lexington St, Harrisonville, MO 64701 · <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms-of-service.html">Terms</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/guides/">Guides</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a>
+<div class="credit">Photos by Andrea Piacquadio, Kindel Media, Tima Miroshnichenko and Amina Filkins on Pexels.</div></div></footer>
 <script>
 document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
 var n=document.getElementById('n').value,b=document.getElementById('b').value,m=document.getElementById('m').value;
-location.href='mailto:atlas.operator.ai@gmail.com?subject='+encodeURIComponent('Custom tool inquiry'+(b?' - '+b:''))+'&body='+encodeURIComponent('Name: '+n+'\nBusiness: '+b+'\n\n'+m);});
+location.href='mailto:atlas.operator.ai@gmail.com?subject='+encodeURIComponent('Custom app inquiry'+(b?' - '+b:''))+'&body='+encodeURIComponent('Name: '+n+'\nBusiness: '+b+'\n\n'+m);});
 </script>
 <script src="/t.js" defer></script>
 <!-- GoatCounter -->
