@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Concrete Calculator: Slab, Bags &amp; Cost | Atlas Operator</title>
+<title>Concrete Calculator: Slab, Bags &amp; Cost | Atlas Operator AI</title>
 <meta name="description" content="Free concrete calculator: cubic yards, 40/60/80 lb bag counts and cost for slabs, footings and columns. Includes waste %. No sign-up, works on your phone.">
 <link rel="canonical" href="https://atlasoperator.ai/tools/concrete-calculator/">
 <meta name="theme-color" content="#07090e">
@@ -35,12 +35,14 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 </style>
 <style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
+<style>/* v4 draft: no pricing shown */ #pro,#gopro{display:none!important}</style>
+<style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
 </head><body>
-<div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator home"><i></i><h1>Concrete Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
+<div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator AI home"><i></i><h1>Concrete Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
 <main class="w ezbelow">
 <nav class="crumb"><a href="/">Home</a> › <a href="/#tools">Tools</a> › Concrete calculator</nav>
 <h2 class="ezh">Concrete Calculator: Slab, Bags &amp; Cost</h2>
-<p class="lead">Cubic yards, bag counts and cost for slabs, footings and columns. Free, no sign-up. <span class="twa-hide">Replaces the calc features in Construction Master Pro ($39.99/yr).</span></p>
+<p class="lead">Cubic yards, bag counts and cost for slabs, footings and columns. Free, no sign-up.</p>
 
 <section class="card" aria-label="Calculator">
 <div class="tabs" role="tablist"><button role="tab" data-s="slab" aria-selected="true">Slab</button><button role="tab" data-s="footing" aria-selected="false">Footing</button><button role="tab" data-s="column" aria-selected="false">Column</button></div>
@@ -183,7 +185,7 @@ render();
 function $t(i){if(i==="tw_"){return document.getElementById("tw").value+"×"+document.getElementById("th").value+" in"}var e=document.getElementById(i);return e?e.textContent.trim():""}
 function L(){return [{n:"ft",k:1,pad:"ftin"},{n:"m",k:3.28084,pad:"num"}]}
 function U(){var l=$t(this.labId);return /\(in\)/.test(l)?[{n:"in",k:1,pad:"num"},{n:"cm",k:0.393701,pad:"num"}]:[{n:"ft",k:1,pad:"num"},{n:"m",k:3.28084,pad:"num"}]}
-window.EZCFG={tool:"concrete-calculator",card:'section.card[aria-label="Calculator"]',proText:'🧾 Pro: saved jobs &amp; PDF quote<small>On the web: save jobs, print a branded quote</small>',
+window.EZCFG={tool:"concrete-calculator",card:'section.card[aria-label="Calculator"]',proText:'',
 note:"Slab size → bags. Footings, columns, waste %, cost and 40/60 lb bags are under More.",
 fields:[
 {id:"a",t:"#a",lab:function(){return $t("la")},units:U,labId:"la"},
