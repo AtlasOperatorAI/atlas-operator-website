@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Platícalo privacy policy | Atlas Operator AI</title><meta name="description" content="How the Platícalo WhatsApp Web translator handles your messages and data."><link rel="canonical" href="https://atlasoperator.ai/platicalo/privacy/">
+<link rel="stylesheet" href="/assets/v4.css"></head><body>
+<a href="#main" style="position:absolute;left:-999px">Skip to content</a>
+<header><div class="wrap"><a class="brand" href="/">Atlas Operator AI</a><nav><a href="/#apps">Our apps</a><a href="/#custom">Custom apps</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header><main id="main">
+<section><div class="wrap">
+<h1>Platícalo privacy policy</h1>
+<p><b>Effective date: October 22, 2026</b></p>
+<p>This policy covers the Platícalo browser extension and the server it uses. Platícalo is made by G &amp; K Strategies LLC, doing business as Atlas Operator AI ("we", "us"), 117 S Lexington St, Harrisonville, MO 64701. Platícalo is free. For our website, see the <a href="/privacy-policy.html">Atlas Operator AI privacy policy</a>.</p>
+
+<h2>What Platícalo does</h2>
+<p>Platícalo has one purpose: to translate chat messages between Spanish and English on web.whatsapp.com, when you ask it to. You can translate up to 10 messages a day.</p>
+
+<h2>You agree first</h2>
+<p>The first time you use Platícalo, a one-time consent screen explains what is sent and where. Nothing is sent, and no anonymous ID is created, until you agree.</p>
+<p><b>In short:</b> We never log message text or save it to disk. Translations stay in server memory for up to 24 hours, then are deleted. Your IP address is used only for rate limiting: kept in server memory, deleted within about 2 minutes, never logged.</p>
+
+<h2>Message text</h2>
+<ul class="big">
+<li><b>What is sent:</b> only the text of the messages you press Translate on. Platícalo never reads other chats, never sends messages and never touches the Send button.</li>
+<li><b>Where it goes:</b> to our translation server, hosted on Railway. From there it goes to Google's Gemini API, and the translation comes back to you.</li>
+<li><b>On our server:</b> message text is never logged and never written to disk. Translations are kept in server memory for up to 24 hours, looked up by a scrambled code (a SHA-256 hash) of the text. Expired entries are deleted every minute, so nothing outlives 24 hours plus about 1 minute. A server restart clears everything.</li>
+<li><b>Google:</b> The text you choose is sent to Google's Gemini API to translate it, under Google's API terms. We delete our copy within 24 hours. See <a href="https://ai.google.dev/gemini-api/terms">Google's Gemini API terms</a>.</li>
+</ul>
+
+<h2>IP address</h2>
+<p>Your IP address is used only for per-minute rate limiting, to prevent abuse. It is kept in server memory, and old entries are deleted every minute, so it is gone within about 2 minutes. It is never logged and never written to disk.</p>
+
+<h2>Anonymous ID</h2>
+<p>After you agree, our server creates a random, signed anonymous ID. It is saved in your browser and sent with each translation request. A Railway database (SQLite on a Railway volume) stores the anonymous ID, the plan ("free") and your daily translation count with its date, so we can apply the limit of up to 10 translations a day. No name, email, phone number or message content is stored.</p>
+
+<h2>On your device</h2>
+<p>Chrome extension storage holds the consent flag, your on/off setting and translation direction for each chat, and the anonymous ID. Uninstalling the extension removes them.</p>
+
+<h2>What we do not do</h2>
+<ul class="big">
+<li>We do not sell or share your data.</li>
+<li>We do not show ads.</li>
+<li>We do not use your data for anything other than translation.</li>
+<li>We do not use your data to decide creditworthiness or for lending.</li>
+</ul>
+<p>Platícalo's use of information received from the extension adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
+
+<h2>Processors</h2>
+<ul class="big">
+<li><b>Railway</b> – hosting and database.</li>
+<li><b>Google</b> – Gemini API, under Google's API terms.</li>
+</ul>
+<p>Platícalo has no payments and collects no email addresses.</p>
+
+<h2>Deleting your data</h2>
+<ul class="big">
+<li><b>Still installed:</b> email <a href="mailto:atlas.operator.ai@gmail.com?subject=Plat%C3%ADcalo%20data%20deletion">atlas.operator.ai@gmail.com</a> and include your anonymous ID, and we will delete that record. To find the ID: open <code>chrome://extensions</code>, find Platícalo, click <b>service worker</b>, then go to <b>Application → Storage</b> and copy the value of the key <code>token</code>. We plan to add an easier button later.</li>
+<li><b>Already uninstalled (ID lost):</b> the copy in your browser is gone. The record on our server holds only a random ID, the plan "free" and daily counts, with no name, email or other identifier. We cannot match it to you, and it cannot be used to identify you. Email us anyway and we will confirm this.</li>
+</ul>
+
+<h2>Children</h2>
+<p>Platícalo is not meant for children under 13, and we do not knowingly collect their information.</p>
+
+<h2>Changes</h2>
+<p>If we change this policy, we will update this page and its date.</p>
+
+<h2>Governing law</h2>
+<p>This policy is governed by the laws of the State of Missouri, USA.</p>
+
+<h2>Support and contact</h2>
+<p>G &amp; K Strategies LLC (Atlas Operator AI)<br>117 S Lexington St, Harrisonville, MO 64701<br><a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a></p>
+<p class="small">Platícalo is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.</p>
+</div></section>
+</main><footer><div class="wrap"><p><b>G &amp; K Strategies LLC</b> (Atlas Operator AI)<br>117 S Lexington St, Harrisonville, MO 64701<br><a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a></p><p><a href="/privacy-policy.html">Privacy policy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a></p></div></footer><script src="/t.js" defer></script></body></html>
