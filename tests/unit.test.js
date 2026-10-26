@@ -22,3 +22,7 @@ t("keypad: ftin guards (one ft, one inch, no double slash)",()=>{a.strictEqual(t
 t("keypad: backspace over ft mark",()=>{a.strictEqual(typ(["B"],"ftin","5' "),"5");a.strictEqual(typ(["B"],"ftin","5' 7"),"5'")});
 t("norm: bare number as feet for length fields",()=>{a.strictEqual(E.norm("12","ft"),"12'");a.strictEqual(E.norm("12.5","ft"),"12.5'");a.strictEqual(E.norm("12' 6","ft"),"12' 6");a.strictEqual(E.norm("3/","ft"),"3'")});
 console.log(`\n${n} tests passed`);
+const PL=require("../tools/play.js");
+t("play: rate card only from 3rd use and never after done",()=>{a.strictEqual(PL.shouldShow(1,false),false);a.strictEqual(PL.shouldShow(2,false),false);a.strictEqual(PL.shouldShow(3,false),true);a.strictEqual(PL.shouldShow(9,false),true);a.strictEqual(PL.shouldShow(3,true),false)});
+t("play: urls",()=>{a.strictEqual(PL.marketUrl("ai.atlasoperator.area"),"market://details?id=ai.atlasoperator.area");a.strictEqual(PL.playUrl("ai.atlasoperator.area"),"https://play.google.com/store/apps/details?id=ai.atlasoperator.area")});
+console.log(`${n} tests passed (incl. play)`);
