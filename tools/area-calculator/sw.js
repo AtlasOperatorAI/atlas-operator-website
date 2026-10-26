@@ -1,5 +1,5 @@
 /* Offline cache for /tools/area-calculator/. Same-origin GET only; analytics (Railway) and Stripe are never cached. */
-const CACHE="atlas-area-calculator-v4";
+const CACHE="atlas-area-calculator-v5";
 const SCOPE="/tools/area-calculator/";
 const ASSETS=[SCOPE,SCOPE+"fic.js",SCOPE+"area.js",SCOPE+"manifest.webmanifest",SCOPE+"icons/icon-192.png",SCOPE+"icons/icon-512.png",SCOPE+"icons/maskable-512.png","/t.js","/tools/play.js","/tools/easy.js"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});

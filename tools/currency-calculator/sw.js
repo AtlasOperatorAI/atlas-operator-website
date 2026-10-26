@@ -1,5 +1,5 @@
 /* Offline cache for /tools/currency-calculator/. Same-origin app shell + the daily rate files (last-known rates for offline use). Analytics (Railway) and Stripe are never cached. */
-const CACHE="atlas-currency-calculator-v4";
+const CACHE="atlas-currency-calculator-v5";
 const SCOPE="/tools/currency-calculator/";
 const ASSETS=[SCOPE,SCOPE+"cur.js",SCOPE+"manifest.webmanifest",SCOPE+"icons/icon-192.png",SCOPE+"icons/icon-512.png",SCOPE+"icons/maskable-512.png","/t.js","/tools/play.js"];
 const RATE_HOSTS=["cdn.jsdelivr.net","latest.currency-api.pages.dev","api.frankfurter.dev"];
