@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Percentage Calculator: % of, % change, add or subtract % | Atlas Operator AI</title>
+<meta name="description" content="Free, simple percentage calculator with a big keypad. X% of Y, X is what % of Y, percent change, and add or subtract a percent (tax, tip, markup, discount). Works offline. No ads.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/percentage-calculator/">
+<meta name="theme-color" content="#07090e">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Easy Percentage Calculator (no ads, works offline)"><meta property="og:description" content="% of, what %, % change, and add or subtract % with a big keypad. Free, no ads."><meta property="og:url" content="https://atlasoperator.ai/tools/percentage-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Percentage Calculator by Atlas","url":"https://atlasoperator.ai/tools/percentage-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web, Android","description":"Simple percentage calculator: X% of Y, X is what % of Y, percent change, and add or subtract a percent. Works offline. No ads.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://atlasoperator.ai/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://atlasoperator.ai/#tools"},{"@type":"ListItem","position":3,"name":"Percentage Calculator","item":"https://atlasoperator.ai/tools/percentage-calculator/"}]}]}</script>
+<style>
+:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa;--key:#151c2b;--warn:#ffd166}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}.hidden{display:none!important}.small{font-size:.82rem;color:var(--mut)}
+.app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:0 14px env(safe-area-inset-bottom)}
+.top{display:flex;justify-content:space-between;align-items:center;height:50px}
+.logo{display:flex;gap:8px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none;font-size:.95rem}.logo i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+h1{font-size:.95rem;margin:0;font-weight:700;color:var(--mut)}
+.menu{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:6px 14px;font:inherit;font-size:.9rem;cursor:pointer}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:2px 0 8px}
+.tabs button{border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;font:inherit;font-size:.8rem;font-weight:700;padding:8px 2px;cursor:pointer;line-height:1.15}
+.tabs button[aria-selected=true]{background:var(--acc);color:#06101f;border-color:var(--acc)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px 12px}
+.line{display:flex;align-items:center;gap:10px;font-size:1.05rem;color:var(--mut);flex-wrap:wrap}
+.fld{flex:1;min-width:0;display:flex;align-items:baseline;justify-content:flex-end;gap:4px;background:#0a0e16;border:2px solid var(--line);border-radius:12px;padding:3px 12px;color:var(--fg);font:inherit;font-size:1.9rem;font-weight:700;cursor:pointer;min-height:52px;text-align:right}
+.fld.on{border-color:var(--acc)}.fld .ph{color:#4b566c}.fld u{text-decoration:none;font-size:1.2rem;color:var(--mut)}
+.fld span.v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb{min-width:64px}
+.row2{display:flex;gap:8px;margin-top:6px}.row2+.line,.line+.line{margin-top:8px}
+.sg small{font-weight:500;font-size:.7rem;opacity:.8}.pm{display:flex;gap:6px}.sg{width:54px;height:52px;font-size:1.6rem!important;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;font:inherit;font-size:.8rem;line-height:1.2;font-weight:700;padding:6px 4px;cursor:pointer}.sg[aria-pressed=true]{background:#1b2438;border-color:var(--acc);color:var(--acc)}
+.res{margin-top:10px;background:#0d1426;border:1px solid #33456b;border-radius:18px;padding:8px 16px;text-align:right;min-height:92px}
+.res .big{font-size:2.8rem;font-weight:800;line-height:1.1;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .big.m{font-size:2.1rem}.res .big.s{font-size:1.6rem}
+.res .say{font-size:1rem;color:var(--mut);margin-top:2px}.res .err{color:var(--warn);font-size:1.05rem;font-weight:600}
+.up{color:#7ee2a8}.down{color:#ff8f8f}
+.pad{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,minmax(50px,1fr));gap:7px;margin-top:10px;flex:1;max-height:330px}
+.pad button{border:0;border-radius:16px;background:var(--key);color:var(--fg);font:inherit;font-size:1.7rem;font-weight:600;cursor:pointer;touch-action:manipulation}
+.pad button:active{background:#22304a}.pad .op{background:#1b2438;color:var(--acc);font-size:1.3rem}
+.foot{text-align:center;padding:6px 0 8px}.foot p{margin:0}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--card);border:1px solid var(--line);border-bottom:0;border-radius:20px 20px 0 0;width:100%;max-width:480px;max-height:88vh;max-height:88dvh;overflow:auto;padding:14px 16px 22px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.sh h2{margin:0;font-size:1.1rem}
+.x{padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+input{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:1.2rem}
+label{display:block;font-size:.82rem;color:var(--mut)}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mi{display:block;width:100%;text-align:left;background:#0d1220;border:1px solid var(--line);border-radius:12px;color:var(--fg);font:inherit;padding:12px 14px;margin-top:8px;cursor:pointer;text-decoration:none}.mi small{display:block;color:var(--mut)}
+.out{background:#0d1426;border:1px solid #33456b;border-radius:12px;padding:12px;margin-top:12px;font-size:1.05rem}.out b{font-size:1.6rem;display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chipb{background:transparent;border:1px solid var(--line);border-radius:999px;color:var(--fg);font:inherit;font-size:.9rem;padding:7px 12px;cursor:pointer}
+.below{border-top:1px solid var(--line);margin-top:8px;padding-top:24px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+html[data-twa] .webonly{display:none!important}
+.ad-slot,.aff-slot{display:none!important}
+</style>
+<style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
+</head><body>
+<div class="app">
+<header class="top"><a class="logo" href="/"><i></i><h1>Percentage</h1></a><button class="menu" id="more" type="button" aria-haspopup="dialog">☰ More</button></header>
+<nav class="tabs" role="tablist" aria-label="Calculator mode">
+<button role="tab" data-m="of" type="button">% of</button><button role="tab" data-m="what" type="button">What %</button><button role="tab" data-m="chg" type="button">% change</button><button role="tab" data-m="add" type="button">+ / − %</button>
+</nav>
+<section class="q" id="q" aria-live="polite"></section>
+<div class="res" id="res" aria-live="polite"></div>
+<div class="pad" id="pad" aria-label="Keypad">
+<button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="C" aria-label="Clear">C</button>
+<button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="B" aria-label="Backspace">⌫</button>
+<button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op" data-k="N" aria-label="Plus or minus">±</button>
+<button data-k="0" style="grid-column:span 2">0</button><button data-k=".">.</button><button class="op" data-k="T" aria-label="Next field">Next</button>
+</div>
+<div class="foot"><p class="small" id="hint">Tap a box, then type.</p></div>
+</div>
+
+<div class="sheet hidden" id="menu" role="dialog" aria-modal="true" aria-labelledby="mnh"><div>
+<div class="sh"><h2 id="mnh">More</h2><button class="x" type="button" data-close>Close</button></div>
+<button class="mi" type="button" data-open="rev">↩️ Price before tax or discount<small>Find the original price from a total</small></button>
+<button class="mi" type="button" data-open="mar">📈 Margin and markup<small>Selling price from cost and margin %</small></button>
+<button class="mi" type="button" id="copy">📋 Copy result<small id="copyst">Copy the answer on screen</small></button>
+<a class="mi webonly" href="#about">ℹ️ How it works &amp; FAQ<small>The formulas, with examples</small></a>
+</div></div>
+
+<div class="sheet hidden" id="rev" role="dialog" aria-modal="true" aria-labelledby="rvh"><div>
+<div class="sh"><h2 id="rvh">Price before tax or discount</h2><button class="x" type="button" data-close>Close</button></div>
+<div class="f"><label>Total you paid<input id="rvt" inputmode="decimal" placeholder="108.25"></label><label>Percent<input id="rvp" inputmode="decimal" placeholder="8.25"></label></div>
+<div class="row2"><button class="sg" type="button" id="rvadd" aria-pressed="true">% was added (tax)</button><button class="sg" type="button" id="rvsub" aria-pressed="false">% was taken off</button></div>
+<div class="out" id="rvo">Enter the total and the percent.</div>
+</div></div>
+
+<div class="sheet hidden" id="mar" role="dialog" aria-modal="true" aria-labelledby="mrh"><div>
+<div class="sh"><h2 id="mrh">Margin and markup</h2><button class="x" type="button" data-close>Close</button></div>
+<div class="f"><label>Your cost<input id="mrc" inputmode="decimal" placeholder="60"></label><label>Margin you want (%)<input id="mrm" inputmode="decimal" placeholder="40"></label></div>
+<div class="out" id="mro">Enter your cost and margin.</div>
+<p class="small">Margin is profit as a % of the selling price. Markup is profit as a % of cost. A 50% markup is a 33.3% margin. For a markup, use the + / − % screen.</p>
+</div></div>
+
+<div class="below w webonly">
+<section id="about"><h2>How it works</h2>
+<p>Pick a screen at the top, tap a box and type on the keypad. The answer updates as you type. Use ± for negative numbers and Next to jump to the other box.</p>
+<ul>
+<li><b>% of:</b> X% of Y = X ÷ 100 × Y. 15% of 80 = 12.</li>
+<li><b>What %:</b> X is what % of Y = X ÷ Y × 100. 12 is 15% of 80. Y can't be 0.</li>
+<li><b>% change:</b> (B − A) ÷ |A| × 100. From 50 to 75 is +50%; from 75 to 50 is −33.33%. A can't be 0. When A is negative, the sign still shows the direction: −50 to −25 is up 50%.</li>
+<li><b>+ / − %:</b> Y + X% = Y × (1 + X ÷ 100) for tax, tip or markup; Y − X% = Y × (1 − X ÷ 100) for a discount. 100 + 8.25% = 108.25; 80 − 25% = 60.</li>
+</ul>
+<p>Answers show up to 4 decimal places. Nothing you type leaves your device.</p>
+<h2>FAQ</h2>
+<details><summary>Why isn't a 50% rise followed by a 50% drop back to the start?</summary><p>The second percent applies to a bigger number. 100 + 50% = 150, and 150 − 50% = 75.</p></details>
+<details><summary>How do I remove sales tax from a total?</summary><p>Tap ☰ More, then Price before tax or discount. 108.25 with 8.25% tax was 100 before tax. Dividing by 1.0825 is correct; subtracting 8.25% of the total is not.</p></details>
+<details><summary>Does it work offline?</summary><p>Yes. After the first visit the calculator is saved on your device.</p></details>
+</section>
+<footer>© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a></footer>
+</div>
+<script src="/t.js" defer></script>
+<script src="pct.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA){sessionStorage.setItem("atlas_twa","1");document.documentElement.setAttribute("data-twa","1");document.querySelectorAll(".webonly").forEach(function(e){e.parentNode.removeChild(e)})}}catch(e){}
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var D={of:{a:"15",b:"80"},what:{a:"12",b:"80"},chg:{a:"50",b:"75"},add:{a:"100",b:"8.25",sign:1}};
+var S={m:"of",v:D};try{var st=JSON.parse(ls.g("atlas_pct_v1")||"null");if(st&&st.v&&D[st.m]){S.m=st.m;for(var k in D)if(st.v[k])S.v[k]=st.v[k]}}catch(e){}
+var cur="a",fresh=true,last="";
+var L={ /* each screen: two boxes in a plain sentence */
+ of:{rows:[["",'a',"%"],["of",'b',""]],t:"% of"},
+ what:{rows:[["",'a',""],["is what % of",'b',""]],t:"What %"},
+ chg:{rows:[["From",'a',""],["to",'b',""]],t:"% change"},
+ add:{rows:[["Amount",'a',""],["",'b',"%"]],t:"+ / − %"}};
+function save(){ls.s("atlas_pct_v1",JSON.stringify(S))}
+function F(n,d){return PCT.fmt(n,d)}
+function box(f,suf){var s=S.v[S.m][f],t=PCT.show(s);return '<button type="button" class="fld'+(cur===f?" on":"")+'" data-f="'+f+'" aria-label="'+(f==="a"?"First":"Second")+' number">'+(t?'<span class="v">'+t+"</span>":'<span class="ph">0</span>')+(suf?"<u>"+suf+"</u>":"")+"</button>"}
+function drawQ(){var m=S.m,h="";
+ L[m].rows.forEach(function(r,i){var lab=r[0]?'<span class="lb">'+r[0]+"</span>":"";
+  if(m==="add"&&i===1){var sg=S.v.add.sign;lab='<span class="pm"><button class="sg" type="button" data-s="1" aria-pressed="'+(sg>0)+'" aria-label="Add percent: tax, tip, markup">+</button><button class="sg" type="button" data-s="-1" aria-pressed="'+(sg<0)+'" aria-label="Subtract percent: discount">−</button></span>'}
+  h+='<div class="line">'+lab+box(r[1],r[2])+"</div>"});
+ if(m==="add")h+='<p class="small" style="margin:6px 0 0">'+(S.v.add.sign>0?"+ adds the percent: sales tax, tip or markup":"− takes the percent off: a discount or sale")+"</p>";
+ $("q").innerHTML=h;
+ $("q").querySelectorAll(".fld").forEach(function(b){b.onclick=function(){cur=b.dataset.f;fresh=true;drawQ()}});
+ $("q").querySelectorAll(".sg").forEach(function(b){b.onclick=function(){S.v.add.sign=+b.dataset.s;draw()}});
+ document.querySelectorAll(".tabs button").forEach(function(b){b.setAttribute("aria-selected",String(b.dataset.m===m))})}
+function size(el,t){var n=t.length;el.classList.toggle("m",n>9&&n<=13);el.classList.toggle("s",n>13)}
+function drawR(){var m=S.m,v=S.v[m],a=v.a,b=v.b,r,big="",say="",cls="";
+ if(m==="of"){r=PCT.percentOf(a,b);if(r.ok){big=F(r.value);say=F(PCT.num(a))+"% of "+F(PCT.num(b))+" is "+big}}
+ else if(m==="what"){r=PCT.whatPercent(a,b);if(r.ok){big=F(r.value,2)+"%";say=F(PCT.num(a))+" is "+big+" of "+F(PCT.num(b))}}
+ else if(m==="chg"){r=PCT.change(a,b);if(r.ok){var p=r.value;big=(p>0?"+":"")+F(p,2)+"%";cls=p>0?"up":p<0?"down":"";say=(p>0?"Up ":p<0?"Down ":"No change")+(p?F(Math.abs(p),2)+"%":"")+" · difference "+(r.diff>0?"+":"")+F(r.diff)}}
+ else{r=PCT.addSub(a,b,v.sign);if(r.ok){big=F(r.value,2);say=F(PCT.num(a),2)+(v.sign>0?" + ":" − ")+F(PCT.num(b))+"% ("+F(r.amount,2)+") = "+big}}
+ var el=$("res");if(!r.ok){last="";el.innerHTML='<div class="big">–</div><div class="'+(r.error==="div0"?"err":"say")+'">'+r.message+"</div>";return}
+ last=big;el.innerHTML='<div class="big '+cls+'" id="big"></div><div class="say" id="say"></div>';$("big").textContent=big;$("say").textContent=say;size($("big"),big)}
+function draw(){drawQ();drawR();save()}
+function press(k){if(k==="T"){cur=cur==="a"?"b":"a";fresh=true;drawQ();return}
+ var v=S.v[S.m];v[cur]=PCT.key(v[cur],k,fresh&&k!=="N");if(k!=="N")fresh=false;draw()}
+document.querySelectorAll("#pad button").forEach(function(b){b.addEventListener("click",function(){press(b.dataset.k)})});
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){S.m=b.dataset.m;cur="a";fresh=true;draw()}});
+document.addEventListener("keydown",function(e){if(document.querySelector(".sheet:not(.hidden)")||e.ctrlKey||e.metaKey||e.altKey)return;var k=e.key;
+ if(/^[0-9.]$/.test(k)){press(k);e.preventDefault()}else if(k===","){press(".");e.preventDefault()}else if(k==="Backspace"){press("B");e.preventDefault()}else if(k==="Escape"||k==="Delete")press("C");else if(k==="-")press("N");else if(k==="Tab"||k==="Enter"){press("T");e.preventDefault()}});
+/* sheets */
+function open(id){$(id).classList.remove("hidden");document.body.style.overflow="hidden"}
+function close(id){$(id).classList.add("hidden");document.body.style.overflow=""}
+document.querySelectorAll(".sheet").forEach(function(s){s.addEventListener("click",function(e){if(e.target===s||e.target.hasAttribute("data-close"))close(s.id)})});
+$("more").onclick=function(){$("copyst").textContent="Copy the answer on screen";open("menu")};
+document.querySelectorAll("[data-open]").forEach(function(b){b.onclick=function(){close("menu");open(b.dataset.open)}});
+document.querySelectorAll("#menu a.mi").forEach(function(a){a.addEventListener("click",function(){close("menu")})});
+$("copy").onclick=function(){if(!last){$("copyst").textContent="Nothing to copy yet";return}var t=last.replace("−","-");
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){$("copyst").textContent="Copied "+last}).catch(function(){$("copyst").textContent="Couldn't copy on this device"})};
+var rs=1;function rv(){var r=PCT.reverse($("rvt").value,$("rvp").value,rs);$("rvadd").setAttribute("aria-pressed",String(rs>0));$("rvsub").setAttribute("aria-pressed",String(rs<0));
+ $("rvo").innerHTML=r.ok?"Original price<b>"+F(r.value,2)+"</b>"+(rs>0?"Tax/extra":"Discount")+" was "+F(Math.abs(r.amount),2):r.message}
+["rvt","rvp"].forEach(function(i){$(i).addEventListener("input",rv)});$("rvadd").onclick=function(){rs=1;rv()};$("rvsub").onclick=function(){rs=-1;rv()};
+function mr(){var r=PCT.marginPrice($("mrc").value,$("mrm").value);$("mro").innerHTML=r.ok?"Selling price<b>"+F(r.value,2)+"</b>Profit "+F(r.profit,2)+(isFinite(r.markup)?" · markup "+F(r.markup,2)+"%":""):r.message}
+["mrc","mrm"].forEach(function(i){$(i).addEventListener("input",mr)});
+window.__pct=function(){return JSON.parse(JSON.stringify(S))};
+draw();
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
+</body></html>
