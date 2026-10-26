@@ -50,5 +50,31 @@
         "F9:71:66:6A:32:57:12:17:4D:30:82:62:64:17:62:FD:1C:74:AB:58:84:5D:F7:B2:86:EF:C0:CB:75:34:81:EB"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ai.atlasoperator.percentage",
+      "sha256_cert_fingerprints": [
+        "8B:B6:AB:74:90:7D:35:AF:6D:44:C6:70:23:93:AE:6F:91:6A:3E:A1:B9:A5:18:DA:0C:1F:11:68:89:19:D4:13",
+        "F9:71:66:6A:32:57:12:17:4D:30:82:62:64:17:62:FD:1C:74:AB:58:84:5D:F7:B2:86:EF:C0:CB:75:34:81:EB"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ai.atlasoperator.hours",
+      "sha256_cert_fingerprints": [
+        "53:85:DF:F4:FA:CD:81:8A:D4:A2:32:B0:A2:68:C6:00:B7:09:5A:4E:E1:E6:66:7D:05:35:95:55:D4:15:59:B8",
+        "F9:71:66:6A:32:57:12:17:4D:30:82:62:64:17:62:FD:1C:74:AB:58:84:5D:F7:B2:86:EF:C0:CB:75:34:81:EB"
+      ]
+    }
   }
 ]
