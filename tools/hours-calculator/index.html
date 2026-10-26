@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hours Calculator: Hours Worked, Overnight Shifts, Pay | Atlas Operator AI</title>
+<meta name="description" content="Free, simple hours calculator with a big keypad. Start and end time to hours worked in h:mm and decimal, with breaks, overnight shifts, pay rate and a weekly total. Works offline. No ads.">
+<link rel="canonical" href="https://atlasoperator.ai/tools/hours-calculator/">
+<meta name="theme-color" content="#07090e">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Easy Hours Calculator (no ads, works offline)"><meta property="og:description" content="Hours worked from start and end time, breaks, overnight shifts, pay and a weekly total. Free, no ads."><meta property="og:url" content="https://atlasoperator.ai/tools/hours-calculator/"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Hours Calculator by Atlas","url":"https://atlasoperator.ai/tools/hours-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web, Android","description":"Start and end time to hours worked (h:mm and decimal), with breaks, overnight shifts, optional pay rate and a weekly total. No ads.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Atlas Operator AI","url":"https://atlasoperator.ai/"}}]}</script>
+<style>
+:root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa;--key:#151c2b;--warn:#ffd166}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}.hidden{display:none!important}.small{font-size:.82rem;color:var(--mut)}
+.app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:0 14px env(safe-area-inset-bottom)}
+.top{display:flex;justify-content:space-between;align-items:center;height:50px}
+.logo{display:flex;gap:8px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none;font-size:.95rem}.logo i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+h1{font-size:.95rem;margin:0;font-weight:700;color:var(--mut)}
+.menu{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:6px 14px;font:inherit;font-size:.9rem;cursor:pointer}
+.x0{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:2px 0 8px}
+.tabs button{border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;font:inherit;font-size:.8rem;font-weight:700;padding:8px 2px;cursor:pointer;line-height:1.15}
+.tabs button[aria-selected=true]{background:var(--acc);color:#06101f;border-color:var(--acc)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px 12px}
+.line{display:flex;align-items:center;gap:10px;font-size:1.05rem;color:var(--mut);flex-wrap:wrap}
+.fld{flex:1;min-width:0;display:flex;align-items:baseline;justify-content:flex-end;gap:4px;background:#0a0e16;border:2px solid var(--line);border-radius:12px;padding:3px 12px;color:var(--fg);font:inherit;font-size:1.9rem;font-weight:700;cursor:pointer;min-height:52px;text-align:right}
+.fld.on{border-color:var(--acc)}.fld .ph{color:#4b566c}.fld u{text-decoration:none;font-size:1.2rem;color:var(--mut)}
+.fld span.v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb{min-width:64px}
+.row2{display:flex;gap:8px;margin-top:6px}.row2+.line,.line+.line{margin-top:8px}
+.sg small{font-weight:500;font-size:.7rem;opacity:.8}.pm{display:flex;gap:6px}.sg{width:54px;height:52px;font-size:1.6rem!important;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;font:inherit;font-size:.8rem;line-height:1.2;font-weight:700;padding:6px 4px;cursor:pointer}.sg[aria-pressed=true]{background:#1b2438;border-color:var(--acc);color:var(--acc)}
+.res{margin-top:10px;background:#0d1426;border:1px solid #33456b;border-radius:18px;padding:8px 16px;text-align:right;min-height:92px}
+.res .big{font-size:2.8rem;font-weight:800;line-height:1.1;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .big.m{font-size:2.1rem}.res .big.s{font-size:1.6rem}
+.res .say{font-size:1rem;color:var(--mut);margin-top:2px}.res .err{color:var(--warn);font-size:1.05rem;font-weight:600}
+.up{color:#7ee2a8}.down{color:#ff8f8f}
+.pad{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,minmax(50px,1fr));gap:7px;margin-top:10px;flex:1;max-height:330px}
+.pad button{border:0;border-radius:16px;background:var(--key);color:var(--fg);font:inherit;font-size:1.7rem;font-weight:600;cursor:pointer;touch-action:manipulation}
+.pad button:active{background:#22304a}.pad .op{background:#1b2438;color:var(--acc);font-size:1.3rem}
+.foot{text-align:center;padding:6px 0 8px}.foot p{margin:0}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--card);border:1px solid var(--line);border-bottom:0;border-radius:20px 20px 0 0;width:100%;max-width:480px;max-height:88vh;max-height:88dvh;overflow:auto;padding:14px 16px 22px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.sh h2{margin:0;font-size:1.1rem}
+.x{padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;cursor:pointer}
+input{width:100%;margin-top:3px;padding:11px;border-radius:9px;border:1px solid var(--line);background:#0a0e16;color:var(--fg);font:inherit;font-size:1.2rem}
+label{display:block;font-size:.82rem;color:var(--mut)}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mi{display:block;width:100%;text-align:left;background:#0d1220;border:1px solid var(--line);border-radius:12px;color:var(--fg);font:inherit;padding:12px 14px;margin-top:8px;cursor:pointer;text-decoration:none}.mi small{display:block;color:var(--mut)}
+.out{background:#0d1426;border:1px solid #33456b;border-radius:12px;padding:12px;margin-top:12px;font-size:1.05rem}.out b{font-size:1.6rem;display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chipb{background:transparent;border:1px solid var(--line);border-radius:999px;color:var(--fg);font:inherit;font-size:.9rem;padding:7px 12px;cursor:pointer}
+.below{border-top:1px solid var(--line);margin-top:8px;padding-top:24px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
+html[data-twa] .webonly{display:none!important}
+.ad-slot,.aff-slot{display:none!important}
+.seg{flex:1;min-height:44px;height:auto;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;font:inherit;font-size:.85rem;font-weight:700;padding:8px 6px;line-height:1.2;cursor:pointer}.seg[aria-pressed=true]{background:#1b2438;border-color:var(--acc);color:var(--acc)}
+</style>
+<style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
+<style>
+.line .lb{min-width:58px}.ap{display:flex;gap:4px}.ap .sg{width:52px;height:52px;font-size:.95rem!important}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.two .line{margin:0}.two .lb{min-width:0}
+.two .fld{font-size:1.5rem}
+.dh{font-size:1.5rem;color:var(--acc);font-weight:700}.say{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wk{display:grid;grid-template-columns:36px 1fr 1fr 50px;gap:5px;align-items:center;margin-top:5px}.wk input{padding:7px 4px;font-size:.8rem;margin:0;min-width:0}.wk input[type=time]::-webkit-calendar-picker-indicator{display:none}.wk b{font-size:.9rem}
+</style>
+</head><body>
+<div class="app">
+<header class="top"><a class="logo" href="/"><i></i><h1>Hours worked</h1></a><button class="menu" id="more" type="button" aria-haspopup="dialog">☰ More</button></header>
+<section class="q" id="q"></section>
+<div class="res" id="res" aria-live="polite"></div>
+<div class="pad" id="pad" aria-label="Keypad">
+<button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="C" aria-label="Clear">C</button>
+<button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="B" aria-label="Backspace">⌫</button>
+<button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op" data-k="P" aria-label="Switch AM or PM">AM/PM</button>
+<button data-k="0" style="grid-column:span 2">0</button><button data-k=".">.</button><button class="op" data-k="T" aria-label="Next field">Next</button>
+</div>
+<div class="foot"><p class="small" id="hint">Tap a box, then type. 930 = 9:30.</p></div>
+</div>
+
+<div class="sheet hidden" id="menu" role="dialog" aria-modal="true" aria-labelledby="mnh"><div>
+<div class="sh"><h2 id="mnh">More</h2><button class="x" type="button" data-close>Close</button></div>
+<button class="mi" type="button" data-open="week">🗓️ Week total<small>Add up shifts for Monday to Sunday</small></button>
+<button class="mi" type="button" id="copy">📋 Copy result<small id="copyst">Copy the hours on screen</small></button>
+<a class="mi webonly" href="#about">ℹ️ How it works &amp; FAQ<small>Overnight shifts, breaks, decimal hours</small></a>
+</div></div>
+
+<div class="sheet hidden" id="week" role="dialog" aria-modal="true" aria-labelledby="wkh"><div>
+<div class="sh"><h2 id="wkh">Week total</h2><button class="x" type="button" data-close>Close</button></div>
+<div class="wk small"><span></span><span>Start</span><span>End</span><span>Break min</span></div>
+<div id="wkrows"></div>
+<div class="row2"><button class="seg" type="button" id="wkfill">Copy main-screen shift to Mon–Fri</button><button class="seg" type="button" id="wkclr" style="flex:0 0 auto">Clear</button></div>
+<div class="out" id="wko"></div>
+<p class="small">Uses the pay rate from the main screen. Overnight shifts count on the day they start. Overtime rules differ by state and employer, so none are applied.</p>
+</div></div>
+
+<div class="below w webonly">
+<section id="about"><h2>How it works</h2>
+<p>Type the start time, tap AM/PM if needed, then Next for the end time, break minutes and an optional pay rate. Hours update as you type, shown as h:mm (8:30) and decimal hours (8.50), which is what most timesheets and payroll use.</p>
+<ul>
+<li><b>Overnight shifts:</b> if the end time is earlier than the start time, the shift ended the next day. 10:00 PM to 6:00 AM is 8:00.</li>
+<li><b>Breaks:</b> unpaid break minutes are taken off the shift.</li>
+<li><b>Pay:</b> exact minutes × rate ÷ 60, rounded to the cent. 7:20 at $15/hr = $110.00.</li>
+<li><b>Same start and end:</b> counted as 0 hours, not 24.</li>
+</ul>
+<h2>FAQ</h2>
+<details><summary>How do I turn minutes into decimal hours?</summary><p>Divide minutes by 60. 15 min = 0.25, 20 min = 0.33, 30 min = 0.50, 45 min = 0.75.</p></details>
+<details><summary>Where is the weekly total?</summary><p>Tap ☰ More, then Week total. Enter each day's start, end and break.</p></details>
+<details><summary>Does it work offline?</summary><p>Yes. After the first visit the calculator is saved on your device. Nothing you type leaves your device.</p></details>
+</section>
+<footer>© 2026 AtlasOperator.ai, a G &amp; K Strategies LLC company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a></footer>
+</div>
+<script src="/t.js" defer></script>
+<script src="hours.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA){sessionStorage.setItem("atlas_twa","1");document.documentElement.setAttribute("data-twa","1");document.querySelectorAll(".webonly").forEach(function(e){e.parentNode.removeChild(e)})}}catch(e){}
+var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var S={s:"900",sa:"AM",e:"530",ea:"PM",b:"30",r:"",wk:[]};try{var st=JSON.parse(ls.g("atlas_hrs_v1")||"null");if(st)for(var k in S)if(st[k]!=null)S[k]=st[k]}catch(e){}
+var DAYS=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];while(S.wk.length<7)S.wk.push({start:"",end:"",brk:""});
+var cur="s",fresh=true,last="",ORDER=["s","e","b","r"];
+function save(){ls.s("atlas_hrs_v1",JSON.stringify(S))}
+function box(f,suf,pre){var v=S[f],t=f==="s"||f==="e"?HRS.show(v):v;return '<button type="button" class="fld'+(cur===f?" on":"")+'" data-f="'+f+'" aria-label="'+{s:"Start time",e:"End time",b:"Break minutes",r:"Pay rate"}[f]+'">'+(pre?"<u>"+pre+"</u>":"")+(t?'<span class="v">'+t+"</span>":'<span class="ph">'+(f==="r"?"0.00":"0")+"</span>")+(suf?"<u>"+suf+"</u>":"")+"</button>"}
+function ap(f){var a=S[f+"a"];return '<span class="ap"><button class="sg" type="button" data-ap="'+f+'" data-v="AM" aria-pressed="'+(a==="AM")+'">AM</button><button class="sg" type="button" data-ap="'+f+'" data-v="PM" aria-pressed="'+(a==="PM")+'">PM</button></span>'}
+function drawQ(){$("q").innerHTML='<div class="line"><span class="lb">Start</span>'+box("s")+ap("s")+'</div><div class="line"><span class="lb">End</span>'+box("e")+ap("e")+'</div><div class="two"><div class="line">'+box("b","min")+'</div><div class="line">'+box("r","/hr","$")+"</div></div>";
+ $("q").querySelectorAll(".fld").forEach(function(b){b.onclick=function(){cur=b.dataset.f;fresh=true;drawQ()}});
+ $("q").querySelectorAll("[data-ap]").forEach(function(b){b.onclick=function(){S[b.dataset.ap+"a"]=b.dataset.v;draw()}})}
+function drawR(){var s=HRS.parse12(S.s,S.sa),e=HRS.parse12(S.e,S.ea),el=$("res");last="";
+ if(s===null||e===null){el.innerHTML='<div class="big">–</div><div class="say">'+(S.s&&S.e?"Check the times: hours 1–12, minutes 00–59":"Enter a start and end time")+"</div>";return}
+ var r=HRS.shift(s,e,S.b);if(!r.ok){el.innerHTML='<div class="big">–</div><div class="err">'+r.message+"</div>";return}
+ var p=HRS.pay(r.minutes,S.r),bits=[];if(p.ok&&p.pay!==null)bits.push("<b style=\"color:var(--fg)\">"+HRS.money(p.pay)+"</b>");if(r.breakMin)bits.push(r.breakMin+" min break");if(r.overnight)bits.push("overnight");
+ var say=p.ok?(bits.join(" · ")||"No break, no pay rate"):'<span class="err">'+p.message+"</span>";
+ last=HRS.hm(r.minutes)+" ("+HRS.dec(r.minutes)+" h)"+(p.ok&&p.pay!==null?" "+HRS.money(p.pay):"");
+ el.innerHTML='<div class="big">'+HRS.hm(r.minutes)+' <span class="dh">= '+HRS.dec(r.minutes)+' h</span></div><div class="say">'+say+"</div>"}
+function draw(){drawQ();drawR();save()}
+function edit(v,k){var f=cur;if(k==="C")return "";if(k==="B")return fresh?"":v.slice(0,-1);if(fresh)v="";
+ if(k==="."){if(f!=="r"||v.indexOf(".")>=0)return v;return v===""?"0.":v+"."}
+ var max={s:4,e:4,b:3,r:7}[f];if(v.replace(".","").length>=max)return v;if(f==="r"&&/\.\d\d$/.test(v))return v;return v==="0"?k:v+k}
+function press(k){if(k==="T"){cur=ORDER[(ORDER.indexOf(cur)+1)%4];fresh=true;drawQ();return}
+ if(k==="P"){var f=cur==="e"?"e":"s";S[f+"a"]=S[f+"a"]==="AM"?"PM":"AM";draw();return}
+ S[cur]=edit(S[cur],k);if(k!=="C")fresh=false;draw()}
+document.querySelectorAll("#pad button").forEach(function(b){b.addEventListener("click",function(){press(b.dataset.k)})});
+document.addEventListener("keydown",function(e){if(document.querySelector(".sheet:not(.hidden)")||e.ctrlKey||e.metaKey||e.altKey)return;var k=e.key;
+ if(/^[0-9.]$/.test(k)){press(k);e.preventDefault()}else if(k==="Backspace"){press("B");e.preventDefault()}else if(k==="Escape"||k==="Delete")press("C");else if(/^[aApP]$/.test(k)){var f=cur==="e"?"e":"s";S[f+"a"]=k.toUpperCase()+"M";draw()}else if(k==="Tab"||k==="Enter"){press("T");e.preventDefault()}});
+function open(id){$(id).classList.remove("hidden");document.body.style.overflow="hidden"}
+function close(id){$(id).classList.add("hidden");document.body.style.overflow=""}
+document.querySelectorAll(".sheet").forEach(function(s){s.addEventListener("click",function(e){if(e.target===s||e.target.hasAttribute("data-close"))close(s.id)})});
+$("more").onclick=function(){$("copyst").textContent="Copy the hours on screen";open("menu")};
+document.querySelectorAll("[data-open]").forEach(function(b){b.onclick=function(){close("menu");wkDraw();open(b.dataset.open)}});
+document.querySelectorAll("#menu a.mi").forEach(function(a){a.addEventListener("click",function(){close("menu")})});
+$("copy").onclick=function(){if(!last){$("copyst").textContent="Nothing to copy yet";return}(navigator.clipboard?navigator.clipboard.writeText(last):Promise.reject()).then(function(){$("copyst").textContent="Copied "+last}).catch(function(){$("copyst").textContent="Couldn't copy on this device"})};
+function to24(m){if(m===null)return "";var h=Math.floor(m/60),n=m%60;return (h<10?"0":"")+h+":"+(n<10?"0":"")+n}
+function wkDraw(){var h="";S.wk.forEach(function(d,i){h+='<div class="wk"><b>'+DAYS[i]+'</b><input type="time" data-i="'+i+'" data-k="start" value="'+d.start+'" aria-label="'+DAYS[i]+' start"><input type="time" data-i="'+i+'" data-k="end" value="'+d.end+'" aria-label="'+DAYS[i]+' end"><input inputmode="numeric" data-i="'+i+'" data-k="brk" value="'+d.brk+'" placeholder="0" aria-label="'+DAYS[i]+' break minutes"></div>'});
+ $("wkrows").innerHTML=h;$("wkrows").querySelectorAll("input").forEach(function(x){x.addEventListener("input",function(){S.wk[+x.dataset.i][x.dataset.k]=x.value;save();wkTot()})});wkTot()}
+function wkTot(){var w=HRS.week(S.wk,S.r),o=$("wko");if(!w.ok){o.innerHTML=w.message;return}
+ o.innerHTML="Week total<b>"+HRS.hm(w.minutes)+" h:mm · "+HRS.dec(w.minutes)+" h</b>"+w.days+" day"+(w.days===1?"":"s")+(w.pay!==null?" · "+HRS.money(w.pay)+" at $"+S.r+"/hr":"")+(w.bad.length?' · <span class="err">check '+w.bad.map(function(i){return DAYS[i]}).join(", ")+"</span>":"")}
+$("wkfill").onclick=function(){var s=HRS.parse12(S.s,S.sa),e=HRS.parse12(S.e,S.ea);if(s===null||e===null)return;for(var i=0;i<5;i++)S.wk[i]={start:to24(s),end:to24(e),brk:S.b};save();wkDraw()};
+$("wkclr").onclick=function(){S.wk=DAYS.map(function(){return{start:"",end:"",brk:""}});save();wkDraw()};
+window.__hrs=function(){return JSON.parse(JSON.stringify(S))};
+draw();
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});</script>
+</body></html>
