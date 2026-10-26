@@ -53,6 +53,7 @@ details{background:var(--card);border:1px solid var(--line);border-radius:10px;p
 footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
 html[data-twa] .webonly{display:none!important}
 .ad-slot,.aff-slot{display:none!important}
+.seg{flex:1;min-height:44px;height:auto;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:12px;font:inherit;font-size:.85rem;font-weight:700;padding:8px 6px;line-height:1.2;cursor:pointer}.seg[aria-pressed=true]{background:#1b2438;border-color:var(--acc);color:var(--acc)}
 </style>
 <style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
 </head><body>
@@ -83,7 +84,7 @@ html[data-twa] .webonly{display:none!important}
 <div class="sheet hidden" id="rev" role="dialog" aria-modal="true" aria-labelledby="rvh"><div>
 <div class="sh"><h2 id="rvh">Price before tax or discount</h2><button class="x" type="button" data-close>Close</button></div>
 <div class="f"><label>Total you paid<input id="rvt" inputmode="decimal" placeholder="108.25"></label><label>Percent<input id="rvp" inputmode="decimal" placeholder="8.25"></label></div>
-<div class="row2"><button class="sg" type="button" id="rvadd" aria-pressed="true">% was added (tax)</button><button class="sg" type="button" id="rvsub" aria-pressed="false">% was taken off</button></div>
+<div class="row2"><button class="seg" type="button" id="rvadd" aria-pressed="true">% was added (tax)</button><button class="seg" type="button" id="rvsub" aria-pressed="false">% was taken off</button></div>
 <div class="out" id="rvo">Enter the total and the percent.</div>
 </div></div>
 
