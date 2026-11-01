@@ -42,7 +42,7 @@ if(TWA){
   css("#playbadge{margin:14px auto;text-align:center}#playbadge img{height:64px;width:auto;display:inline-block}#playbadge small{display:block;font-size:.72rem;opacity:.75;margin-top:2px}");
   onReady(function(){
     var h=d.getElementById("playbadge")||anchor();h.id="playbadge";
-    h.innerHTML='<a href="'+playUrl(pkg)+'" rel="noopener"><img src="/img/google-play-badge-en.png" width="166" height="64" alt="Get it on Google Play"></a><small>Google Play and the Google Play logo are trademarks of Google LLC.</small>';
+    h.innerHTML='<a href="'+playUrl(pkg)+'" rel="noopener" data-atlas-install="play:'+pkg+'"><img src="/img/google-play-badge-en.png" width="166" height="64" alt="Get it on Google Play"></a><small>Google Play and the Google Play logo are trademarks of Google LLC.</small>';
   });
 }
 })(this);

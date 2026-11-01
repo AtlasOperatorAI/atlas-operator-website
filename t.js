@@ -1,10 +1,14 @@
-/* atlasoperator.ai: cookie-free page-view beacon. No cookies, no identifiers stored in the browser. */
-(function(){var E="https://atlas-analytics-production-f29e.up.railway.app";window.ATLAS_API=E;
+/* atlasoperator.ai: cookie-free page-view + install_click beacons. No cookies, no identifiers stored in the browser. */
+(function(){var E="https://atlas-analytics-production-f29e.up.railway.app";var C="https://platicalo-api-production.up.railway.app";window.ATLAS_API=E;window.ATLAS_CLICKS=C;
 function q(k){try{return new URLSearchParams(location.search).get(k)||""}catch(e){return ""}}
 /* Test marker: visiting any page with ?atlas_test=1 flags this browser (localStorage, no cookie); ?atlas_test=0 clears it. Flagged traffic is tagged utm_source=atlas-test and excluded from /stats. */
 var TST=false;try{var tq=q("atlas_test");if(tq==="1")localStorage.setItem("atlas_test","1");else if(tq==="0")localStorage.removeItem("atlas_test");TST=localStorage.getItem("atlas_test")==="1"}catch(e){}
 window.atlasUTM=function(){return{utm_source:TST?"atlas-test":q("utm_source"),utm_medium:q("utm_medium"),utm_campaign:q("utm_campaign"),referrer:document.referrer||""}};
 window.atlasPost=function(p,d){try{var b=JSON.stringify(d);return fetch(E+p,{method:"POST",headers:{"Content-Type":"text/plain"},body:b,keepalive:true,credentials:"omit"})}catch(e){return Promise.reject(e)}};
+/* Outbound install_click → platicalo-api (first-party). target: play:<pkg> | cws:<id> | gold */
+window.atlasInstallClick=function(target){try{if(!target||navigator.webdriver||/^(localhost|127\.)/.test(location.hostname))return;var body=JSON.stringify({event:"install_click",target:String(target),path:location.pathname,utm_source:TST?"atlas-test":q("utm_source")});if(navigator.sendBeacon){try{navigator.sendBeacon(C+"/install_click",new Blob([body],{type:"text/plain"}));return}catch(e){}}fetch(C+"/install_click",{method:"POST",headers:{"Content-Type":"text/plain"},body:body,keepalive:true,credentials:"omit"}).catch(function(){})}catch(e){}};
+function clickTarget(href){try{var u=new URL(href,location.href);var h=u.hostname.replace(/^www\./,"");if(h==="play.google.com"&&/\/store\/apps\/details/.test(u.pathname)){var id=u.searchParams.get("id");return id?"play:"+id:null}if(h==="chromewebstore.google.com"){var m=u.pathname.match(/\/detail\/(?:[^/]+\/)?([a-z0-9]{32})/i);return m?"cws:"+m[1].toLowerCase():null}if(/sellyourgrail-gold/i.test(h)||u.href.indexOf("sellyourgrail-gold-production.up.railway.app")>=0)return"gold"}catch(e){}return null}
+document.addEventListener("click",function(ev){var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;if(!a)return;var t=clickTarget(a.href);if(t)atlasInstallClick(t)},true);
 if(navigator.webdriver||/^(localhost|127\.)/.test(location.hostname))return;
 var d=atlasUTM();d.site="atlas";d.path=location.pathname;atlasPost("/hit",d).catch(function(){})})();
 /* Play app (TWA) mode: keep the app strictly free-only by neutralizing links to the homepage and to Stripe. */
