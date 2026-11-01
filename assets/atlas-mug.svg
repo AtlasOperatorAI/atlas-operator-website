@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" rx="220" fill="#07090f"/>
+  <rect x="290" y="100" width="440" height="360" rx="56" fill="#ff5a3d"/>
+  <ellipse cx="510" cy="145" rx="175" ry="52" fill="#2a140f"/>
+  <path d="M730 210c120 15 130 180 5 210" stroke="#ff5a3d" stroke-width="70" fill="none" stroke-linecap="round"/>
+  <path d="M390 70c22-42 0-72 22-105" stroke="#2ee6c5" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <path d="M510 50c22-42 0-72 22-105" stroke="#2ee6c5" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <path d="M620 70c22-42 0-72 22-105" stroke="#2ee6c5" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <g fill="#f4f0e6">
+    <circle cx="512" cy="530" r="78"/>
+    <path d="M370 575c25 130 50 195 142 240 92-45 117-110 142-240z"/>
+    <!-- thick arms -->
+    <path d="M370 575 C250 520 210 420 270 360 L370 400 C330 450 350 520 400 560 Z"/>
+    <path d="M654 575 C774 520 814 420 754 360 L654 400 C694 450 674 520 624 560 Z"/>
+    <path d="M420 790 C370 860 320 920 390 950 H500 L470 820 Z"/>
+    <path d="M604 790 L640 950 H750 C800 900 720 840 680 790 Z"/>
+  </g>
+  <path d="M475 510h36" stroke="#07090f" stroke-width="20" stroke-linecap="round"/>
+  <path d="M535 495c16-14 38-12 52 6" stroke="#07090f" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <path d="M475 575c22 20 55 22 75 4" stroke="#07090f" stroke-width="18" fill="none" stroke-linecap="round"/>
+</svg>
