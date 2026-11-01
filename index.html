@@ -1,60 +1,467 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Atlas Operator AI: simple calculator apps, and custom apps built for you</title><meta name="description" content="Free, simple calculator tools and Android apps from G &amp; K Strategies LLC in Harrisonville, Missouri. We also build custom single-purpose apps for any industry."><link rel="canonical" href="https://atlasoperator.ai/">
-<link rel="stylesheet" href="/assets/v4.css"></head><body>
-<a href="#main" style="position:absolute;left:-999px">Skip to content</a>
-<header><div class="wrap"><a class="brand" href="/">Atlas Operator AI</a><nav><a href="/#apps">Our apps</a><a href="/#custom">Custom apps</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header><main id="main">
-<section><div class="wrap">
-<h1>Simple apps that do one job well.</h1>
-<p class="lead">We make small, plain tools for everyday work: measuring a room, ordering concrete, converting money, valuing gold. Big buttons, clear numbers, nothing in the way.</p>
-<p class="lead">And if your business needs its own little app, we can build it for you.</p>
-<a class="btn" href="#apps">See our apps</a><a class="btn alt" href="#custom">Ask about a custom app</a>
-</div></section>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Operator AI — Direction B (Built in Public)</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #f7f1e8;
+    --bg-paper: #fffaf3;
+    --bg-band: #efe6d8;
+    --ink: #1c1915;
+    --mut: #5c554c;
+    --line: #e0d4c3;
+    --accent: #c45c26;
+    --accent-ink: #fff8f2;
+    --teal: #0f6b5c;
+    --gold: #9a6b12;
+    --max: 1080px;
+    --font: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 18px/1.6 var(--sans);
+    color: var(--ink);
+    background:
+      radial-gradient(900px 480px at 0% 0%, rgba(196,92,38,.08), transparent 55%),
+      radial-gradient(700px 420px at 100% 10%, rgba(15,107,92,.07), transparent 50%),
+      var(--bg);
+  }
+  a { color: var(--teal); }
+  a:hover { color: var(--accent); }
+  .wrap { width: min(100% - 40px, var(--max)); margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--line);
+    background: rgba(247,241,232,.9);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  header .inner {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 68px; gap: 16px; padding: 8px 0;
+  }
+  .brand {
+    font-family: var(--font); font-weight: 700; font-size: 1.15rem;
+    color: var(--ink); text-decoration: none; letter-spacing: -.02em;
+  }
+  .brand span { color: var(--accent); }
+  nav { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  nav a {
+    color: var(--mut); text-decoration: none; font-size: 14px; font-weight: 600;
+  }
+  nav a:hover { color: var(--ink); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: 12px 20px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-ink); font-weight: 700;
+    font-size: 15px; text-decoration: none; border: 0;
+  }
+  .btn:hover { filter: brightness(1.05); color: var(--accent-ink); text-decoration: none; }
+  .btn.ghost {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn.ghost:hover { color: var(--accent); border-color: var(--accent); }
+  .btn.sm { min-height: 40px; padding: 8px 16px; font-size: 14px; }
+  .hero { padding: 64px 0 40px; }
+  .kicker {
+    font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--teal); margin: 0 0 16px;
+  }
+  h1 {
+    font-family: var(--font); font-weight: 700;
+    font-size: clamp(2.5rem, 5.5vw, 3.85rem);
+    line-height: 1.05; letter-spacing: -.03em;
+    margin: 0 0 18px; max-width: 14ch;
+  }
+  .lede {
+    font-size: 1.2rem; color: var(--mut); max-width: 42ch; margin: 0 0 28px;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
+  .hero-frame {
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 18px;
+    box-shadow: 0 18px 50px rgba(28,25,21,.08);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;
+  }
+  .hero-frame img {
+    width: 100%; display: block; border-radius: 18px;
+    border: 1px solid var(--line); background: #fff;
+  }
+  .hero-left img { max-height: 420px; object-fit: cover; object-position: top left; }
+  .hero-right { display: grid; gap: 14px; }
+  .hero-right img { max-height: 200px; object-fit: cover; object-position: top; width: 100%; }
+  .cap {
+    margin-top: 10px; font-size: 13px; color: var(--mut);
+  }
+  section { padding: 64px 0; }
+  .band { background: var(--bg-band); border-block: 1px solid var(--line); }
+  h2 {
+    font-family: var(--font); font-size: clamp(1.7rem, 3vw, 2.3rem);
+    letter-spacing: -.02em; line-height: 1.15; margin: 0 0 10px;
+  }
+  .section-intro { color: var(--mut); max-width: 48ch; margin: 0 0 28px; }
+  .story-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .story {
+    background: var(--bg-paper); border: 1px solid var(--line);
+    border-radius: 22px; overflow: hidden; display: flex; flex-direction: column;
+  }
+  .story .pic {
+    aspect-ratio: 4/3; overflow: hidden; background: #e8dfd1;
+    border-bottom: 1px solid var(--line);
+  }
+  .story .pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .story .pic:has(img[src*="app-gold"]) { aspect-ratio: 16/10; }
+  .paper img[src*="app-gold"], .hero-frame img[src*="app-gold"], .hero-side img[src*="app-gold"] {
+    max-height: 280px; object-fit: cover; object-position: top; width: 100%;
+  }
+  /* gold preview */
+  .story .copy { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .label {
+    font-size: 12px; font-weight: 800; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .label.teal { color: var(--teal); }
+  .label.gold { color: var(--gold); }
+  .story h3 { margin: 0; font-family: var(--font); font-size: 1.35rem; letter-spacing: -.015em; }
+  .story p { margin: 0; color: var(--mut); font-size: .98rem; flex: 1; }
+  .tools {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 28px;
+  }
+  .tools a {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+    color: var(--ink); text-decoration: none; font-weight: 600;
+  }
+  .tools a span { color: var(--mut); font-weight: 500; font-size: .92rem; text-align: right; }
+  .tools a:hover { color: var(--accent); }
+  .feature {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+  }
+  .feature.reverse { direction: rtl; }
+  .feature.reverse > * { direction: ltr; }
+  .paper {
+    background: var(--bg-paper); border: 1px solid var(--line);
+    border-radius: 24px; padding: 18px;
+  }
+  .paper img { width: 100%; border-radius: 16px; display: block; border: 1px solid var(--line); }
+  .price {
+    font-family: var(--font); font-size: 2rem; font-weight: 700;
+    color: var(--gold); margin: 8px 0 4px;
+  }
+  .price-sub { color: var(--mut); margin: 0 0 16px; }
+  ul.plain { margin: 0 0 20px; padding-left: 1.15em; color: var(--mut); }
+  ul.plain li { margin: 6px 0; }
+  .note {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px; color: var(--mut); margin: 0 0 22px;
+  }
+  .custom-card {
+    background: var(--ink); color: #f4efe7; border-radius: 28px; padding: 36px;
+  }
+  .custom-card h2 { color: #fff; }
+  .custom-card p, .custom-card li { color: #d8d0c4; }
+  .custom-card ol { margin: 0 0 22px; padding-left: 1.2em; }
+  .custom-card ol b { color: #fff; }
+  .custom-card .btn { background: #fff; color: var(--ink); }
+  .bip-bar {
+    margin-top: 18px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    background: var(--bg-paper); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px;
+  }
+  .bip-bar strong { display: block; font-family: var(--font); font-size: 1.15rem; }
+  .bip-bar p { margin: 4px 0 0; color: var(--mut); }
+  footer {
+    border-top: 1px solid var(--line); padding: 36px 0 48px;
+    color: var(--mut); font-size: .92rem;
+  }
+  footer .cols { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  footer a { color: var(--mut); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+  @media (max-width: 900px) {
+    .hero-frame, .story-grid, .feature { grid-template-columns: 1fr; }
+    .feature.reverse { direction: ltr; }
+    .hero-side { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { width: min(100% - 28px, var(--max)); }
+    nav .hide-sm { display: none; }
+    .tools, .hero-side { grid-template-columns: 1fr; }
+    .custom-card { padding: 24px 18px; }
+    h1 { max-width: none; font-size: 2.35rem; }
+    section { padding: 44px 0; }
+    .hero { padding: 36px 0 28px; }
+    .story .copy .btn.sm { width: 100%; }
+    header .inner { min-height: 56px; }
+  }
 
-<section id="apps" class="band"><div class="wrap" id="tools">
-<h2>Calculators you can use right now</h2>
-<p>These work in any web browser, on a phone or a computer. No sign-up needed.</p>
-<div class="grid">
-<div class="card"><h3><a href="/tools/concrete-calculator/">Concrete calculator</a></h3><p>Slabs, footings and posts. Shows cubic yards and how many bags to buy.</p></div>
-<div class="card"><h3><a href="/tools/area-calculator/">Square footage calculator</a></h3><p>Square feet, square yards and square meters for rooms and floors.</p></div>
-<div class="card"><h3><a href="/tools/feet-inch-calculator/">Feet and inches calculator</a></h3><p>Add and subtract feet, inches and fractions without the headache.</p></div>
-<div class="card"><h3><a href="/tools/currency-calculator/">Currency converter</a></h3><p>Quick money conversions, handy for travel.</p></div>
-<div class="card"><h3><a href="/tools/gravel-mulch-calculator/">Gravel and mulch calculator</a></h3><p>Cubic yards, tons and bags for beds and driveways.</p></div>
-<div class="card"><h3><a href="/tools/paint-calculator/">Paint calculator</a></h3><p>How many gallons you need for a room.</p></div>
-<div class="card"><h3><a href="/tools/tile-calculator/">Tile calculator</a></h3><p>How many tiles and boxes, with extra for cuts.</p></div>
-</div></div></section>
+  .story .pic:has(img[src*="platicalo"]) { aspect-ratio: 4/5; }
+  .story .pic img.contain, .paper img.contain { object-fit: contain; object-position: center; background: #efe6d8; }
+  .hero-frame {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch;
+  }
+  .hero-frame .hero-left, .hero-frame .hero-right {
+    display: flex; flex-direction: column; gap: 10px; min-height: 0;
+  }
+  .hero-frame img {
+    width: 100%; height: 100%; max-height: 340px; object-fit: cover; object-position: top;
+  }
+  .hero-frame .hero-left img { max-height: 420px; object-fit: cover; object-position: top left; }
+  .hero-frame .hero-right img { max-height: 200px; }
+  .gold-duo {
+    display: grid; grid-template-columns: 1.05fr .95fr; gap: 12px;
+  }
+  .gold-duo figure { margin: 0; }
+  .gold-duo img {
+    width: 100%; display: block; border-radius: 16px; border: 1px solid var(--line); background: #fff;
+    object-fit: contain; max-height: 520px;
+  }
+  .gold-duo figcaption { color: var(--mut); font-size: 12px; margin-top: 8px; }
+  @media (max-width: 900px) {
+    .hero-frame { grid-template-columns: 1fr; }
+    .hero-frame .hero-right { grid-template-columns: 1fr 1fr; display: grid; }
+    .hero-frame img, .hero-frame .hero-left img, .hero-frame .hero-right img { max-height: 260px; }
+    .gold-duo { grid-template-columns: 1fr; }
+  }
 
-<section><div class="wrap">
-<h2>Get our apps on Google Play</h2>
-<p>Four of our calculators are coming to Android as apps, so they can sit on your home screen.</p>
-<div class="grid">
-<div class="card"><img src="/img/app-concrete.jpg" alt="Concrete calculator app screen" loading="lazy" width="390"><h3>Concrete Calculator</h3><p>Yards and bags for slabs, footings and posts.</p><a class="btn" href="/go/play/concrete/">Get it on Google Play</a></div>
-<div class="card"><h3>Square Footage (Area) Calculator</h3><p>Measure rooms and floors in seconds.</p><a class="btn" href="/go/play/area/">Get it on Google Play</a></div>
-<div class="card"><h3>Feet &amp; Inch Calculator</h3><p>Fractions made easy, right on your phone.</p><a class="btn" href="/go/play/feetinch/">Get it on Google Play</a></div>
-<div class="card"><img src="/img/app-currency.jpg" alt="Currency converter app screen" loading="lazy" width="390"><h3>Currency Converter</h3><p>Quick money conversions for trips and shopping.</p><a class="btn" href="/go/play/currency/">Get it on Google Play</a></div>
-</div></div></section>
+  /* polish */
 
-<section class="band"><div class="wrap">
-<h2>Apps we built for others</h2>
-<div class="grid">
-<div class="card"><img src="/img/app-gold.jpg" alt="Sell Your Grail Gold Calculator welcome screen" loading="lazy" width="390"><h3>Sell Your Grail Gold Calculator</h3><p>Helps people see what their gold is worth by weight and karat before they sell.</p><a class="btn" href="/go/gold/">Open the gold calculator</a></div>
-<div class="card"><img src="/img/platicalo.png" alt="Platicalo extension on and off switch" loading="lazy"><h3>Platicalo</h3><p>A translator for WhatsApp Web. Chat in English and Spanish with the people who matter to you, right inside WhatsApp in your browser.</p><a class="btn" href="/platicalo/">Learn about Platícalo</a></div>
-</div></div></section>
+  .hero-frame {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+  }
+  .hero-frame .hero-tile {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .hero-frame .hero-tile img {
+    width: 100%;
+    height: 360px;
+    max-height: none !important;
+    object-fit: cover;
+    object-position: top center;
+    border: 0 !important;
+    border-radius: 0 !important;
+    display: block;
+  }
+  .hero-frame .hero-tile .cap,
+  .hero-frame .hero-tile figcaption {
+    margin: 0;
+    padding: 10px 14px 12px;
+    color: var(--mut);
+    font-size: 13px;
+  }
+  @media (max-width: 900px) {
+    .hero-frame { grid-template-columns: 1fr !important; }
+    .hero-frame .hero-tile img { height: 240px; }
+  }
 
-<section id="custom"><div class="wrap">
-<h2>We build custom single-purpose apps for any industry</h2>
-<p class="lead">Do you have one task that eats up your day? A price you figure by hand, a form you fill out over and over, a number your customers always ask for? We can turn that into a simple app.</p>
-<ul class="big">
-<li>One app, one job, done well.</li>
-<li>Made for your business: a shop, a crew, a farm, an office, anything.</li>
-<li>Works on phones and computers.</li>
-<li>Plain screens your customers and staff can use without training.</li>
-</ul>
-<h3>How it works</h3>
-<ol class="big">
-<li><b>Tell us the job.</b> Email us a few sentences about the task you want the app to do.</li>
-<li><b>We talk it through.</b> We write back with questions and a plain plan for what the app would do.</li>
-<li><b>We build it with you.</b> You try it as we go and tell us what to change.</li>
-</ol>
-<a class="btn" href="mailto:atlas.operator.ai@gmail.com?subject=Custom%20app%20idea">Email atlas.operator.ai@gmail.com</a>
-</div></section>
-</main><footer><div class="wrap"><p><b>G &amp; K Strategies LLC</b> (Atlas Operator AI)<br>117 S Lexington St, Harrisonville, MO 64701<br><a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a></p><p><a href="/privacy-policy.html">Privacy policy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a></p></div></footer><script src="/t.js" defer></script></body></html>
+  /* qg-fix */
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap inner">
+    <a class="brand" href="/">Atlas Operator <span>AI</span></a>
+    <nav>
+      <a class="hide-sm" href="#work">Work</a>
+      <a class="hide-sm" href="#calculators">Calculators</a>
+      <a class="hide-sm" href="#custom">Custom</a>
+      <a class="hide-sm" href="https://x.com/AtlasBuildsLive" rel="noopener">@AtlasBuildsLive</a>
+      <a class="btn sm" href="#work">See the work</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <p class="kicker">Built in public · G &amp; K Strategies LLC</p>
+    <h1>Small tools. Clear prices. Shipped in the open.</h1>
+    <p class="lede">We make single-purpose apps for everyday work — measuring, converting, valuing gold, and translating WhatsApp Web chats — and we show the building on X.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#work">See products</a>
+      <a class="btn ghost" href="https://x.com/AtlasBuildsLive" rel="noopener">Follow @AtlasBuildsLive</a>
+    </div>
+    <div class="hero-frame" aria-hidden="true">
+      <figure class="hero-tile">
+        <img src="/assets/refresh/platicalo-bubbles.png" alt="">
+        <figcaption class="cap">Platícalo — translation in the chat</figcaption>
+      </figure>
+      <figure class="hero-tile">
+        <img src="/assets/refresh/app-concrete.jpg" alt="">
+        <figcaption class="cap">Concrete calculator on Google Play</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="work" class="band">
+    <div class="wrap">
+      <h2>Three product lines</h2>
+      <p class="section-intro">Only facts we can stand behind: store links, listed prices, and what each tool does.</p>
+      <div class="story-grid">
+        <article class="story">
+          <div class="pic"><img src="/assets/refresh/app-currency.jpg" alt="Currency Converter app screen"></div>
+          <div class="copy">
+            <div class="label">Google Play</div>
+            <h3>Calculator apps</h3>
+            <p>Area, Currency, Concrete, Feet-Inch, Hours, and others. Big buttons, clear numbers, one job per screen.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <a class="btn sm" href="/go/play/area/">Area</a>
+              <a class="btn sm ghost" href="/go/play/concrete/">Concrete</a>
+              <a class="btn sm ghost" href="/go/play/currency/">Currency</a>
+              <a class="btn sm ghost" href="/go/play/feetinch/">Feet-Inch</a>
+              <a class="btn sm ghost" href="/go/play/hours/">Hours</a>
+            </div>
+          </div>
+        </article>
+        <article class="story">
+          <div class="pic"><img class="contain" src="/assets/refresh/platicalo-popup-free30.png" alt="Platícalo Free: 30 translations popup"></div>
+          <div class="copy">
+            <div class="label teal">Chrome Web Store · Live</div>
+            <h3>Platícalo</h3>
+            <p>WhatsApp Web translator (Spanish ↔ English). Free: 30 translations. Pro: US$2.99/mo or US$29/yr.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <a class="btn sm" href="/go/cws/">Install free from the Chrome Web Store</a>
+              <a class="btn sm ghost" href="/platicalo/">Details</a>
+            </div>
+          </div>
+        </article>
+        <article class="story">
+          <div class="pic"><img class="contain" src="/assets/refresh/gold-payout.png" alt="Gold Calculator payout percent screen"></div>
+          <div class="copy">
+            <div class="label gold">Shops</div>
+            <h3>Gold Calculator</h3>
+            <p>For gold-buying shops. US$19/mo per shop, 14-day free trial. Open the live calculator from the store link.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <a class="btn sm" href="/go/gold/">Open calculator</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculators">
+    <div class="wrap">
+      <h2>Free calculators in the browser</h2>
+      <p class="section-intro">No sign-up. Use them on a phone or a computer.</p>
+      <div class="tools">
+        <a href="/tools/concrete-calculator/">Concrete <span>yards &amp; bags</span></a>
+        <a href="/tools/area-calculator/">Square footage <span>rooms &amp; floors</span></a>
+        <a href="/tools/feet-inch-calculator/">Feet &amp; inches <span>fractions</span></a>
+        <a href="/tools/currency-calculator/">Currency <span>quick convert</span></a>
+        <a href="/tools/gravel-mulch-calculator/">Gravel &amp; mulch <span>yards, tons, bags</span></a>
+        <a href="/tools/paint-calculator/">Paint <span>gallons for a room</span></a>
+        <a href="/tools/tile-calculator/">Tile <span>tiles &amp; boxes</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap feature">
+      <div class="paper">
+        <img class="contain" src="/assets/refresh/platicalo-flow.png" alt="Platícalo translating a WhatsApp Web message">
+      </div>
+      <div>
+        <p class="kicker">Platícalo</p>
+        <h2>Chat across English and Spanish inside WhatsApp Web.</h2>
+        <p class="note">Live on the Chrome Web Store. Free: 30 translations.</p>
+        <ul class="plain">
+          <li>Pro is US$2.99/month or US$29/year.</li>
+          <li>You choose which messages to translate.</li>
+          <li>Install free from the Chrome Web Store.</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn" href="/go/cws/">Get Platícalo</a>
+          <a class="btn ghost" href="/platicalo/">How it works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap feature reverse">
+      <div class="paper">
+        <div class="gold-duo">
+          <figure>
+            <img src="/assets/refresh/gold-uncut.png" alt="Gold Calculator scrap and spot prices">
+            <figcaption>Scrap + live spot prices</figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/refresh/gold-payout.png" alt="Gold Calculator payout percent controls">
+            <figcaption>Payout % view</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <p class="kicker">For gold-buying shops</p>
+        <h2>A counter calculator with a clear monthly price.</h2>
+        <p class="price">US$19/mo</p>
+        <p class="price-sub">per shop · 14-day free trial</p>
+        <ul class="plain">
+          <li>Built for gold-buying shops at the counter.</li>
+          <li>Branded shop option available.</li>
+          <li>Free public version available.</li>
+        </ul>
+        <a class="btn" href="/go/gold/">Open Gold Calculator</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="custom" class="band">
+    <div class="wrap">
+      <div class="custom-card">
+        <h2>Need a custom single-purpose app?</h2>
+        <p>If one task eats your day — a price figured by hand, a form filled over and over — we can turn it into a plain app for phones and computers.</p>
+        <ol>
+          <li><b>Tell us the job</b> in a short email.</li>
+          <li><b>We talk it through</b> with questions and a plain plan.</li>
+          <li><b>We build it with you</b> as you try each version.</li>
+        </ol>
+        <a class="btn" href="mailto:atlas.operator.ai@gmail.com?subject=Custom%20app%20idea">Email atlas.operator.ai@gmail.com</a>
+      </div>
+      <div class="bip-bar">
+        <div>
+          <strong>Built in public</strong>
+          <p>Watch shipping notes and demos on <a href="https://x.com/AtlasBuildsLive" rel="noopener">X @AtlasBuildsLive</a>.</p>
+        </div>
+        <a class="btn ghost" href="https://x.com/AtlasBuildsLive" rel="noopener">Open the feed</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <p><b style="color:var(--ink)">G &amp; K Strategies LLC</b> (Atlas Operator AI)<br>
+      117 S Lexington St, Harrisonville, MO 64701<br>
+      <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a>
+    </p>
+    <p>
+      <a href="/privacy-policy.html">Privacy</a> ·
+      <a href="/terms-of-service.html">Terms</a> ·
+      <a href="/affiliate-disclosure/">Affiliate disclosure</a> ·
+      <a href="/about/">About</a> ·
+      <a href="/contact/">Contact</a>
+    </p>
+  </div>
+</footer>
+<script src="/t.js" defer></script>
+</body>
+</html>
