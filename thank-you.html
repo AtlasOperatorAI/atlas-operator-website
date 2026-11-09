@@ -8,7 +8,7 @@ function go(n){fetch("https://atlas-analytics-production-f29e.up.railway.app/ver
  if(!d.ok){if(n<3&&d.error!=="invalid session"&&d.error!=="not a completed Atlas Pro purchase")return setTimeout(function(){go(n+1)},2000);return fail("Your payment couldn't be verified.")}
  try{if(d.plan==="bundle39")localStorage.setItem("atlas_pro_all","1");else if(d.tool)localStorage.setItem("atlas_pro_"+d.tool,"1")}catch(e){}
  var t=NAMES[d.tool]?d.tool:"";$("ph").textContent="You're in. Pro is unlocked.";
- $("pm").innerHTML=(d.plan==="bundle39"?"Pro is unlocked for every Atlas tool on this device and browser while your yearly plan is active.":"Pro is unlocked for the "+(NAMES[t]||"tool")+" on this device and browser, for life.")+(t?' <a href="/tools/'+t+'/">Back to the '+NAMES[t]+' →</a>':' <a href="/#tools">Go to the tools →</a>')+'<br><small>Using another device? Email us with your receipt and we\'ll unlock it there too.</small>'
+ $("pm").innerHTML=(d.plan==="bundle39"?"Pro is unlocked for all 4 Atlas calculators on this device and browser while your yearly plan is active.":"Pro is unlocked for the "+(NAMES[t]||"tool")+" on this device and browser, for life.")+(t?' <a href="/tools/'+t+'/">Back to the '+NAMES[t]+' →</a>':' <a href="/#tools">Go to the tools →</a>')+'<br><small>Using another device? Email us with your receipt and we\'ll unlock it there too.</small>'
 }).catch(function(){n<3?setTimeout(function(){go(n+1)},2000):fail("Network problem.")})}go(0)})();
 </script>
 </body></html>
