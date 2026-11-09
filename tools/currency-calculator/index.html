@@ -240,7 +240,7 @@ var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},
 var $=function(i){return document.getElementById(i)},TOOL="currency-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
 /* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
 var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
-var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm=Math.random()<0.5?"A":"B";ls.s("atlas_arm",arm);fresh=true}}
+var arm,fresh=false;if(TWA){arm="A"}else{arm="B";if(ls.g("atlas_arm")!=="B"){ls.s("atlas_arm","B");fresh=true}}
 if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1");document.querySelectorAll(".webonly").forEach(function(e){e.parentNode.removeChild(e)})}
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
