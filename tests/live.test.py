@@ -148,6 +148,43 @@ with sync_playwright() as p:
                 if st["pro"] or not st["strip"] or st["unl"]!="0":fails.append(f"{n}: unpaid view wrong {st}")
             if errs:fails.append(f"{n}: {errs[:2]}")
             c.close()
+    # Follow-ups: #pro anchor shows gateB to unpaid web visitors; More-menu item for paid users; thank-you lands on #pro
+    VIS="""s=>{const e=document.querySelector(s);return !!e&&getComputedStyle(e).display!=='none'&&!e.classList.contains('hidden')&&!!e.getClientRects().length}"""
+    INVIEW="""s=>{const e=document.querySelector(s);if(!e)return false;const r=e.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0}"""
+    for t in ("concrete","area","feet-inch","currency"):
+        for mode in ("web","app"):
+            c=br.new_context(viewport={"width":390,"height":844});c.route("**/event",lambda r:r.fulfill(status=200,body="{}"))
+            pg=c.new_page();pg.goto(f"{B}/tools/{t}-calculator/?atlas_test=1"+("&src=twa" if mode=="app" else "")+"#pro",wait_until="load");pg.wait_for_timeout(1200)
+            n=f"#pro unpaid {mode} {t}"
+            if mode=="web":
+                if not(pg.evaluate(f"({VIS})('#gateB')") and pg.evaluate(f"({VIS})('#gateB [data-plan=lifetime12]')") and pg.evaluate(f"({VIS})('#gateB [data-plan=bundle39]')")):fails.append(f"{n}: gateB buttons not visible")
+                if not pg.evaluate(f"({INVIEW})('#gateB')"):fails.append(f"{n}: gateB not scrolled into view")
+                if pg.evaluate(f"({VIS})('#gateA')"):fails.append(f"{n}: gateA visible")
+            else:
+                bad=pg.evaluate("()=>document.querySelectorAll('#pro,#gateB,[data-plan],#proStrip').length+(document.body.innerText.match(/US\\$|\\bPro\\b/g)||[]).length")
+                if bad:fails.append(f"{n}: app shows pricing ({bad})")
+            c.close()
+    for t in ("concrete","area","feet-inch"):
+        for paid in (False,True):
+            c=br.new_context(viewport={"width":390,"height":844});c.route("**/event",lambda r:r.fulfill(status=200,body="{}"))
+            if paid:c.add_init_script("localStorage.setItem('atlas_pro_all','1')")
+            pg=c.new_page();pg.goto(f"{B}/tools/{t}-calculator/?atlas_test=1",wait_until="load");pg.wait_for_timeout(800)
+            pg.click("#ezmore");pg.wait_for_timeout(150);v=pg.evaluate(f"({VIS})('#ezsheet #gopro')")
+            n=f"menu {t} {'paid' if paid else 'unpaid'}"
+            if v!=paid:fails.append(f"{n}: Pro menu item visible={v}")
+            if paid:
+                pg.click("#ezsheet #gopro");pg.wait_for_timeout(400)
+                if not pg.evaluate(f"({INVIEW})('#proUI')") or pg.evaluate(f"({VIS})('#ezsheet')"):fails.append(f"{n}: menu item did not open Pro tools")
+            c.close()
+    c=br.new_context(viewport={"width":390,"height":844});c.route("**/event",lambda r:r.fulfill(status=200,body="{}"))
+    c.route("**/verify?**",lambda r:r.fulfill(status=200,content_type="application/json",headers={"Access-Control-Allow-Origin":"*"},body='{"ok":true,"plan":"bundle39","tool":"area-calculator"}'))
+    pg=c.new_page();pg.goto(f"{B}/thank-you.html?session_id=cs_test_aaaaaaaaaaaaaaaa",wait_until="load");pg.wait_for_timeout(1500)
+    href=pg.evaluate("()=>{const a=[...document.querySelectorAll('#pm a')].find(a=>/Back to/.test(a.textContent));return a&&a.getAttribute('href')}")
+    if href!="/tools/area-calculator/#pro":fails.append(f"thank-you back link {href}")
+    else:
+        pg.click("#pm a");pg.wait_for_load_state("load");pg.wait_for_timeout(1200)
+        if not pg.evaluate(f"({INVIEW})('#proUI')") or not pg.evaluate(f"({VIS})('#proUI')"):fails.append("thank-you -> tool did not land on visible Pro tools")
+    c.close()
     # arm_assigned: first visit fires once; a stored A switched to B does not fire it again
     for prev,expect in ((None,1),("A",0),("B",0)):
         c=br.new_context();sent=[]
