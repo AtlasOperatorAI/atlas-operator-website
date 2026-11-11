@@ -120,6 +120,43 @@ with sync_playwright() as p:
     pg.tap('.ezchips button[aria-label="Tile 12 by 12 inches"]');want("ez tile 12x12",txt(pg,"#ezv"),"88")
     pg.tap("#ezi1");keys(pg,["1","0"]);want("ez tile 10x10 12x12",txt(pg,"#ezv"),"110");pg.close()
     mob.close()
+    # Atlas Pro on the 4 paid tools (web). Analytics POSTs are stubbed so this never writes to /event.
+    PRO={"concrete":"save","area":"save","feet-inch":"save","currency":"bcsv"}
+    for t,ctl in PRO.items():
+        for paid in (False,True):
+            c=br.new_context();sent=[]
+            c.route("**/event",lambda r:(sent.append(r.request.post_data or ""),r.fulfill(status=200,body="{}")))
+            if paid:c.add_init_script("localStorage.setItem('atlas_pro_all','1')")
+            pg=c.new_page();errs=[];pg.on("pageerror",lambda e:errs.append(str(e)))
+            pg.goto(f"{B}/tools/{t}-calculator/?atlas_test=1",wait_until="load");pg.wait_for_timeout(1500)
+            if t=="currency":pg.wait_for_function("()=>window.__fx&&window.__fx.rates",timeout=15000)
+            st=pg.evaluate("""()=>{const v=e=>!!e&&getComputedStyle(e).display!=='none'&&!e.classList.contains('hidden')&&!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length);
+              const $=i=>document.getElementById(i);return{pro:v($('pro')),ui:v($('proUI'))&&!$('proUI').classList.contains('lock'),gA:v($('gateA')),gB:v($('gateB')),strip:v($('proStrip')),unl:document.documentElement.getAttribute('data-unlocked')}}""")
+            n=f"pro {t} {'paid' if paid else 'unpaid'}"
+            if paid:
+                if not(st["pro"] and st["ui"]) or st["gA"] or st["gB"] or st["strip"] or st["unl"]!="1":fails.append(f"{n}: Pro tools not usable after unlock {st}")
+                if ctl=="save":
+                    pg.click("#save");pg.wait_for_timeout(200)
+                    if pg.locator("#jobs li").count()<1:fails.append(f"{n}: Save job did not add a job")
+                    pg.evaluate("window.print=()=>{window.__printed=1}");pg.click("#pdf")
+                    if not pg.evaluate("!!window.__printed") or "<table>" not in pg.inner_html("#quote"):fails.append(f"{n}: branded PDF quote did not build")
+                else:
+                    pg.fill("#blines .bl:first-child input[data-k=amount]","100")
+                    with pg.expect_download(timeout=5000) as dl:pg.click("#bcsv")
+                    if dl.value.suggested_filename!="trip-budget.csv":fails.append(f"{n}: CSV export {dl.value.suggested_filename}")
+            else:
+                if st["pro"] or not st["strip"] or st["unl"]!="0":fails.append(f"{n}: unpaid view wrong {st}")
+            if errs:fails.append(f"{n}: {errs[:2]}")
+            c.close()
+    # arm_assigned: first visit fires once; a stored A switched to B does not fire it again
+    for prev,expect in ((None,1),("A",0),("B",0)):
+        c=br.new_context();sent=[]
+        c.route("**/event",lambda r:(sent.append(r.request.post_data or ""),r.fulfill(status=200,body="{}")))
+        if prev:c.add_init_script(f"localStorage.setItem('atlas_arm','{prev}')")
+        pg=c.new_page();pg.goto(f"{B}/tools/concrete-calculator/?atlas_test=1",wait_until="load");pg.wait_for_timeout(1500)
+        got=sum(1 for s in sent if '"arm_assigned"' in s);arm=pg.evaluate("localStorage.getItem('atlas_arm')")
+        if got!=expect or arm!="B":fails.append(f"arm_assigned prev={prev}: fired {got} want {expect}, arm={arm}")
+        c.close()
     br.close()
 print(json.dumps(res,indent=0))
 subst=[k for k,v in res.items() if v>=300]

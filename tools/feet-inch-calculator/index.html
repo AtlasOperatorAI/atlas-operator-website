@@ -27,6 +27,13 @@ label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;ma
 .btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
 .pro h2{margin:0 0 4px;font-size:1.2rem}.lock{opacity:.55}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .small{font-size:.82rem;color:var(--mut)}.ok{color:#7ee2a8}.hidden{display:none}
+.pro-strip{margin:8px 0 0;padding:8px 10px;background:#0a0e16;border:1px solid var(--line);border-radius:12px}
+.pro-strip>p{margin:0;line-height:1.35}
+.pro-strip .row{margin:6px 0 0}
+.pro-strip .btn{padding:8px 12px}
+.pro-strip .seller{margin-top:6px}
+html[data-twa] #proStrip{display:none!important}
+
 ul.jobs{list-style:none;padding:0;margin:8px 0 0}ul.jobs li{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:7px 0}
 details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
 footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
@@ -36,7 +43,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 </style>
 <style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
-<style>/* v4 draft: no pricing shown */ #pro,#gopro{display:none!important}</style>
+<style>/* v4 draft: no pricing shown (paid users still see their Pro tools) */ html:not([data-unlocked="1"]) #pro,html:not([data-unlocked="1"]) #gopro{display:none!important}</style>
 <style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
 </head><body>
 <div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator AI home"><i></i><h1>Feet-Inch Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
@@ -59,6 +66,11 @@ html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 <div data-p="bf" class="hidden"><div class="f">
 <label>Thickness (in)<input id="bt" type="number" inputmode="decimal" step="any" value="2"></label><label>Width (in)<input id="bw" type="number" inputmode="decimal" step="any" value="6"></label><label>Length (ft)<input id="bl" type="number" inputmode="decimal" step="any" value="8"></label><label>Quantity<input id="bq" type="number" inputmode="numeric" step="1" value="1"></label><label>$ per board ft (optional)<input id="bp" type="number" inputmode="decimal" step="any"></label></div></div>
 <div class="res" aria-live="polite"><div class="big" style="grid-column:span 2"><b id="r1">–</b><span id="l1">result</span></div><div class="big"><b id="r2">–</b><span id="l2"></span></div><div class="big"><b id="r3">–</b><span id="l3"></span></div></div>
+<div id="proStrip" class="pro-strip hidden" role="region" aria-label="Atlas Pro">
+<p>Save measurements and calculations to a job and print a branded cut list or quote. Get Pro for all 4 calculators, US$39/yr.</p>
+<div class="row"><button class="btn" type="button" data-plan="bundle39">Get Pro, US$39/yr</button></div>
+<p class="small seller">Renews every year until you cancel. To cancel, email atlas.operator.ai@gmail.com. Pro unlocks on this device and browser. Sold by Rest On Request LLC dba Atlas Operator AI.</p>
+</div>
 <p class="small" id="r4"></p>
 </section>
 
@@ -76,8 +88,8 @@ html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 <div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
 </form></div>
 <div id="gateB" class="hidden">
-<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for all 4 Atlas calculators</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
-<div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all 4 calculators</button></div>
+<p><b>US$39/yr for all 4 Atlas calculators</b>, or <b>US$12 lifetime for this tool</b>. The single-tool price is a one-time payment, not a subscription. Secure checkout by Stripe.</p>
+<div class="row"><button class="btn" data-plan="bundle39">US$39/yr all 4 calculators</button><button class="btn ghost" data-plan="lifetime12">US$12 lifetime</button></div>
 <form id="fB" class="hidden" style="margin-top:12px">
 <p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
 <div class="f"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
@@ -135,7 +147,7 @@ var last=null;
 var $=function(i){return document.getElementById(i)},mode="math";
 function set(a,b,c,d,la,lb,lc){$("r1").textContent=a;$("r2").textContent=b;$("r3").textContent=c;$("l1").textContent=la;$("l2").textContent=lb;$("l3").textContent=lc;$("r4").textContent=d}
 function n(id){var v=parseFloat($(id).value);return isFinite(v)?v:0}
-function run(){var den=+$("den").value||16,F=FIC.fmt;
+function run(){try{var den=+$("den").value||16,F=FIC.fmt;
  if(mode==="math"){var o=$("mo").value,a=FIC.parse($("ma").value),b=(o==="*"||o==="/")?parseFloat($("mb").value):FIC.parse($("mb").value);$("lbm").firstChild.textContent=(o==="*"||o==="/")?"Number B":"Measurement B";
   var r=FIC.op(a,o,b);if(!isFinite(r)){set("–","–","–","Check your input.","result","","");last=null;return}
   set(F(r,den),(r).toFixed(4)+'"',(r/12).toFixed(4)+"'",(r*25.4).toFixed(1)+" mm · "+(r*2.54).toFixed(2)+" cm","feet-inches","decimal inches","decimal feet");last=$("ma").value+" "+$("mo").selectedOptions[0].text+" "+$("mb").value+" = "+F(r,den)}
@@ -143,26 +155,26 @@ function run(){var den=+$("den").value||16,F=FIC.fmt;
   set(s.risers+" risers @ "+F(s.riser,16),s.treads+" treads","run "+F(s.totalRun,16),"Stringer ≈ "+F(s.stringer,16)+" · angle "+s.angleDeg.toFixed(1)+"°","risers","treads @ "+s.tread+'"',"total run");last="Stairs: rise "+F(tr,16)+" → "+s.risers+" risers @ "+F(s.riser,16)+", "+s.treads+" treads, run "+F(s.totalRun,16)}
  else if(mode==="rafter"){var run_=FIC.parse($("rr").value),oh=FIC.parse($("ro").value)||0,p=n("rp");if(!(run_>0)){set("–","–","–","","","","");last=null;return}var r2=FIC.rafter(run_,p,oh);
   set(F(r2.withOverhang,16),"rise "+F(r2.rise,16),r2.angleDeg.toFixed(2)+"°","Rafter without overhang: "+F(r2.length,16)+" · decimal "+(r2.withOverhang/12).toFixed(3)+" ft","rafter length","total rise","roof angle");last="Rafter: run "+F(run_,16)+" @ "+p+"/12 → "+F(r2.withOverhang,16)}
- else{var bf=FIC.boardFeet(n("bt"),n("bw"),n("bl"),Math.max(1,Math.floor(n("bq"))||1)),cost=n("bp")?bf*n("bp"):0;set(bf.toFixed(2)+" bf",cost?"$"+cost.toFixed(2):"–",(bf/12).toFixed(3)+" ft³","","board feet","cost","volume");last="Board ft: "+n("bt")+"×"+n("bw")+"×"+n("bl")+"ft ×"+(Math.floor(n("bq"))||1)+" = "+bf.toFixed(2)+" bf"}}
+ else{var bf=FIC.boardFeet(n("bt"),n("bw"),n("bl"),Math.max(1,Math.floor(n("bq"))||1)),cost=n("bp")?bf*n("bp"):0;set(bf.toFixed(2)+" bf",cost?"$"+cost.toFixed(2):"–",(bf/12).toFixed(3)+" ft³","","board feet","cost","volume");last="Board ft: "+n("bt")+"×"+n("bw")+"×"+n("bl")+"ft ×"+(Math.floor(n("bq"))||1)+" = "+bf.toFixed(2)+" bf"}}finally{var st=document.getElementById("proStrip");if(st){if(last)st.dataset.ready="1";else delete st.dataset.ready;st.classList.toggle("hidden",!last||document.documentElement.getAttribute("data-unlocked")==="1")}}}
 document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){mode=b.dataset.m;document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});document.querySelectorAll("[data-p]").forEach(function(p){p.classList.toggle("hidden",p.dataset.p!==mode)});run()}});
 document.querySelectorAll("input,select").forEach(function(e){if(!e.closest("#pro"))e.addEventListener("input",run)});run();
 window.__run=run;
 })();
 (function(){
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-/* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
+/* Web visitors always get paid arm B (stored in localStorage, not a cookie). TWA stays on free-registration arm A. arm_assigned fires only for first-time visitors, not when a stored A is switched to B. */
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 var $=function(i){return document.getElementById(i)},TOOL="feet-inch-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
 /* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
 var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
-var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm="B";ls.s("atlas_arm",arm);fresh=true}}
-if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1")}
+var arm,fresh=false;if(TWA){arm="A"}else{arm="B";var prevArm=ls.g("atlas_arm");if(prevArm!=="B"){ls.s("atlas_arm","B");fresh=prevArm!=="A"}}
+if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);var ps=document.getElementById("proStrip");if(ps)ps.parentNode.removeChild(ps);document.documentElement.setAttribute("data-twa","1")}
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
 if(TWA)return; /* app mode: free-only, no Pro UI or wording */
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
 if(fresh)whenReady(function(){ev("arm_assigned")});
 var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
-function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);jobs()}
+function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);document.documentElement.setAttribute("data-unlocked",unlocked?"1":"0");var st=$("proStrip");if(st)st.classList.toggle("hidden",st.dataset.ready!=="1"||unlocked);jobs()}
 function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
 $("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=TWA?"T":arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
  atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};

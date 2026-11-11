@@ -47,7 +47,13 @@ var css=".ez{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;di
 ".ezsh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.ezsh h2{margin:0;font-size:1.2rem}.ezx{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;cursor:pointer}"+
 ".ezsheet .card{margin-bottom:10px}.ezmi{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--fg);padding:12px 14px;margin-top:8px;text-decoration:none;font-weight:600}.ezmi small{display:block;color:var(--mut);font-weight:400}"+
 ".ezbelow{border-top:1px solid var(--line);margin-top:6px;padding-top:18px}.ezh{font-size:1.5rem;line-height:1.2;margin:4px 0 6px}"+
-"html[data-twa] .webonly{display:none!important}";
+"html[data-twa] .webonly{display:none!important}"+
+"#proStrip.pro-strip{margin:0 0 6px;padding:6px 10px;background:var(--card);border:1px solid var(--line);border-radius:12px;flex-shrink:0}"+
+"#proStrip.pro-strip p{margin:0;font-size:.76rem;line-height:1.25}"+
+"#proStrip.pro-strip .row{margin:4px 0 0}"+
+"#proStrip.pro-strip .btn{padding:6px 12px;font-size:.9rem}"+
+"#proStrip.pro-strip .seller{margin-top:4px;font-size:.66rem;line-height:1.25;color:var(--mut)}"+
+"html[data-twa] #proStrip{display:none!important}";
 var st=d.createElement("style");st.textContent=css;d.head.appendChild(st);
 var ez=$("#ez"),card=$(C.card),UK="atlas_ez_"+C.tool,saved={};try{saved=JSON.parse(ls.g(UK)||"{}")||{}}catch(e){}
 var act=0,buf=null,fresh=true,F=C.fields;
@@ -55,7 +61,7 @@ function el(tag,cls,html){var e=d.createElement(tag);if(cls)e.className=cls;if(h
 var res=el("div","ezres");res.setAttribute("aria-live","polite");res.innerHTML='<b id="ezv">–</b><span class="u" id="ezu"></span><span class="sub" id="ezsub"></span>';
 var box=el("div","ezbox"),pad=el("div","ezpad");pad.id="ezpad";pad.setAttribute("aria-label","Keypad");
 var note=el("p","eznote",C.note||"Tap a box, type on the keypad. Shapes, waste, cost and more are under More.");
-ez.appendChild(res);ez.appendChild(box);ez.appendChild(pad);ez.appendChild(note);
+ez.appendChild(res);var offer=d.getElementById("proStrip");if(offer){if(TWA){offer.parentNode.removeChild(offer)}else{ez.appendChild(offer)}}ez.appendChild(box);ez.appendChild(pad);ez.appendChild(note);
 /* More sheet: the original calculator card + links */
 var sh=el("div","ezsheet hidden");sh.id="ezsheet";sh.setAttribute("role","dialog");sh.setAttribute("aria-modal","true");sh.setAttribute("aria-labelledby","ezsh");
 sh.innerHTML='<div><div class="ezsh"><h2 id="ezsh">More options</h2><button class="ezx" type="button" data-close>Done</button></div><div id="ezslot"></div>'+

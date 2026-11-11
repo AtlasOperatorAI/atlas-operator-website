@@ -14,6 +14,13 @@
 :root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa;--key:#151c2b}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
 a{color:var(--acc)}.w{max-width:880px;margin:0 auto;padding:0 18px}.hidden{display:none!important}.small{font-size:.82rem;color:var(--mut)}.ok{color:#7ee2a8}
+.pro-strip{margin:10px 0 0;padding:8px 10px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.pro-strip>p{margin:0;font-size:.8rem;line-height:1.3}
+.pro-strip .row{margin:6px 0 0}
+.pro-strip .btn{padding:8px 12px;font-size:.95rem}
+.pro-strip .seller{margin-top:6px;font-size:.72rem}
+html[data-twa] #proStrip{display:none!important}
+
 .app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:0 14px env(safe-area-inset-bottom)}
 .top{display:flex;justify-content:space-between;align-items:center;height:50px}
 .logo{display:flex;gap:8px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none;font-size:.95rem}.logo i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
@@ -57,7 +64,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 html[data-twa] #pro,html[data-twa] .webonly{display:none!important}
 </style>
 <style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
-<style>/* v4 draft: no pricing shown */ #pro,#gopro{display:none!important}</style>
+<style>/* v4 draft: no pricing shown (paid users still see their Pro tools) */ html:not([data-unlocked="1"]) #pro,html:not([data-unlocked="1"]) #gopro{display:none!important}</style>
 <style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
 </head><body>
 <div class="app">
@@ -66,6 +73,11 @@ html[data-twa] #pro,html[data-twa] .webonly{display:none!important}
 <div class="side from"><button class="cur" id="pfrom" type="button"><span class="fl" id="ffrom"></span><span><b id="cfrom">USD</b><small>Tap to change</small></span></button><input class="num" id="amt" readonly inputmode="none" aria-label="Amount to convert" value="1"></div>
 <div class="mid"><button class="swap" id="swap" type="button" aria-label="Swap currencies" title="Swap">⇅</button></div>
 <div class="side to"><button class="cur" id="pto" type="button"><span class="fl" id="fto"></span><span><b id="cto">MXN</b><small>Tap to change</small></span></button><div class="num" id="outv" aria-live="polite">–</div></div>
+<div id="proStrip" class="pro-strip hidden" role="region" aria-label="Atlas Pro">
+<p>Add costs in any currency and see the trip total in your home currency. Export as CSV. Get Pro for all 4 calculators, US$39/yr.</p>
+<div class="row"><button class="btn" type="button" data-plan="bundle39">Get Pro, US$39/yr</button></div>
+<p class="small seller">Renews every year until you cancel. To cancel, email atlas.operator.ai@gmail.com. Pro unlocks on this device and browser. Sold by Rest On Request LLC dba Atlas Operator AI.</p>
+</div>
 <div class="pad" id="pad" aria-label="Keypad">
 <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op c" data-k="C" aria-label="Clear">C</button>
 <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
@@ -112,8 +124,8 @@ html[data-twa] #pro,html[data-twa] .webonly{display:none!important}
 <div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
 </form></div>
 <div id="gateB" class="hidden">
-<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for all 4 Atlas calculators</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
-<div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all 4 calculators</button></div>
+<p><b>US$39/yr for all 4 Atlas calculators</b>, or <b>US$12 lifetime for this tool</b>. The single-tool price is a one-time payment, not a subscription. Secure checkout by Stripe.</p>
+<div class="row"><button class="btn" data-plan="bundle39">US$39/yr all 4 calculators</button><button class="btn ghost" data-plan="lifetime12">US$12 lifetime</button></div>
 <form id="fB" class="hidden" style="margin-top:12px">
 <p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
 <div class="f"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
@@ -235,19 +247,20 @@ window.__fxState=function(){return{from:from,to:to,amt:amt}};
 <script>
 (function(){
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-/* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
+/* Web visitors always get paid arm B (stored in localStorage, not a cookie). TWA stays on free-registration arm A. arm_assigned fires only for first-time visitors, not when a stored A is switched to B. */
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 var $=function(i){return document.getElementById(i)},TOOL="currency-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
 /* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
 var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
-var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm="B";ls.s("atlas_arm",arm);fresh=true}}
-if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1");document.querySelectorAll(".webonly").forEach(function(e){e.parentNode.removeChild(e)})}
+var arm,fresh=false;if(TWA){arm="A"}else{arm="B";var prevArm=ls.g("atlas_arm");if(prevArm!=="B"){ls.s("atlas_arm","B");fresh=prevArm!=="A"}}
+if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);var ps=document.getElementById("proStrip");if(ps)ps.parentNode.removeChild(ps);document.documentElement.setAttribute("data-twa","1");document.querySelectorAll(".webonly").forEach(function(e){e.parentNode.removeChild(e)})}
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
 if(TWA)return;
 if(fresh)whenReady(function(){ev("arm_assigned")});
 var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
-function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);bud()}
+function syncStrip(){var st=$("proStrip"),out=$("outv");if(!st)return;var ready=!!(out&&out.textContent.trim()&&out.textContent.trim()!=="–");if(ready)st.dataset.ready="1";else delete st.dataset.ready;st.classList.toggle("hidden",!ready||unlocked)}
+function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);document.documentElement.setAttribute("data-unlocked",unlocked?"1":"0");syncStrip();bud()}
 function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
 $("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=TWA?"T":arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
  atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};
@@ -266,7 +279,7 @@ function bcalc(){var R=R_(),home=($("home")&&$("home").value)||"USD";if(!R)retur
 function btot(){var c=bcalc();$("btot").textContent=c?"Trip total: "+c.b.total.toLocaleString("en-US",{minimumFractionDigits:CUR.decimals(c.home),maximumFractionDigits:CUR.decimals(c.home)})+" "+c.home+" (home currency, set in Travel)"+(c.b.bad?" · "+c.b.bad+" line(s) skipped":""):""}
 $("badd").onclick=function(){BL.push({label:"",amount:"",cur:""});bsave();bud()};
 $("bcsv").onclick=function(){if(!gate())return;var c=bcalc();if(!c)return;var m=window.__fx.meta,t=CUR.csv(c.b,c.home,"Rates as of "+m.date+" ("+m.srcName+"); for information only, not for trading"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv"}));a.download="trip-budget.csv";document.body.appendChild(a);a.click();a.remove();ev("csv_export")};
-["home","away"].forEach(function(i){var e=$(i);if(e)e.addEventListener("change",bud)});if(window.__fxReady)window.__fxReady.then(bud);
+["home","away"].forEach(function(i){var e=$(i);if(e)e.addEventListener("change",bud)});if(window.__fxReady)window.__fxReady.then(function(){bud();syncStrip()});if($("outv"))new MutationObserver(syncStrip).observe($("outv"),{childList:true,characterData:true,subtree:true});
 render();
 })();
 </script>
