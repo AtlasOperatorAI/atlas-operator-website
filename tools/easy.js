@@ -48,11 +48,11 @@ var css=".ez{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;di
 ".ezsheet .card{margin-bottom:10px}.ezmi{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--fg);padding:12px 14px;margin-top:8px;text-decoration:none;font-weight:600}.ezmi small{display:block;color:var(--mut);font-weight:400}"+
 ".ezbelow{border-top:1px solid var(--line);margin-top:6px;padding-top:18px}.ezh{font-size:1.5rem;line-height:1.2;margin:4px 0 6px}"+
 "html[data-twa] .webonly{display:none!important}"+
-"#proStrip.pro-strip{margin:0 0 8px;padding:8px 10px;background:var(--card);border:1px solid var(--line);border-radius:12px;flex-shrink:0}"+
-"#proStrip.pro-strip p{margin:0;font-size:.8rem;line-height:1.3}"+
-"#proStrip.pro-strip .row{margin:6px 0 0}"+
-"#proStrip.pro-strip .btn{padding:8px 12px;font-size:.95rem}"+
-"#proStrip.pro-strip .seller{margin-top:6px;font-size:.72rem;color:var(--mut)}"+
+"#proStrip.pro-strip{margin:0 0 6px;padding:6px 10px;background:var(--card);border:1px solid var(--line);border-radius:12px;flex-shrink:0}"+
+"#proStrip.pro-strip p{margin:0;font-size:.76rem;line-height:1.25}"+
+"#proStrip.pro-strip .row{margin:4px 0 0}"+
+"#proStrip.pro-strip .btn{padding:6px 12px;font-size:.9rem}"+
+"#proStrip.pro-strip .seller{margin-top:4px;font-size:.66rem;line-height:1.25;color:var(--mut)}"+
 "html[data-twa] #proStrip{display:none!important}";
 var st=d.createElement("style");st.textContent=css;d.head.appendChild(st);
 var ez=$("#ez"),card=$(C.card),UK="atlas_ez_"+C.tool,saved={};try{saved=JSON.parse(ls.g(UK)||"{}")||{}}catch(e){}

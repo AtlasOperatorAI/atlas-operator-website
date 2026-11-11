@@ -44,7 +44,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var
 html[data-twa] #pro{display:none!important}
 </style>
 <style>.guide table.t{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:.92rem}.guide table.t td,.guide table.t th{border:1px solid var(--line,#222b3d);padding:7px 9px;text-align:left}.guide table.t th{background:#0d1220}.guide .tw{overflow-x:auto}.ad-slot,.aff-slot{display:none!important}</style>
-<style>/* v4 draft: no pricing shown */ #pro,#gopro{display:none!important}</style>
+<style>/* v4 draft: no pricing shown (paid users still see their Pro tools) */ html:not([data-unlocked="1"]) #pro,html:not([data-unlocked="1"]) #gopro{display:none!important}</style>
 <style>/* v4 easy-read */ html{font-size:20px}@media screen{body{font-size:1rem!important}}@media(max-width:600px){html{font-size:18px}}</style>
 </head><body>
 <div class="ez" id="ez"><header class="eztop"><a class="logo" href="/" aria-label="Atlas Operator AI home"><i></i><h1>Area Calculator</h1></a><button class="ezmore" id="ezmore" type="button" aria-haspopup="dialog" aria-controls="ezsheet">☰ More</button></header></div>
@@ -62,7 +62,7 @@ html[data-twa] #pro{display:none!important}
 <div id="proStrip" class="pro-strip hidden" role="region" aria-label="Atlas Pro">
 <p>Save area takeoffs to a job and print a branded estimate or quote. Get Pro for all 4 calculators, US$39/yr.</p>
 <div class="row"><button class="btn" type="button" data-plan="bundle39">Get Pro, US$39/yr</button></div>
-<p class="small seller">Sold by Rest On Request LLC dba Atlas Operator AI.</p>
+<p class="small seller">Renews every year until you cancel. To cancel, email atlas.operator.ai@gmail.com. Pro unlocks on this device and browser. Sold by Rest On Request LLC dba Atlas Operator AI.</p>
 </div>
 <p class="small" id="r4"></p>
 </section>
@@ -172,12 +172,12 @@ window.__run=run;window.__area={add:add,shapes:function(){return shapes},unit:fu
 })();
 (function(){
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-/* Web visitors always get paid arm B (stored in localStorage, not a cookie). TWA stays on free-registration arm A. */
+/* Web visitors always get paid arm B (stored in localStorage, not a cookie). TWA stays on free-registration arm A. arm_assigned fires only for first-time visitors, not when a stored A is switched to B. */
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 var $=function(i){return document.getElementById(i)},TOOL="area-calculator";function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:d})}
 /* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
 var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
-var arm,fresh=false;if(TWA){arm="A"}else{arm="B";if(ls.g("atlas_arm")!=="B"){ls.s("atlas_arm","B");fresh=true}}
+var arm,fresh=false;if(TWA){arm="A"}else{arm="B";var prevArm=ls.g("atlas_arm");if(prevArm!=="B"){ls.s("atlas_arm","B");fresh=prevArm!=="A"}}
 if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);var ps=document.getElementById("proStrip");if(ps)ps.parentNode.removeChild(ps);document.documentElement.setAttribute("data-twa","1")}
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
