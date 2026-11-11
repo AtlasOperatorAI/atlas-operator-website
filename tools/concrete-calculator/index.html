@@ -27,6 +27,13 @@ label{display:block;font-size:.82rem;color:var(--mut)}input,select{width:100%;ma
 .btn{display:inline-block;padding:11px 16px;border-radius:10px;border:0;background:var(--acc);color:#06101f;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
 .pro h2{margin:0 0 4px;font-size:1.2rem}.lock{opacity:.55}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .small{font-size:.82rem;color:var(--mut)}.ok{color:#7ee2a8}.hidden{display:none}
+.pro-strip{margin:8px 0 0;padding:8px 10px;background:#0a0e16;border:1px solid var(--line);border-radius:12px}
+.pro-strip>p{margin:0;line-height:1.35}
+.pro-strip .row{margin:6px 0 0}
+.pro-strip .btn{padding:8px 12px}
+.pro-strip .seller{margin-top:6px}
+html[data-twa] #proStrip{display:none!important}
+
 ul.jobs{list-style:none;padding:0;margin:8px 0 0}ul.jobs li{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:7px 0}
 details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
 footer{border-top:1px solid var(--line);margin-top:30px;padding:18px 0;color:var(--mut);font-size:.85rem}
@@ -62,6 +69,11 @@ html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 <div class="big"><b id="rbags">–</b><span id="rbl">80 lb bags</span></div>
 <div class="big"><b id="rcost">–</b><span id="rcl">estimated cost</span></div>
 </div>
+<div id="proStrip" class="pro-strip hidden" role="region" aria-label="Atlas Pro">
+<p>Save this job or print a branded PDF quote. Get Pro for all 4 calculators, US$39/yr.</p>
+<div class="row"><button class="btn" type="button" data-plan="bundle39">Get Pro, US$39/yr</button></div>
+<p class="small seller">Sold by Rest On Request LLC dba Atlas Operator AI.</p>
+</div>
 <p class="small" id="rm3"></p>
 </section>
 
@@ -79,8 +91,8 @@ html[data-twa] #pro,html[data-twa] .twa-hide{display:none!important}
 <div style="grid-column:1/-1"><button class="btn" type="submit">Unlock Pro free</button> <span class="small" id="mA"></span></div>
 </form></div>
 <div id="gateB" class="hidden">
-<p><b>$12 lifetime for this tool</b>, or <b>$39/yr for all 4 Atlas calculators</b>. Pay once, no subscription for the single tool. Secure checkout by Stripe.</p>
-<div class="row"><button class="btn" data-plan="lifetime12">$12 lifetime</button><button class="btn ghost" data-plan="bundle39">$39/yr all 4 calculators</button></div>
+<p><b>US$39/yr for all 4 Atlas calculators</b>, or <b>US$12 lifetime for this tool</b>. The single-tool price is a one-time payment, not a subscription. Secure checkout by Stripe.</p>
+<div class="row"><button class="btn" data-plan="bundle39">US$39/yr all 4 calculators</button><button class="btn ghost" data-plan="lifetime12">US$12 lifetime</button></div>
 <form id="fB" class="hidden" style="margin-top:12px">
 <p class="small">Checkout opens soon. Join the waitlist and we'll email you when it's ready.</p>
 <div class="f"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
@@ -147,21 +159,21 @@ function f(n,d){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimum
 function run(){var o={shape:shape,a:num("a"),b:num("b"),c:num("c"),qty:num("qty")||1,waste:parseFloat($("waste").value)||0,bagSize:+$("bag").value,pricePerYd:num("pyd"),pricePerBag:num("pbag")};
  var r=ConcreteCalc.calc(o);last={o:o,r:r};$("ryd").textContent=f(r.yd3,2);$("rft").textContent=f(r.ft3WithWaste,1);$("rbags").textContent=r.bags[o.bagSize].toLocaleString();$("rbl").textContent=o.bagSize+" lb bags";
  var c=r.readyMixCost||r.bagCost;$("rcost").textContent=c?"$"+f(c,2):"–";$("rcl").textContent=r.readyMixCost?"ready-mix cost":r.bagCost?"bag cost":"add a price for cost";
- $("rm3").textContent=f(r.m3,2)+" m³ · bags: "+r.bags[80]+" × 80 lb, "+r.bags[60]+" × 60 lb, "+r.bags[40]+" × 40 lb"}
+ $("rm3").textContent=f(r.m3,2)+" m³ · bags: "+r.bags[80]+" × 80 lb, "+r.bags[60]+" × 60 lb, "+r.bags[40]+" × 40 lb";var st=document.getElementById("proStrip");if(st){st.dataset.ready="1";st.classList.toggle("hidden",document.documentElement.getAttribute("data-unlocked")==="1")}}
 document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){shape=b.dataset.s;document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});var l=L[shape];$("la").textContent=l[0];$("lb").textContent=l[1];$("lc").textContent=l[2];$("wc").style.display=l[2]?"":"none";$("a").value=l[3][0];$("b").value=l[3][1];$("c").value=l[3][2];run()}});
 document.querySelectorAll("input,select").forEach(function(e){if(e.closest(".card")&&!e.closest("#pro"))e.addEventListener("input",run)});run();
-/* Pricing test: 50/50 arm stored in localStorage (not a cookie). */
+/* Web visitors always get paid arm B (stored in localStorage, not a cookie). TWA stays on free-registration arm A. */
 var ls={g:function(k){try{return localStorage.getItem(k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 /* Inside the Google Play app (TWA) nothing is sold: force the free-registration arm and hide paid options. */
 var TWA=false;try{TWA=/^android-app:\/\//.test(document.referrer)||new URLSearchParams(location.search).get("src")==="twa"||sessionStorage.getItem("atlas_twa")==="1";if(TWA)sessionStorage.setItem("atlas_twa","1")}catch(e){}
-var arm,fresh=false;if(TWA){arm="A"}else{arm=ls.g("atlas_arm");if(arm!=="A"&&arm!=="B"){arm="B";ls.s("atlas_arm",arm);fresh=true}}
-if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);document.documentElement.setAttribute("data-twa","1")}
+var arm,fresh=false;if(TWA){arm="A"}else{arm="B";if(ls.g("atlas_arm")!=="B"){ls.s("atlas_arm","B");fresh=true}}
+if(TWA){var gb=document.getElementById("gateB");if(gb)gb.parentNode.removeChild(gb);var pr=document.getElementById("pro");if(pr)pr.parentNode.removeChild(pr);var ps=document.getElementById("proStrip");if(ps)ps.parentNode.removeChild(ps);document.documentElement.setAttribute("data-twa","1")}
 function ev(type,extra){if(!window.atlasPost)return;var d=atlasUTM();d.tool=TOOL;d.type=type;d.arm=TWA?"T":arm;for(var k in extra)d[k]=extra[k];atlasPost("/event",d).catch(function(){})}
 if(TWA)return; /* app mode: free-only, no Pro UI or wording */
 function whenReady(fn){if(window.atlasPost)fn();else window.addEventListener("load",fn)}
 if(fresh)whenReady(function(){ev("arm_assigned")});
 var unlocked=ls.g("atlas_pro_"+TOOL)==="1"||ls.g("atlas_pro_all")==="1";
-function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);jobs()}
+function render(){$("gateA").classList.toggle("hidden",unlocked||arm!=="A");if($("gateB"))$("gateB").classList.toggle("hidden",unlocked||arm!=="B");$("proUI").classList.toggle("lock",!unlocked);document.documentElement.setAttribute("data-unlocked",unlocked?"1":"0");var st=$("proStrip");if(st)st.classList.toggle("hidden",st.dataset.ready!=="1"||unlocked);jobs()}
 function gate(){if(unlocked)return true;ev("pro_click");$("pro").scrollIntoView({behavior:"smooth"});return false}
 $("fA").onsubmit=function(e){e.preventDefault();var fd=new FormData(this),d=atlasUTM();d.tool=TOOL;d.arm=TWA?"T":arm;d.name=fd.get("name");d.business=fd.get("business");d.email=fd.get("email");d.phone=fd.get("phone");d.consent=!!fd.get("consent");$("mA").textContent="Saving…";
  atlasPost("/signup",d).then(function(r){if(!r.ok)throw 0;unlocked=true;ls.s("atlas_pro_"+TOOL,"1");$("mA").textContent="";render()}).catch(function(){$("mA").textContent="Couldn't save. Check your email and try again."})};
