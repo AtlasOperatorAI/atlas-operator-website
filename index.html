@@ -281,6 +281,7 @@
       <a class="hide-sm" href="#calculators">Calculators</a>
       <a class="hide-sm" href="#behind">Who's behind this</a>
       <a class="hide-sm" href="#custom">Custom</a>
+      <a class="hide-sm" href="/one-workflow/" data-ow="nav">One workflow, US$49</a>
       <a class="hide-sm" href="/about/">About</a>
       <a class="hide-sm" href="https://x.com/AtlasBuildsLive" rel="noopener">@AtlasBuildsLive</a>
       <a href="/go/cws/">Try Platícalo free</a>
@@ -496,12 +497,12 @@
         <h2>One boring workflow, US$49</h2>
         <p>One narrow automation, set up for you. Not a retainer.</p>
       </div>
-      <p>Examples: invoice reminders, or turning WhatsApp leads into a spreadsheet. Before we build, we agree in writing what done looks like.</p>
+      <p>Examples: an invoice reminder that goes out 3 days and again 7 days after the due date, or each new WhatsApp lead&#39;s name, number and first question copied into one Google Sheet. Before we build, we agree in writing what done looks like.</p>
       <div class="price-line" style="margin-top:12px">
         <span class="price">US$49</span>
         <span class="price-note">one time · checkout by Stripe · sold by Rest On Request LLC dba Atlas Operator AI</span>
       </div>
-      <p style="margin-top:14px"><a class="btn" href="/one-workflow/">See what&#39;s included</a></p>
+      <p style="margin-top:14px"><a class="btn" href="/one-workflow/" data-ow="section">See what&#39;s included</a></p>
     </div>
   </section>
 
@@ -555,5 +556,6 @@
   </div>
 </footer>
 <script src="/t.js" defer></script>
+<script>document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a[data-ow]"):null;if(!a||navigator.webdriver||!window.atlasPost)return;var d=atlasUTM();d.tool="one-workflow-home";d.type="pro_click";d.arm=a.getAttribute("data-ow")==="nav"?"nav":"sec";atlasPost("/event",d).catch(function(){})},true);</script>
 </body>
 </html>
