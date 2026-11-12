@@ -433,6 +433,7 @@
         <a class="btn" href="https://buy.stripe.com/5kQfZhee40Qn6Jfc3V6sw0a?client_reference_id=home" data-sprint="bundle39-home">Get Pro for all 4 calculators, US$39/yr</a>
         <a class="btn ghost" href="/tools/concrete-calculator/#pro">US$12 lifetime for one tool</a>
       </div>
+      <p class="price-note" style="margin-top:8px">US$39/yr renews every year until you cancel by email. Full refund on request within 14 days of any charge, including renewals (<a href="/terms-of-service.html#atlas-pro">Terms</a>). Sold by Rest On Request LLC dba Atlas Operator AI.</p>
 
     </div>
   </section>
@@ -557,5 +558,6 @@
 </footer>
 <script src="/t.js" defer></script>
 <script>document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a[data-ow]"):null;if(!a||navigator.webdriver||!window.atlasPost)return;var d=atlasUTM();d.tool="one-workflow-home";d.type="pro_click";d.arm=a.getAttribute("data-ow")==="nav"?"nav":"sec";atlasPost("/event",d).catch(function(){})},true);</script>
+<script>/* checkout_click for the homepage US$39/yr button (atlas-analytics /event; no cookies) */document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a[data-sprint='bundle39-home']"):null;if(!a||!window.atlasPost)return;var d=atlasUTM();d.tool="home";d.type="checkout_click";d.plan="bundle39";atlasPost("/event",d).catch(function(){})});</script>
 </body>
 </html>
