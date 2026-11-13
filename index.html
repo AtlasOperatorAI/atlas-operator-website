@@ -365,10 +365,9 @@
           <div class="body">
             <span class="tag gold">Shops</span>
             <h3>Gold Calculator</h3>
-            <p>For gold-buying shops. US$19/mo per shop, 14-day free trial. Try the live calculator, or start the shop trial now.</p>
+            <p>For gold-buying shops. Open the live calculator.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <a class="btn sm" href="/go/gold/">Open calculator</a>
-              <a class="btn sm" href="https://buy.stripe.com/9B628rc5W1Ur9Vr8RJ6sw0c?client_reference_id=home-gold" target="_blank" rel="noopener" data-sprint="gold-home" data-arm="card">Start 14-day free trial</a>
             </div>
           </div>
         </article>
@@ -465,23 +464,15 @@
     <div class="wrap split">
       <div>
         <div class="section-head" style="margin-bottom:8px">
-          <h2>A counter calculator with a clear monthly price.</h2>
-          <p>For gold-buying shops.</p>
-        </div>
-        <div class="price-line">
-          <span class="price">US$19/mo</span>
-          <span class="price-note">per shop · 14-day free trial</span>
+          <h2>A counter calculator for gold-buying shops.</h2>
         </div>
         <ul class="bullets">
           <li>Built for gold-buying shops at the counter.</li>
-          <li>Branded shop option available.</li>
-          <li>Free public version available.</li>
+          <li>Use it free in the browser.</li>
         </ul>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <a class="btn" href="https://buy.stripe.com/9B628rc5W1Ur9Vr8RJ6sw0c?client_reference_id=home-gold" target="_blank" rel="noopener" data-sprint="gold-home" data-arm="sec">Start 14-day free trial, then US$19/mo</a>
           <a class="btn" href="/go/gold/">Open Gold Calculator</a>
         </div>
-        <span class="price-note" style="display:block;margin-top:6px">checkout by Stripe · Shop plan subscriptions are sold by Rest On Request LLC dba Atlas Operator AI</span>
       </div>
       <div class="gold-duo">
         <figure>
@@ -546,7 +537,6 @@
   </div>
 </footer>
 <script src="/t.js" defer></script>
-<script>/* checkout_click for the homepage Gold trial buttons (atlas-analytics /event; no cookies) */document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a[data-sprint='gold-home']"):null;if(!a||!window.atlasPost)return;var d=atlasUTM();d.tool="home";d.type="checkout_click";d.plan="gold19";d.arm=a.getAttribute("data-arm")||"";atlasPost("/event",d).catch(function(){})});</script>
 <script>/* checkout_click for the homepage US$39/yr button (atlas-analytics /event; no cookies) */document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a[data-sprint='bundle39-home']"):null;if(!a||!window.atlasPost)return;var d=atlasUTM();d.tool="home";d.type="checkout_click";d.plan="bundle39";atlasPost("/event",d).catch(function(){})});</script>
 </body>
 </html>
