@@ -1,14 +1,44 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Thanks | Atlas Operator AI</title><style>body{font:17px/1.6 system-ui,sans-serif;background:#0b0d12;color:#e8ebf2;max-width:640px;margin:60px auto;padding:0 20px}a{color:#6ea8ff}</style></head><body><div id="pro" hidden><h1 id="ph">Confirming your purchase…</h1><p id="pm">One moment while we confirm your payment with Stripe.</p></div><div id="order"><h1>Thank you. Your order is in.</h1><p>Please email <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a> with your product URL, a short and a long description, your logo, categories and a contact email for directory verification. Your report arrives within 72 hours of receiving those details.</p><p><a href="/">Back home</a></p></div><script src="/t.js" defer></script>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thank you for your order | Atlas Operator AI</title><meta name="description" content="Thank you for your order. Stripe emails you the receipt. Here is what happens next.">
+<meta name="robots" content="noindex"><link rel="canonical" href="https://atlasoperator.ai/thank-you.html">
+<link rel="stylesheet" href="/assets/v4.css"></head><body>
+<a href="#main" style="position:absolute;left:-999px">Skip to content</a>
+<header><div class="wrap"><a class="brand" href="/">Atlas Operator AI</a><nav><a href="/#apps">Our apps</a><a href="/#custom">Custom apps</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header><main id="main">
+<section id="pro" class="band" hidden><div class="wrap">
+<p><span class="tag">Atlas Pro</span></p>
+<h1 id="ph">Confirming your purchase…</h1>
+<p class="lead" id="pm">One moment while we confirm your payment with Stripe.</p>
+</div></section>
+<section id="order"><div class="wrap">
+<h1 id="oh">Thank you for your order.</h1>
+<p class="lead">Stripe emails you the receipt at the address you entered at checkout.</p>
+<h2>What happens next</h2>
+<ul>
+<li><b>Atlas Pro (calculators):</b> Pro unlocks on this device and browser. If Pro is not unlocked yet, or you are using another device, email us with your receipt and we'll unlock it for you.</li>
+<li><b>Gold Calculator shop plan:</b> we'll email you within 1 business day to set up your shop's calculator.</li>
+<li><b>One boring workflow (US$49):</b> we will email you within 1 business day, using the email you entered at checkout, to agree on the one workflow and what done means. Then we set it up.</li>
+<li><b>Platícalo Pro:</b> Pro turns on by itself within a minute. <a href="/platicalo/gracias/">See the Platícalo Pro steps</a>.</li>
+<li><b>Anything else:</b> email us with your receipt and tell us what you bought.</li>
+</ul>
+</div></section>
+<section><div class="wrap">
+<h2>Questions about your order?</h2>
+<p>Send us an email and include your receipt.</p>
+<p><a class="btn" href="mailto:atlas.operator.ai@gmail.com?subject=My%20order">atlas.operator.ai@gmail.com</a> <a class="btn alt" href="/">Back home</a></p>
+</div></section>
+</main><footer><div class="wrap"><p><b>Rest On Request LLC dba Atlas Operator AI</b><br><a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a></p><p><a href="/privacy-policy.html">Privacy policy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a></p></div></footer><script src="/t.js" defer></script>
 <script>
-(function(){var sid=new URLSearchParams(location.search).get("session_id");if(!sid)return;
+/* Atlas Pro Payment Links redirect here with ?session_id={CHECKOUT_SESSION_ID}. Without a real session id, only the general order steps show. */
+(function(){var sid="";try{sid=(new URLSearchParams(location.search).get("session_id")||"").trim()}catch(e){}
+if(!/^cs_[A-Za-z0-9_]+$/.test(sid))return;
 var $=function(i){return document.getElementById(i)},NAMES={"concrete-calculator":"Concrete calculator","feet-inch-calculator":"Feet-inch calculator","area-calculator":"Area calculator","currency-calculator":"Currency calculator"};
-$("order").hidden=true;$("pro").hidden=false;
-function fail(m){$("ph").textContent="We couldn't confirm your purchase yet";$("pm").innerHTML=m+' If you were charged, email <a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a> and we\'ll unlock Pro for you.'}
+$("order").hidden=true;$("pro").hidden=false;document.title="Confirming your purchase | Atlas Operator AI";
+function fail(m){$("ph").textContent="We couldn't confirm your Pro purchase yet";$("pm").innerHTML=m+' If you were charged, email <a href="mailto:atlas.operator.ai@gmail.com?subject=Atlas%20Pro%20unlock">atlas.operator.ai@gmail.com</a> with your receipt and we\'ll unlock Pro for you.';$("oh").textContent="What to do next";$("order").hidden=false;document.title="Thank you for your order | Atlas Operator AI"}
 function go(n){fetch("https://atlas-analytics-production-f29e.up.railway.app/verify?session_id="+encodeURIComponent(sid),{credentials:"omit"}).then(function(r){return r.json()}).then(function(d){
- if(!d.ok){if(n<3&&d.error!=="invalid session"&&d.error!=="not a completed Atlas Pro purchase")return setTimeout(function(){go(n+1)},2000);return fail("Your payment couldn't be verified.")}
+ if(!d||!d.ok){if(n<3&&d&&d.error!=="invalid session"&&d.error!=="not a completed Atlas Pro purchase")return setTimeout(function(){go(n+1)},2000);return fail("Your payment couldn't be verified.")}
  try{if(d.plan==="bundle39")localStorage.setItem("atlas_pro_all","1");else if(d.tool)localStorage.setItem("atlas_pro_"+d.tool,"1")}catch(e){}
- var t=NAMES[d.tool]?d.tool:"";$("ph").textContent="You're in. Pro is unlocked.";
- $("pm").innerHTML=(d.plan==="bundle39"?"Pro is unlocked for all 4 Atlas calculators on this device and browser while your yearly plan is active.":"Pro is unlocked for the "+(NAMES[t]||"tool")+" on this device and browser, for life.")+(t?' <a href="/tools/'+t+'/#pro">Back to the '+NAMES[t]+' →</a>':' <a href="/#tools">Go to the tools →</a>')+'<br><small>Using another device? Email us with your receipt and we\'ll unlock it there too.</small>'
+ var t=NAMES[d.tool]?d.tool:"";$("ph").textContent="You're in. Pro is unlocked.";document.title="Pro is unlocked | Atlas Operator AI";
+ $("pm").innerHTML=(d.plan==="bundle39"?"Pro is unlocked for all 4 Atlas calculators on this device and browser while your yearly plan is active.":"Pro is unlocked for the "+(NAMES[t]||"tool")+" on this device and browser, for life.")+(t?' <a href="/tools/'+t+'/#pro">Back to the '+NAMES[t]+' →</a>':' <a href="/#calculators">Go to the calculators →</a>')+'<br><small>Stripe emails you the receipt. Using another device? Email us with your receipt and we\'ll unlock it there too.</small>'
 }).catch(function(){n<3?setTimeout(function(){go(n+1)},2000):fail("Network problem.")})}go(0)})();
 </script>
 </body></html>
