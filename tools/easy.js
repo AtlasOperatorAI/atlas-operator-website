@@ -65,7 +65,7 @@ ez.appendChild(res);var offer=d.getElementById("proStrip");if(offer){if(TWA){off
 /* More sheet: the original calculator card + links */
 var sh=el("div","ezsheet hidden");sh.id="ezsheet";sh.setAttribute("role","dialog");sh.setAttribute("aria-modal","true");sh.setAttribute("aria-labelledby","ezsh");
 sh.innerHTML='<div><div class="ezsh"><h2 id="ezsh">More options</h2><button class="ezx" type="button" data-close>Done</button></div>'+
- (C.proText?'<a class="ezmi webonly" id="gopro" href="#pro" data-close style="margin:0 0 10px">'+C.proText+'</a>':'')+'<div id="ezslot"></div><a class="ezmi" href="#guide" data-close>📖 Guide &amp; FAQ<small>How the math works, tables and tips</small></a><a class="ezmi" href="/#tools">🧰 All tools</a></div>';
+ (C.proText?'<a class="ezmi webonly" id="gopro" href="#pro" data-close style="margin:0 0 10px">'+C.proText+'</a>':'')+'<div id="ezslot"></div><a class="ezmi" href="#guide" data-close>📖 Guide &amp; FAQ<small>How the math works, tables and tips</small></a><a class="ezmi" href="/#calculators">🧰 All tools</a></div>';
 d.body.appendChild(sh);$("#ezslot").appendChild(card);
 if(TWA){d.documentElement.setAttribute("data-twa","1");sh.querySelectorAll(".webonly").forEach(function(e){e.parentNode.removeChild(e)})}
 function openS(){sh.classList.remove("hidden");d.body.style.overflow="hidden";if(C.onMore)C.onMore()}
