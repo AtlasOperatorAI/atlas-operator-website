@@ -1,0 +1,36 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cancelar o administrar Platícalo Pro / Cancel or manage Platícalo Pro | Atlas Operator AI</title>
+<meta name="robots" content="noindex"><link rel="canonical" href="https://atlasoperator.ai/platicalo/cancel/">
+<!--
+  PORTAL_LOGIN_URL: the ONE place on this site that holds the Stripe customer-portal login link.
+  Every "cancel / manage Pro" link on the site points to /platicalo/cancel/ (this page), which forwards here.
+  Ops: replace the placeholder below with the live link from Stripe Dashboard > Settings > Billing > Customer portal >
+  "Login link" (https://billing.stripe.com/p/login/...). Change only the value inside the quotes on the next line.
+-->
+<script>var PORTAL_LOGIN_URL = 'https://billing.stripe.com/p/login/REPLACE_WITH_PORTAL_LOGIN_ID';</script>
+<link rel="stylesheet" href="/assets/v4.css"></head><body>
+<a href="#main" style="position:absolute;left:-999px">Skip to content</a>
+<header><div class="wrap"><a class="brand" href="/">Atlas Operator AI</a><nav><a href="/#work">Our apps</a><a href="/#custom">Custom apps</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header><main id="main">
+<section><div class="wrap">
+<h1>Cancelar o administrar Platícalo Pro</h1>
+<p class="lead" id="go-es">Te llevamos al portal de clientes de Stripe. Inicia sesión con el correo de tu cuenta.</p>
+<p><a class="btn" id="portal" href="mailto:atlas.operator.ai@gmail.com?subject=Cancel%20Plat%C3%ADcalo%20Pro">Abrir el portal de Stripe / Open the Stripe portal</a></p>
+<p>Si el portal no abre, escribe a <a href="mailto:atlas.operator.ai@gmail.com?subject=Cancel%20Plat%C3%ADcalo%20Pro">atlas.operator.ai@gmail.com</a> desde el correo de tu cuenta y lo cancelamos en un máximo de 1 día hábil. Pro sigue activo hasta el final del periodo que ya pagaste.</p>
+</div></section>
+<section class="band"><div class="wrap" lang="en">
+<h2>Cancel or manage Platícalo Pro</h2>
+<p class="lead">We're taking you to Stripe's customer portal. Sign in with your account email.</p>
+<p>If the portal doesn't open, email <a href="mailto:atlas.operator.ai@gmail.com?subject=Cancel%20Plat%C3%ADcalo%20Pro">atlas.operator.ai@gmail.com</a> from your account email and we cancel it within 1 business day. Pro stays on until the end of the period you paid for.</p>
+<p class="small">Platícalo is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.</p>
+</div></section>
+</main><footer><div class="wrap"><p><b>Rest On Request LLC dba Atlas Operator AI</b><br><a href="mailto:atlas.operator.ai@gmail.com">atlas.operator.ai@gmail.com</a></p><p><a href="/privacy-policy.html">Privacy policy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/affiliate-disclosure/">Affiliate disclosure</a></p></div></footer>
+<script>
+// Forward only once Ops has filled in the real link; with the placeholder, the email fallback stays.
+(function () {
+  var ok = /^https:\/\/billing\.stripe\.com\/p\/login\/[A-Za-z0-9_]+$/.test(PORTAL_LOGIN_URL) && PORTAL_LOGIN_URL.indexOf('REPLACE_WITH') < 0;
+  if (!ok) { document.getElementById('go-es').textContent = 'El portal todavía no está disponible. Escríbenos por correo (abajo).'; return; }
+  document.getElementById('portal').href = PORTAL_LOGIN_URL;
+  location.replace(PORTAL_LOGIN_URL);
+})();
+</script>
+<script src="/t.js" defer></script></body></html>
