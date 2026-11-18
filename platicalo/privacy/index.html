@@ -5,15 +5,15 @@
 <header><div class="wrap"><a class="brand" href="/">Atlas Operator AI</a><nav><a href="/#work">Our apps</a><a href="/#custom">Custom apps</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header><main id="main">
 <section><div class="wrap">
 <h1>Platícalo privacy policy</h1>
-<p><b>Effective date: October 23, 2026</b> (previous version: October 22, 2026)</p>
+<p><b>Effective date: November 18, 2026</b> (previous version: October 23, 2026)</p>
 <p>This policy covers the Platícalo browser extension and the server it uses. Platícalo is made by Rest On Request LLC dba Atlas Operator AI ("we", "us"). Platícalo has a free allowance and an optional paid plan (Platícalo Pro). For our website, see the <a href="/privacy-policy.html">Atlas Operator AI privacy policy</a>.</p>
 
 <h2>What Platícalo does</h2>
-<p>Platícalo has one purpose: to translate chat messages between Spanish and English on web.whatsapp.com, when you ask it to. With a confirmed email you get 30 free translations in total. Platícalo Pro (US$2.99 a month or US$29 a year, plus any tax) allows up to 1,500 a day.</p>
+<p>Platícalo has one purpose: to translate chat messages between Spanish and English on web.whatsapp.com, when you ask it to. You get 30 free translations in total: the first 5 need no email, and you confirm your email to use the other 25. Platícalo Pro (US$2.99 a month or US$29 a year, plus any tax) allows up to 500 a day.</p>
 
 <h2>You agree first</h2>
 <p>The first time you use Platícalo, a one-time consent screen explains what is sent and where. Nothing is sent, no anonymous ID is created, and no email is asked for, until you agree.</p>
-<p><b>In short:</b> We never log message text or save it to disk. Translations stay in server memory for up to 24 hours, then are deleted. Your IP address is used only for rate limiting: kept in server memory, deleted within about 2 minutes, never logged (for the sign-up limit, kept only as a scrambled code for up to about 2 hours). Your email is used only to send you a sign-in code and for your account and billing.</p>
+<p><b>In short:</b> We never log message text or save it to disk. Translations stay in server memory for up to 24 hours, then are deleted. Your IP address is used only for rate limiting: kept in server memory, deleted within about 2 minutes, never logged (for the sign-up and free-try limits, kept only as a scrambled code for up to about 2 hours). Your email is used only to send you a sign-in code and for your account and billing.</p>
 
 <h2>Message text</h2>
 <ul class="big">
@@ -24,11 +24,11 @@
 </ul>
 
 <h2>IP address</h2>
-<p>Your IP address is used only for rate limiting, to prevent abuse. For the per-minute limit it is kept in server memory, and old entries are deleted every minute, so it is gone within about 2 minutes. For the sign-up limit (how many codes and new accounts one connection can request per hour), we keep only a scrambled code of the IP address (an HMAC-SHA-256 hash with a secret key), not the address itself, in server memory for up to about 2 hours. Neither is ever logged or written to disk.</p>
+<p>Your IP address is used only for rate limiting, to prevent abuse. For the per-minute limit it is kept in server memory, and old entries are deleted every minute, so it is gone within about 2 minutes. For the sign-up and free-try limits (how many codes, new accounts, new installs and translations without an email one connection can use per hour), we keep only a scrambled code of the IP address (an HMAC-SHA-256 hash with a secret key), not the address itself, in server memory for up to about 2 hours. Neither is ever logged or written to disk.</p>
 
 <h2>Email address and sign-in code</h2>
 <ul class="big">
-<li><b>Why:</b> to get the 30 free translations, you enter your email. We email you a 6-digit code to confirm the address is yours. Your free translations and any Pro plan are attached to your account only after you enter the right code. Each email gets the free 30 only once.</li>
+<li><b>Why:</b> your first 5 translations need no email. To get the other 25 free translations, you enter your email. We email you a 6-digit code to confirm the address is yours. The rest of your free translations and any Pro plan are attached to your account only after you enter the right code. Each email gets the free 30 only once.</li>
 <li><b>The code:</b> it works for 10 minutes and allows 5 tries. We store it only as a scrambled value (an HMAC-SHA-256 hash), in server memory, never on disk, and delete it when it is used, when it expires, or when the server restarts.</li>
 <li><b>The email address:</b> stored in our account database (below) for as long as you have an account. We use it only to send sign-in codes, to link your Pro plan, and to answer you if you write to us. We never send marketing email and never sell or share it.</li>
 <li><b>Sending:</b> the code email is sent by Resend (our email provider). It is plain text with no images, links or tracking. Resend keeps a record of the email (address, subject and text, which includes the code) for up to 30 days to run its service.</li>
