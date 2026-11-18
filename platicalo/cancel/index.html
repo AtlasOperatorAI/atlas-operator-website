@@ -19,7 +19,7 @@
 </div></section>
 <section class="band"><div class="wrap" lang="en">
 <h2>Cancel or manage Platícalo Pro</h2>
-<p class="lead">We're taking you to Stripe's customer portal. Sign in with your account email.</p>
+<p class="lead" id="go-en">We're taking you to Stripe's customer portal. Sign in with your account email.</p>
 <p>If the portal doesn't open, email <a href="mailto:atlas.operator.ai@gmail.com?subject=Cancel%20Plat%C3%ADcalo%20Pro">atlas.operator.ai@gmail.com</a> from your account email and we cancel it within 1 business day. Pro stays on until the end of the period you paid for.</p>
 <p class="small">Platícalo is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.</p>
 </div></section>
@@ -28,7 +28,7 @@
 // Forward only once Ops has filled in the real link; with the placeholder, the email fallback stays.
 (function () {
   var ok = /^https:\/\/billing\.stripe\.com\/p\/login\/[A-Za-z0-9_]+$/.test(PORTAL_LOGIN_URL) && PORTAL_LOGIN_URL.indexOf('REPLACE_WITH') < 0;
-  if (!ok) { document.getElementById('go-es').textContent = 'El portal todavía no está disponible. Escríbenos por correo (abajo).'; return; }
+  if (!ok) { document.getElementById('go-es').textContent = 'El portal todavía no está disponible. Escríbenos por correo (abajo).'; document.getElementById('go-en').textContent = 'The portal isn\u2019t available yet. Please email us (below).'; return; }
   document.getElementById('portal').href = PORTAL_LOGIN_URL;
   location.replace(PORTAL_LOGIN_URL);
 })();
