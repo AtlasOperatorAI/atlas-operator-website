@@ -8,8 +8,8 @@
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta property="og:type" content="website"><meta property="og:title" content="Easy Currency Calculator (no ads, works offline)"><meta property="og:description" content="Convert 150+ currencies with a travel mode, favorites and tip. Works offline. Free, no ads."><meta property="og:url" content="https://atlasoperator.ai/tools/currency-calculator/"><meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236ea8ff'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Easy Currency Calculator", "url": "https://atlasoperator.ai/tools/currency-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Simple currency converter with a travel mode, favorites, tip and offline last-known rates. No ads.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Currency Calculator", "item": "https://atlasoperator.ai/tools/currency-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open it once with a connection and the rates are saved on your device. Offline it uses those saved rates and shows the date of the rates it is using."}}, {"@type": "Question", "name": "How often are rates updated?", "acceptedAnswer": {"@type": "Answer", "text": "Live. While the calculator is open online it fetches fresh mid-market rates when you open it and about every minute after that, and shows the time of the last update. A few currencies with no live quote use the latest daily reference rate."}}, {"@type": "Question", "name": "Why is my bank's rate different?", "acceptedAnswer": {"@type": "Answer", "text": "These are mid-market reference rates. Banks, card networks and exchange booths add a margin or fee on top."}}, {"@type": "Question", "name": "How do I use travel mode?", "acceptedAnswer": {"@type": "Answer", "text": "Pick your home currency and the currency of the country you're visiting. Type a price you see and the home price appears in large type. Tap the flip button to convert the other way."}}, {"@type": "Question", "name": "What is the mid-market rate?", "acceptedAnswer": {"@type": "Answer", "text": "It's the midpoint between the buy and sell rates large banks trade at. It's a fair reference, but retail providers add a margin or fee on top."}}, {"@type": "Question", "name": "Should I pay in my home currency or the local currency abroad?", "acceptedAnswer": {"@type": "Answer", "text": "Usually the local currency. If the terminal converts to your home currency, its provider sets the rate, which often includes a margin."}}]}]}</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://latest.currency-api.pages.dev" crossorigin>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Easy Currency Calculator", "url": "https://atlasoperator.ai/tools/currency-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Simple currency converter with a travel mode, favorites, tip and offline last-known rates. No ads.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Atlas Operator AI", "url": "https://atlasoperator.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://atlasoperator.ai/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://atlasoperator.ai/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Currency Calculator", "item": "https://atlasoperator.ai/tools/currency-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open it once with a connection and the rates are saved on your device. Offline it uses those saved rates and shows the date of the rates it is using."}}, {"@type": "Question", "name": "How often are rates updated?", "acceptedAnswer": {"@type": "Answer", "text": "Once a day: these are daily reference rates. The converter checks for the newest daily rates when you open it, when you come back to it, every 5 minutes while it stays open, and when you tap ↻. The date of the rates and the time it last checked are shown right under the rate."}}, {"@type": "Question", "name": "Why is my bank's rate different?", "acceptedAnswer": {"@type": "Answer", "text": "These are mid-market reference rates. Banks, card networks and exchange booths add a margin or fee on top."}}, {"@type": "Question", "name": "How do I use travel mode?", "acceptedAnswer": {"@type": "Answer", "text": "Pick your home currency and the currency of the country you're visiting. Type a price you see and the home price appears in large type. Tap the flip button to convert the other way."}}, {"@type": "Question", "name": "What is the mid-market rate?", "acceptedAnswer": {"@type": "Answer", "text": "It's the midpoint between the buy and sell rates large banks trade at. It's a fair reference, but retail providers add a margin or fee on top."}}, {"@type": "Question", "name": "Should I pay in my home currency or the local currency abroad?", "acceptedAnswer": {"@type": "Answer", "text": "Usually the local currency. If the terminal converts to your home currency, its provider sets the rate, which often includes a margin."}}]}]}</script>
 <style>
 :root{--bg:#07090e;--card:#121826;--line:#222b3d;--fg:#eef1f7;--mut:#9aa4b8;--acc:#6ea8ff;--acc2:#a78bfa;--key:#151c2b}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
@@ -26,7 +26,8 @@ html[data-twa] #proStrip{display:none!important}
 .logo{display:flex;gap:8px;align-items:center;font-weight:800;color:var(--fg);text-decoration:none;font-size:.95rem}.logo i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
 h1{font-size:.95rem;margin:0;font-weight:700;color:var(--mut)}
 .menu{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:6px 14px;font:inherit;font-size:.9rem;cursor:pointer}
-.rate{text-align:center;font-size:1.05rem;font-weight:600;color:var(--acc);margin:6px 0 10px;min-height:1.6em}
+.rate{text-align:center;font-size:1.05rem;font-weight:600;color:var(--acc);margin:6px 0 0;min-height:1.6em}
+.fresh{display:flex;justify-content:center;align-items:center;gap:2px;font-size:.72rem;line-height:1.3;color:var(--mut);margin:0 0 6px;min-height:1.3em}.fresh span{min-width:0;text-align:center}.fresh .rbtn{flex:none;font-size:.95rem;line-height:1;padding:2px 6px}.fresh.warn{color:#f5c26b}.rbtn{background:none;border:0;padding:0 .3rem;color:var(--acc);font:inherit;cursor:pointer}
 .side{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;min-height:104px}
 .cur{display:flex;align-items:center;gap:10px;background:transparent;border:0;color:var(--fg);font:inherit;cursor:pointer;padding:4px;text-align:left;flex-shrink:0}
 .cur .fl{font-size:2.1rem;line-height:1}.cur b{display:block;font-size:1.35rem;line-height:1.1}.cur small{display:block;font-size:.72rem;color:var(--mut)}
@@ -71,6 +72,7 @@ html[data-twa] #pro,html[data-twa] .webonly{display:none!important}
 <div class="app">
 <header class="top"><a class="logo" href="/"><i></i><h1>Currency Converter</h1></a><button class="menu" id="more" type="button" aria-haspopup="dialog">☰ More</button></header>
 <div class="rate" id="rate" aria-live="polite">Loading rates…</div>
+<div class="fresh" id="fresh"><span id="freshT">Loading rates…</span><button type="button" class="rbtn" id="fxrefresh2" aria-label="Check for newer rates now">↻</button></div>
 <div class="side from"><button class="cur" id="pfrom" type="button"><span class="fl" id="ffrom"></span><span><b id="cfrom">USD</b><small>Tap to change</small></span></button><input class="num" id="amt" readonly inputmode="none" aria-label="Amount to convert" value="1"></div>
 <div class="mid"><button class="swap" id="swap" type="button" aria-label="Swap currencies" title="Swap">⇅</button></div>
 <div class="side to"><button class="cur" id="pto" type="button"><span class="fl" id="fto"></span><span><b id="cto">MXN</b><small>Tap to change</small></span></button><div class="num" id="outv" aria-live="polite">–</div></div>
@@ -85,7 +87,7 @@ html[data-twa] #pro,html[data-twa] .webonly{display:none!important}
 <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op bk" data-k="B" aria-label="Backspace">⌫</button>
 <button data-k="0" style="grid-column:span 2">0</button><button data-k=".">.</button>
 </div>
-<div class="foot"><p class="small"><span id="asof" aria-live="polite">Rates updated: loading…</span> <button type="button" id="fxrefresh" aria-label="Refresh rates now" style="background:none;border:0;padding:0 .25rem;color:inherit;font:inherit;text-decoration:underline;cursor:pointer">↻ Refresh</button></p><p class="small" style="font-size:.7rem">Live mid-market rates from Coinbase; daily fallback from fawazahmed0 currency-api (CC0) / Frankfurter (ECB). For information only, not for trading.</p></div>
+<div class="foot"><p class="small"><span id="asof" aria-live="polite">Loading rates…</span> <button type="button" class="rbtn" id="fxrefresh" aria-label="Check for newer rates now">↻ Refresh</button></p><p class="small" style="font-size:.7rem">Daily reference rates from fawazahmed0 currency-api (CC0) / Frankfurter (ECB). For information only, not for trading.</p></div>
 </div>
 
 <div class="sheet hidden" id="picker" role="dialog" aria-modal="true" aria-labelledby="pkh"><div>
@@ -159,21 +161,21 @@ html[data-twa] #pro,html[data-twa] .webonly{display:none!important}
 <h3>Budgeting a trip</h3>
 <p>Before a trip, convert a few everyday prices you expect to see, like a coffee, a taxi ride, a meal, and a night's lodging, so you can recognise a fair price at a glance. Then decide how you'll pay for each: card where it's widely accepted, cash for markets, small shops and tips. If your card charges a foreign transaction fee, add that percentage to the converted price to see what you'll really pay. A 3% fee on a 2,000-peso hotel bill is 60 pesos. When you return, leftover coins usually can't be exchanged, so spend them or keep them for your next visit.</p>
 <h3>Common mistakes</h3>
-<div class="tw"><table class="t"><tr><th>Mistake</th><th>Fix</th></tr><tr><td>Converting the wrong way (multiplying instead of dividing)</td><td>Use the ⇅ swap and read the big number</td></tr><tr><td>Assuming the screen rate is what you'll get</td><td>Expect a margin; compare offers against it</td></tr><tr><td>Accepting conversion at the terminal</td><td>Pay in local currency where possible</td></tr><tr><td>Using a stale rate</td><td>Check "Rates updated" on the converter</td></tr></table></div>
+<div class="tw"><table class="t"><tr><th>Mistake</th><th>Fix</th></tr><tr><td>Converting the wrong way (multiplying instead of dividing)</td><td>Use the ⇅ swap and read the big number</td></tr><tr><td>Assuming the screen rate is what you'll get</td><td>Expect a margin; compare offers against it</td></tr><tr><td>Accepting conversion at the terminal</td><td>Pay in local currency where possible</td></tr><tr><td>Using a stale rate</td><td>Check the rates date under the converter</td></tr></table></div>
 <p>More: <a href="/guides/usd-to-mxn-travel-guide/">USD to MXN travel guide</a>, <a href="/guides/tipping-in-mexico/">tipping in Mexico</a>.</p></section>
 <!-- AD SLOT "currency-calculator-guide": placeholder only. No ad code until an AdSense publisher ID is approved and a consent tool is in place. Renders nothing; removed in app mode. --><div class="ad-slot" data-slot="currency-calculator-guide" hidden></div>
 <section id="about"><h2>How it works</h2>
-<p>Type an amount on the keypad and the converted amount appears below it. Tap a currency to change it, tap ⇅ to swap. Rates are live mid-market rates, refreshed when you open the converter and about every minute while it stays open, quoted against the euro, so A to B is rate(B) ÷ rate(A) × amount. The latest rates are saved on your device, so the converter keeps working offline and shows when they were last updated.</p>
-<p>Rates come from the free <a href="https://github.com/fawazahmed0/exchange-api" rel="noopener">fawazahmed0 currency-api</a> (CC0), with <a href="https://frankfurter.dev" rel="noopener">Frankfurter</a> (European Central Bank reference rates) as a backup. Flags are standard emoji, drawn by your device's own emoji font. <b>For information only, not for trading.</b> Banks, cards and exchange booths add fees and spreads.</p>
+<p>Type an amount on the keypad and the converted amount appears below it. Tap a currency to change it, tap ⇅ to swap. Rates are daily mid-market reference rates quoted against the euro, so A to B is rate(B) ÷ rate(A) × amount. The latest rates are saved on your device, so the converter keeps working offline and shows the date of the rates and when it last checked.</p>
+<p>Rates come from the free <a href="https://github.com/fawazahmed0/exchange-api" rel="noopener">fawazahmed0 currency-api</a> (CC0), with <a href="https://frankfurter.dev" rel="noopener">Frankfurter</a> (European Central Bank reference rates) as a backup. Both publish daily reference rates. The converter asks two mirrors of currency-api at once, uses the newest file, and shows that file's date and the time it last checked right under the rate. Flags are standard emoji, drawn by your device's own emoji font. <b>For information only, not for trading.</b> Banks, cards and exchange booths add fees and spreads.</p>
 <h2>FAQ</h2>
-<details><summary>Does it work offline?</summary><p>Yes. Open it once with a connection and the rates are saved on your device. Offline it uses those saved rates and shows when they were last updated.</p></details>
-<details><summary>How often are rates updated?</summary><p>Live. When you open the converter online it fetches fresh mid-market rates, then refreshes about every minute while it stays open (or tap ↻ Refresh). The time of the last update is shown under the converter. A few currencies with no live quote use the latest daily reference rate.</p></details>
+<details><summary>Does it work offline?</summary><p>Yes. Open it once with a connection and the rates are saved on your device. Offline it uses those saved rates and shows the date of the rates and when it last checked.</p></details>
+<details><summary>How often are rates updated?</summary><p>Once a day: these are daily reference rates. The converter checks for the newest daily rates when you open it, when you come back to it, every 5 minutes while it stays open, and when you tap ↻. The date of the rates and the time it last checked are shown right under the rate.</p></details>
 <details><summary>Why is my bank's rate different?</summary><p>These are mid-market reference rates. Banks, card networks and exchange booths add a margin or fee on top.</p></details>
 <details><summary>Where are travel mode and tip?</summary><p>Tap ☰ More, then Travel &amp; tip. Set your home and trip currencies, see a quick price-check table, and add a tip to the amount on the main screen.</p></details>
 <details><summary>What is the mid-market rate?</summary><p>It's the midpoint between the buy and sell rates large banks trade at. It's a fair reference, but retail providers add a margin or fee on top.</p></details>
 <details><summary>Should I pay in my home currency or the local currency abroad?</summary><p>Usually the local currency. If the terminal converts to your home currency, its provider sets the rate, which often includes a margin.</p></details>
 </section>
-<footer>© 2026 AtlasOperator.ai, a Rest On Request LLC dba Atlas Operator AI company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/guides/">Guides</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · Rates: Coinbase (live), fawazahmed0 currency-api (CC0) / Frankfurter (ECB) (daily fallback). For information only, not for trading.</footer>
+<footer>© 2026 AtlasOperator.ai, a Rest On Request LLC dba Atlas Operator AI company · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a> · <a href="/guides/">Guides</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · Rates: fawazahmed0 currency-api (CC0) / Frankfurter (ECB). For information only, not for trading.</footer>
 </div>
 <script src="/t.js" defer></script>
 <script src="cur.js"></script>
@@ -196,10 +198,9 @@ function draw(){$("ffrom").textContent=CUR.flag(from);$("fto").textContent=CUR.f
  if(!R){$("outv").textContent="–";return}
  var v=CUR.convert(parseFloat(amt),from,to,R),t=fmt(v,to);$("outv").textContent=t;size($("outv"),t);
  $("rate").textContent="1 "+from+" = "+fr(CUR.rate(from,to,R))+" "+to;save();tripDraw()}
-function asof(){if(!meta){$("asof").textContent="No rates yet. Connect to the internet once to load them.";return}
- var t=new Date(meta.fetched||Date.parse(meta.date+"T12:00:00Z")),today=t.toDateString()===new Date().toDateString();
- var when=t.toLocaleString("en-US",today?{hour:"numeric",minute:"2-digit",second:"2-digit",timeZoneName:"short"}:{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZoneName:"short"});
- $("asof").textContent=(meta.offline?"Offline · using saved rates from ":"Rates updated ")+when+" · "+(meta.live?"live mid-market":"daily reference rates dated "+meta.date)}
+/* freshness: next to the rate (top) and in the footer. CUR.stamp may be missing if an old cur.js is cached; fall back to the date. */
+function asof(){var s=CUR.stamp?CUR.stamp(meta,!!busy):{top:busy?"Updating…":meta?"Rates dated "+meta.date:"No rates yet",foot:meta?"Rates dated "+meta.date:"No rates yet. Connect to the internet once to load them."};
+ $("freshT").textContent=s.top;$("asof").textContent=s.foot;$("fresh").classList.toggle("warn",!!(meta&&(meta.offline||meta.failed))&&!busy)}
 /* keypad: buttons + hardware keys; the amount field is readonly with inputmode=none so the system keyboard never opens */
 function press(k){amt=CUR.key(amt,k,fresh);fresh=false;draw()}
 document.querySelectorAll("#pad button").forEach(function(b){b.addEventListener("click",function(){press(b.dataset.k)})});
@@ -239,23 +240,22 @@ function tripDraw(){if(!R)return;var h=$("home").value,w=$("away").value,m=CUR.r
 $("usetrip").onclick=function(){from=$("away").value;to=$("home").value;fresh=true;close("trip");draw()};
 $("tipchips").innerHTML=[0,10,15,18,20].map(function(t){return '<button type="button" class="chipb" data-t="'+t+'">'+(t?t+"%":"No tip")+"</button>"}).join("");
 document.querySelectorAll("#tipchips button").forEach(function(b){b.onclick=function(){tipP=+b.dataset.t;tripDraw()}});
-function setRates(p,offline){R=p.rates;meta={date:p.date,src:p.src,srcName:p.srcName,fetched:p.fetched,live:!!p.live,offline:!!offline};if(!R[from])from="USD";if(!R[to])to="MXN";fillSel();draw();asof();window.__fx={rates:R,meta:meta}}
-var cached=null;try{cached=JSON.parse(ls.g(KEY)||"null")}catch(e){}
+function setRates(p,offline){R=p.rates;meta={date:p.date,src:p.src,srcName:p.srcName,fetched:p.fetched,offline:!!offline};if(!R[from])from="USD";if(!R[to])to="MXN";fillSel();draw();asof();window.__fx={rates:R,meta:meta}}
+var busy=null,cached=null;try{cached=JSON.parse(ls.g(KEY)||"null")}catch(e){}
 draw();if(cached&&cached.rates)setRates(cached,!navigator.onLine);else asof();
-/* live quotes: never from the HTTP cache; daily files: revalidate */
-function get(u,live){return fetch(u,{cache:live?"no-store":"no-cache",credentials:"omit"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})}
-/* Fetch fresh rates on open, on ↻, when the app comes back to the foreground, and every minute while visible. One request at a time. */
-var busy=null;
-function refresh(){if(busy)return busy;var L=CUR.loadLive||CUR.load;
- busy=L(get).then(function(p){var off=!navigator.onLine;if(off&&cached&&cached.fetched)p.fetched=cached.fetched;if(!off){ls.s(KEY,JSON.stringify(p));cached=p}setRates(p,off);return p}).catch(function(){if(R){meta.offline=true;asof()}else asof();return null}).then(function(p){busy=null;return p});
+function get(u){return fetch(u,{cache:"no-cache",credentials:"omit"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})}
+/* Check for the newest daily file on open, on ↻, when the page comes back to the foreground or online, and every 5 minutes while visible. One request at a time.
+   A failed check keeps the saved rates with their ORIGINAL check time and says so. */
+function refresh(){if(busy)return busy;
+ busy=Promise.resolve().then(function(){asof();return CUR.load(get)}).then(function(p){ls.s(KEY,JSON.stringify(p));cached=p;busy=null;setRates(p,false);return p},
+  function(){busy=null;if(R){meta.offline=!navigator.onLine;meta.failed=!meta.offline}asof();return null});
  return busy}
-function stale(){return CUR.stale?CUR.stale(meta):!meta||!meta.fetched||Date.now()-meta.fetched>=60000}
+function stale(){return CUR.stale?CUR.stale(meta):!meta||!meta.fetched||Date.now()-meta.fetched>=300000}
 function maybe(){if(document.visibilityState!=="hidden"&&stale())refresh()}
-window.__fxReady=refresh();
-window.__fxRefresh=refresh;
-setInterval(maybe,5000);
+window.__fxReady=refresh();window.__fxRefresh=refresh;
+setInterval(maybe,15000);
 document.addEventListener("visibilitychange",maybe);window.addEventListener("focus",maybe);window.addEventListener("online",refresh);
-$("fxrefresh").onclick=function(){refresh()};
+$("fxrefresh").onclick=function(){refresh()};$("fxrefresh2").onclick=function(){refresh()};
 window.__fxState=function(){return{from:from,to:to,amt:amt}};
 })();
 </script>
