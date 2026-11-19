@@ -6,16 +6,13 @@ var SOURCES=[
  {id:"fawaz-jsdelivr",name:"fawazahmed0 currency-api (jsDelivr)",url:"https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.min.json",kind:"fawaz"},
  {id:"fawaz-pages",name:"fawazahmed0 currency-api (Cloudflare Pages)",url:"https://latest.currency-api.pages.dev/v1/currencies/eur.min.json",kind:"fawaz"},
  {id:"frankfurter",name:"Frankfurter (ECB reference rates)",url:"https://api.frankfurter.dev/v1/latest?base=EUR",kind:"frank"}];
-/* Live mid rates: Coinbase public exchange-rates endpoint (no key, CORS *, Cache-Control: no-store, quotes move about every minute). */
-var LIVE={id:"coinbase",name:"Coinbase exchange rates (live)",url:"https://api.coinbase.com/v2/exchange-rates?currency=EUR",kind:"cb"};
-var TTL=60000;/* refetch when the shown rates are older than 1 minute */
-var MAXDEV=0.10;/* a live quote more than 10% away from the daily reference is treated as bad data and the daily rate is kept */
+/* Provider adapter: every source is {id,name,url,kind}; parse(kind,json) normalizes it. To swap providers, edit SOURCES and add a parse kind. */
+var TTL=300000;/* re-check for a newer daily file when the shown rates were checked more than 5 minutes ago */
 function ok(x){return typeof x==="number"&&isFinite(x)&&x>0}
 /* Normalize either source to {date, base:"EUR", rates:{USD:1.08,...}} with EUR=1, fiat only. */
 function parse(kind,j){var out={},src,date;
  if(!j||typeof j!=="object")return null;
  if(kind==="fawaz"){src=j.eur;date=j.date;if(!src)return null;for(var k in src){var K=k.toUpperCase();if(FIAT_SET[K]&&ok(src[k]))out[K]=src[k]}}
- else if(kind==="cb"){var d=j.data;if(!d||d.currency!=="EUR"||!d.rates)return null;src=d.rates;date=new Date().toISOString().slice(0,10);for(var k3 in src){var v=+src[k3];if(FIAT_SET[k3]&&ok(v))out[k3]=v}}
  else{src=j.rates;date=j.date;if(!src||j.base!=="EUR")return null;for(var k2 in src){if(FIAT_SET[k2]&&ok(src[k2]))out[k2]=src[k2]}}
  out.EUR=1;if(!/^\d{4}-\d{2}-\d{2}$/.test(date||"")||Object.keys(out).length<20)return null;
  return{date:date,base:"EUR",rates:out}}
@@ -23,25 +20,27 @@ function rate(from,to,R){if(!R||!ok(R[from])||!ok(R[to]))return NaN;return R[to]
 function convert(amt,from,to,R){amt=+amt;if(!isFinite(amt))return NaN;return amt*rate(from,to,R)}
 function tip(amt,pct){amt=+amt;pct=+pct;if(!isFinite(amt))return{tip:NaN,total:NaN};if(!isFinite(pct)||pct<0)pct=0;var t=amt*pct/100;return{tip:t,total:amt+t}}
 function decimals(code){return /^(JPY|KRW|VND|CLP|ISK|PYG|UGX|XAF|XOF|XPF|IDR|HUF|COP|KMF|GNF|RWF|BIF|DJF|VUV|LAK|MGA|UZS|IRR|LBP|SYP|MMK|SLE|SOS|TZS|KHR)$/.test(code)?0:2}
-/* Fetch the first source that answers with valid data. fetchFn(url) -> Promise<json>. skip: array of source ids to skip. */
-function load(fetchFn,skip){var i=0,errs=[];skip=skip||[];
- function next(){while(i<SOURCES.length&&skip.indexOf(SOURCES[i].id)>=0)i++;if(i>=SOURCES.length)return Promise.reject(new Error("all sources failed: "+errs.join("; ")));var s=SOURCES[i++];
-  return Promise.resolve().then(function(){return fetchFn(s.url)}).then(function(j){var p=parse(s.kind,j);if(!p)throw new Error("bad data");p.src=s.id;p.srcName=s.name;p.fetched=Date.now();return p}).catch(function(e){errs.push(s.id+": "+(e&&e.message||e));return next()})}
- return next()}
-/* Overlay live quotes on the daily set. daily/live: parsed {rates} or null. Keeps every currency the daily set has, replaces it with the live quote when that quote is sane. */
-function merge(daily,live,now){now=now||Date.now();
- if(!live&&!daily)return null;
- if(!live){daily.live=false;daily.liveCount=0;return daily}
- var out={},n=0,k;if(daily)for(k in daily.rates)out[k]=daily.rates[k];
- for(k in live.rates){var d=out[k],v=live.rates[k];if(k==="EUR")continue;if(daily&&ok(d)&&Math.abs(v/d-1)>MAXDEV)continue;out[k]=v;n++}
- out.EUR=1;
- return{date:new Date(now).toISOString().slice(0,10),base:"EUR",rates:out,src:LIVE.id,srcName:LIVE.name+(daily?" + "+daily.srcName+" for the rest":""),fetched:now,live:true,liveCount:n,dailyDate:daily?daily.date:null}}
-/* Live + daily in parallel; never rejects unless both fail. fetchFn(url, live) -> Promise<json>. */
-function loadLive(fetchFn,skip){skip=skip||[];
- var lv=skip.indexOf(LIVE.id)>=0?Promise.resolve(null):Promise.resolve().then(function(){return fetchFn(LIVE.url,true)}).then(function(j){return parse("cb",j)}).catch(function(){return null});
- var dl=load(function(u){return fetchFn(u,false)},skip).catch(function(){return null});
- return Promise.all([lv,dl]).then(function(a){var m=merge(a[1],a[0]);if(!m)throw new Error("all sources failed");return m})}
+/* Fetch one source -> parsed set or null. */
+function one(fetchFn,s,errs){return Promise.resolve().then(function(){return fetchFn(s.url)}).then(function(j){var p=parse(s.kind,j);if(!p)throw new Error("bad data");p.src=s.id;p.srcName=s.name;p.fetched=Date.now();return p}).catch(function(e){errs.push(s.id+": "+(e&&e.message||e));return null})}
+/* Ask both fawaz mirrors at once and keep the NEWEST dated file (a CDN edge can still hold yesterday's file for hours).
+   Ties go to the first listed. Frankfurter (ECB) is used only when both mirrors fail. fetchFn(url) -> Promise<json>. skip: source ids to skip. */
+function load(fetchFn,skip){var errs=[];skip=skip||[];
+ var live=SOURCES.filter(function(s){return skip.indexOf(s.id)<0});
+ var fz=live.filter(function(s){return s.kind==="fawaz"}),rest=live.filter(function(s){return s.kind!=="fawaz"});
+ return Promise.all(fz.map(function(s){return one(fetchFn,s,errs)})).then(function(a){var best=null;
+  a.forEach(function(p){if(p&&(!best||p.date>best.date))best=p});if(best)return best;
+  var i=0;function next(){if(i>=rest.length)return Promise.reject(new Error("all sources failed: "+errs.join("; ")));return one(fetchFn,rest[i++],errs).then(function(p){return p||next()})}
+  return next()})}
 function stale(meta,now){return !meta||!meta.fetched||((now||Date.now())-meta.fetched)>=TTL}
+/* Freshness text. meta {date, fetched, offline, failed} or null; busy = a refresh is running. Returns {top, foot}. Never says "live" or "updated <now>". */
+function clock(ms,now){var t=new Date(ms),n=new Date(now||Date.now()),o={hour:"numeric",minute:"2-digit"};if(t.toDateString()!==n.toDateString()){o.month="short";o.day="numeric"}return t.toLocaleString("en-US",o)}
+function stamp(meta,busy,now){if(!meta)return{top:busy?"Updating…":"No rates yet",foot:"No rates yet. Connect to the internet once to load them."};
+ var chk="(checked "+clock(meta.fetched||Date.parse(meta.date+"T12:00:00Z"),now)+")",tail="dated "+meta.date+" "+chk,d=day(meta.date,now),s="Daily reference rates "+tail,t="Daily rates dated "+d+" "+chk;
+ if(meta.offline){s="Offline · saved daily reference rates "+tail;t="Offline · saved "+d+" rates "+chk}
+ else if(meta.failed){s="Couldn't refresh · showing daily reference rates "+tail;t="Couldn't refresh · "+d+" rates "+chk}
+ return{top:busy?"Updating…":t,foot:s}}
+/* "2026-11-19" -> "Nov 19" (year added when it isn't the current year). Short form for the line under the rate. */
+function day(iso,now){var t=new Date(iso+"T12:00:00Z"),o={month:"short",day:"numeric",timeZone:"UTC"};if(isNaN(t))return iso;if(t.getUTCFullYear()!==new Date(now||Date.now()).getFullYear())o.year="numeric";return t.toLocaleDateString("en-US",o)}
 /* Pro trip budget: lines [{label,amount,cur}] -> totals in home currency */
 function budget(lines,home,R){var tot=0,bad=0,rows=(lines||[]).map(function(l){var v=convert(l.amount,l.cur,home,R);if(!isFinite(v)){bad++;return{label:l.label,amount:+l.amount,cur:l.cur,home:NaN}}tot+=v;return{label:l.label,amount:+l.amount,cur:l.cur,home:v}});return{rows:rows,total:tot,bad:bad}}
 function csv(b,home,meta){var q=function(s){s=String(s==null?"":s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
@@ -59,6 +58,6 @@ function key(s,k,fresh){s=String(s==null?"0":s);if(k==="C")return "0";if(k==="B"
  if(parts.length>1){if(parts[1].length>=6)return s;return s+k}
  if(parts[0].replace(/^0+/,"").length>=12)return s;return s==="0"?k:s+k}
 function show(s){s=String(s);var p=s.split("."),i=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");return p.length>1?i+"."+p[1]:i}
-var API={LIVE:LIVE,TTL:TTL,MAXDEV:MAXDEV,merge:merge,loadLive:loadLive,stale:stale,flag:flag,key:key,show:show,FIAT:FIAT,SOURCES:SOURCES,parse:parse,rate:rate,convert:convert,tip:tip,decimals:decimals,load:load,budget:budget,csv:csv};
+var API={TTL:TTL,stale:stale,stamp:stamp,clock:clock,flag:flag,key:key,show:show,FIAT:FIAT,SOURCES:SOURCES,parse:parse,rate:rate,convert:convert,tip:tip,decimals:decimals,load:load,budget:budget,csv:csv};
 if(typeof module!=="undefined"&&module.exports)module.exports=API;else root.CUR=API;
 })(this);
