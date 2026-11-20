@@ -1,3 +1,4 @@
+process.env.TZ=process.env.TZ||"America/Mexico_City";/* clock strings in the stamp tests are CT */
 const C=require(process.env.CUR_JS||require("path").join(__dirname,"../tools/currency-calculator/cur.js"));let f=0;const ok=(n,c)=>{console.log((c?"PASS":"FAIL")+" "+n);if(!c)f++};const near=(a,b,t=1e-9)=>Math.abs(a-b)<=t*Math.max(1,Math.abs(b));
 const fz={date:"2026-10-15",eur:{usd:1.1,gbp:0.85,jpy:170,btc:0.00001,eur:1,aud:1.6,cad:1.5,chf:.93,cny:7.5,czk:24,dkk:7.4,hkd:8.8,huf:360,idr:20000,ils:3.5,inr:100,isk:136,krw:1500,mxn:20,myr:4.6,nok:11,nzd:1.9,php:65,pln:4.2}};
 const p=C.parse("fawaz",fz);ok("fawaz parse: EUR base, uppercase, crypto dropped",p&&p.rates.EUR===1&&p.rates.USD===1.1&&!p.rates.BTC&&p.date==="2026-10-15");
@@ -56,7 +57,7 @@ ok("flags: USD US, MXN MX, EUR EU, XOF neutral-ish",C.flag("USD")==="\u{1F1FA}\u
  ok("applyFix: no FIX -> daily unchanged",C.applyFix(dset,null)===dset);
  ok("MXN_FIX source: keyless Frankfurter BANXICO provider URL on an existing host",C.MXN_FIX.url==="https://api.frankfurter.dev/v2/rates?base=USD&quotes=MXN&providers=BANXICO");
  calls=[];const mk2=(fail,fixBody)=>u=>{calls.push(u);if(fail.some(h=>u.includes(h)))return Promise.reject(new Error("blocked"));if(u.includes("providers=BANXICO"))return Promise.resolve(fixBody||[{date:fz.date,base:"USD",quote:"MXN",rate:19.0}]);if(u.includes("frankfurter"))return Promise.resolve(fr);return Promise.resolve(fz)};
- r=await C.loadAll(mk2([]));ok("loadAll: FIX fetched in parallel with both mirrors and applied",calls.length===3&&calls.some(u=>u.includes("BANXICO"))&&r.fix&&near(C.rate("USD","MXN",r.rates),19.0));
+ r=await C.loadAll(mk2([]));ok("loadAll: FIX fetched in parallel with both mirrors (and the hourly proxy) and applied",calls.length===4&&calls.some(u=>u===C.HOURLY.url)&&calls.some(u=>u.includes("BANXICO"))&&r.fix&&near(C.rate("USD","MXN",r.rates),19.0));
  calls=[];r=await C.loadAll(mk2(["BANXICO"]));ok("loadAll: FIX blocked -> plain daily set, no .fix",!r.fix&&near(C.rate("USD","MXN",r.rates),20/1.1));
  r=await C.loadAll(mk2([],{oops:1}));ok("loadAll: FIX garbage -> plain daily set",!r.fix);
  e=null;try{await C.loadAll(mk2(["jsdelivr","pages.dev","api.frankfurter.dev/v1"]))}catch(x){e=x}ok("loadAll: every daily source down -> rejects (FIX alone never shown)",!!e);
@@ -72,6 +73,40 @@ ok("flags: USD US, MXN MX, EUR EU, XOF neutral-ish",C.flag("USD")==="\u{1F1FA}\u
  st=C.stamp({date:"2026-11-19",fetched:now},false,now,{from:"USD",to:"MXN"});ok("stamp USD/MXN without FIX: plain daily",st.top==="Daily rates dated Nov 19 (checked 3:36 PM)"&&!/Banxico/.test(st.foot));
  const all2=[fm,{...fm,failed:true},{...fm,offline:true}].flatMap(x=>[C.stamp(x,false,now,{from:"USD",to:"MXN"}),C.stamp(x,false,now,{from:"EUR",to:"MXN"})]).flatMap(x=>[x.top,x.foot]).join(" | ");
  ok("FIX stamps never say 'live' or 'Rates updated'",!/live|updated/i.test(all2));
+ /* Hourly proxy first (fxRatesAPI via tools/currency-proxy) */
+ const T0=Date.parse("2026-11-20T13:05:00Z");const hourlyBody=(ageMin,over)=>{const r={};"EUR GBP JPY MXN CAD AUD CHF CNY INR BRL KRW SEK NOK DKK PLN ZAR SGD HKD NZD TRY THB".split(" ").forEach((c,i)=>r[c]=1+i/10);Object.assign(r,{EUR:1/1.1,MXN:19.07,GBP:0.86/1.1,JPY:171/1.1,CAD:1.52/1.1},over||{});return{base:"USD",rates:r,timestamp:Math.floor((T0-ageMin*60000)/1000),date:"x",fetched_at:"y",source:"fxRatesAPI"}};
+ let hh=C.parseHourly(hourlyBody(10));ok("parseHourly: per-USD rates, USD=1, provider time in ms",hh&&hh.rates.USD===1&&hh.rates.MXN===19.07&&hh.asOf===Math.floor((T0-600000)/1000)*1000);
+ ok("parseHourly: bad data -> null",C.parseHourly(null)===null&&C.parseHourly({base:"EUR",rates:{},timestamp:1})===null&&C.parseHourly({base:"USD",rates:{EUR:1},timestamp:1})===null&&C.parseHourly({...hourlyBody(1),timestamp:"x"})===null);
+ ok("HOURLY source: proxy URL first, key-free",/^https:\/\/[a-z0-9.-]+\/v1\/rates$/.test(C.HOURLY.url)&&!/key|token/i.test(C.HOURLY.url));
+ const dd=C.applyFix(Object.assign(C.parse("fawaz",Object.assign({},fz,{date:"2026-11-19"})),{src:"fawaz-jsdelivr",srcName:"fawazahmed0",fetched:5}),{date:"2026-11-19",rate:19.027});
+ let hx=C.applyHourly(dd,hh,T0);
+ ok("applyHourly (fresh): USD/MXN = hourly 19.07, EUR/USD = hourly, FIX dropped",near(C.rate("USD","MXN",hx.rates),19.07)&&near(C.rate("EUR","USD",hx.rates),1.1)&&!hx.fix&&hx.hourly.asOf===hh.asOf&&hx.hourly.codes.indexOf("MXN")>=0&&hx.fetched===T0);
+ ok("applyHourly: EUR stays 1; daily-only codes keep their daily USD cross",near(hx.rates.EUR,1)&&near(C.rate("USD","HUF",hx.rates),C.rate("USD","HUF",dd.rates))&&hx.hourly.codes.indexOf("HUF")<0);
+ ok("applyHourly: daily set not mutated",dd.fix&&!dd.hourly&&near(C.rate("USD","MXN",dd.rates),19.027));
+ ok("applyHourly: stale (>3h) -> daily set unchanged (FIX kept)",C.applyHourly(dd,C.parseHourly(hourlyBody(181)),T0)===dd&&!!C.applyHourly(dd,C.parseHourly(hourlyBody(179)),T0).hourly);
+ ok("applyHourly: future timestamp -> ignored",C.applyHourly(dd,C.parseHourly(hourlyBody(-30)),T0)===dd);
+ ok("applyHourly: >10% off daily on a check currency -> daily set unchanged",C.applyHourly(dd,C.parseHourly(hourlyBody(5,{MXN:22})),T0)===dd&&C.applyHourly(dd,C.parseHourly(hourlyBody(5,{EUR:1/1.3})),T0)===dd&&!!C.applyHourly(dd,C.parseHourly(hourlyBody(5,{MXN:20.5})),T0).hourly);
+ ok("applyHourly: no daily set -> hourly alone (EUR-based)",(()=>{const o=C.applyHourly(null,hh,T0);return o&&near(o.rates.EUR,1)&&near(C.rate("USD","MXN",o.rates),19.07)&&o.src===C.HOURLY.id&&o.date==="2026-11-20"})());
+ const mkH=(opts)=>u=>{calls.push(u);if((opts.fail||[]).some(h=>u.includes(h)))return Promise.reject(new Error("blocked"));if(u===C.HOURLY.url)return Promise.resolve(opts.hourly||hourlyBody(10));if(u.includes("providers=BANXICO"))return Promise.resolve([{date:fz.date,base:"USD",quote:"MXN",rate:18.5}]);if(u.includes("frankfurter"))return Promise.resolve(fr);return Promise.resolve(fz)};
+ calls=[];r=await C.loadAll(mkH({}),[],T0);ok("loadAll: proxy is called and wins when fresh",calls[calls.length-1]===C.HOURLY.url||calls.includes(C.HOURLY.url))||0;ok("loadAll proxy-first: hourly applied",r.hourly&&near(C.rate("USD","MXN",r.rates),19.07)&&!r.fix);
+ r=await C.loadAll(mkH({fail:["atlas-fx-proxy"]}),[],T0);ok("loadAll: proxy down -> daily chain + Banxico FIX, exactly as before",!r.hourly&&r.fix&&near(C.rate("USD","MXN",r.rates),18.5));
+ r=await C.loadAll(mkH({hourly:hourlyBody(200)}),[],T0);ok("loadAll: proxy stale (>3h) -> daily chain + FIX",!r.hourly&&r.fix);
+ r=await C.loadAll(mkH({hourly:hourlyBody(5,{EUR:0.5})}),[],T0);ok("loadAll: proxy >10% off daily -> daily chain + FIX",!r.hourly&&r.fix);
+ r=await C.loadAll(mkH({hourly:{error:"rates unavailable"}}),[],T0);ok("loadAll: proxy 503/garbage -> daily chain",!r.hourly&&r.fix);
+ r=await C.loadAll(mkH({fail:["jsdelivr","pages.dev","api.frankfurter.dev/v1"]}),[],T0);ok("loadAll: every daily source down but proxy fresh -> hourly alone",r.hourly&&r.src===C.HOURLY.id);
+ e=null;try{await C.loadAll(mkH({fail:["jsdelivr","pages.dev","api.frankfurter.dev/v1","atlas-fx-proxy"]}),[],T0)}catch(x){e=x}ok("loadAll: daily AND proxy down -> rejects",!!e);
+ r=await C.loadAll(mkH({}),["fxratesapi-hourly"],T0);ok("loadAll: skip list can turn the proxy off",!r.hourly);
+ const now2=T0;const hm={date:"2026-11-19",src:"fawaz-jsdelivr",fetched:T0,hourly:{asOf:Date.parse("2026-11-20T12:59:00Z"),codes:["USD","EUR","MXN","GBP"]}};
+ st=C.stamp(hm,false,now2,{from:"USD",to:"MXN"});ok("stamp hourly USD/MXN: '"+st.top+"' / '"+st.foot+"'",st.top==="Updated hourly, rates as of 6:59 AM (checked 7:05 AM)"&&st.foot==="Updated hourly, rates as of Nov 20, 6:59 AM (checked 7:05 AM) · fxRatesAPI · other currencies: daily reference rates dated 2026-11-19");
+ st=C.stamp(hm,false,now2,{from:"EUR",to:"AED"});ok("stamp: pair not in the hourly set -> daily label; footer still notes hourly: "+st.top,st.top==="Daily rates dated Nov 19 (checked 7:05 AM)"&&/Updated hourly, rates as of Nov 20, 6:59 AM · fxRatesAPI/.test(st.foot));
+ st=C.stamp({...hm,failed:true},false,now2,{from:"USD",to:"MXN"});ok("stamp hourly failed: "+st.top,st.top==="Couldn't refresh · hourly 6:59 AM (checked 7:05 AM)"&&st.foot.startsWith("Couldn't refresh · showing updated hourly"));
+ st=C.stamp({...hm,offline:true},false,now2,{from:"USD",to:"MXN"});ok("stamp hourly offline: "+st.top,st.top==="Offline · saved hourly 6:59 AM (checked 7:05 AM)");
+ st=C.stamp({...hm,src:"fxratesapi-hourly"},false,now2,{from:"USD",to:"MXN"});ok("stamp hourly-only set: no daily mention",st.foot==="Updated hourly, rates as of Nov 20, 6:59 AM (checked 7:05 AM) · fxRatesAPI");
+ st=C.stamp({...hm,hourly:{asOf:Date.parse("2026-11-19T23:30:00Z"),codes:["USD","MXN"]}},false,now2,{from:"USD",to:"MXN"});ok("stamp hourly from yesterday shows the date: "+st.top,st.top==="Updated hourly, rates as of Nov 19, 5:30 PM (checked 7:05 AM)");
+ st=C.stamp({...hm,offline:true,fetched:Date.parse("2026-11-20T05:59:00Z"),hourly:{asOf:Date.parse("2026-11-20T05:00:00Z"),codes:["USD","MXN"]}},false,now2+86400000,{from:"USD",to:"MXN"});ok("stamp hourly offline, saved yesterday: date shown once: "+st.top,st.top==="Offline · saved hourly Nov 19, 11:00 PM (checked 11:59 PM)");
+ ok("stamp hourly busy -> Updating…",C.stamp(hm,true,now2,{from:"USD",to:"MXN"}).top==="Updating…");
+ const all3=[hm,{...hm,failed:true},{...hm,offline:true}].flatMap(x=>[C.stamp(x,false,now2,{from:"USD",to:"MXN"}),C.stamp(x,false,now2,{from:"EUR",to:"AED"})]).flatMap(x=>[x.top,x.foot]).join(" | ");
+ ok("hourly stamps never say 'live' or 'Rates updated'",!/\blive\b|rates updated/i.test(all3));
  const sw2=require("fs").readFileSync(require("path").join(require("path").dirname(require.resolve(process.env.CUR_JS||require("path").join(__dirname,"../tools/currency-calculator/cur.js"))),"sw.js"),"utf8");
- ok("sw.js cache bumped to v8; api.frankfurter.dev still straight to network",/atlas-currency-calculator-v8/.test(sw2)&&/"api\.frankfurter\.dev"/.test(sw2));
+ ok("sw.js cache bumped to v9; rate hosts incl. the proxy go straight to network",/atlas-currency-calculator-v9/.test(sw2)&&/"api\.frankfurter\.dev"/.test(sw2)&&sw2.includes(JSON.stringify(new URL(C.HOURLY.url).hostname)));
  process.exit(f)})();
