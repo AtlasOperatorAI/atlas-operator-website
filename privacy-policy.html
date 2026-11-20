@@ -313,7 +313,7 @@
     <p class="eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
     <p class="effective">Effective Date: March 27, 2026 &nbsp;&bull;&nbsp; Atlas Operator AI &nbsp;&bull;&nbsp; atlasoperator.ai</p>
-    <p class="effective">Last updated: October 21, 2026</p>
+    <p class="effective">Last updated: November 20, 2026</p>
   </div>
 
   <div class="content-wrap">
@@ -436,7 +436,12 @@
         Because this analytics data cannot be linked to you, we cannot look it up or delete it for an individual.
       </p>
       <p>
-        <strong>Currency rates.</strong> The Currency Calculator downloads public exchange-rate files from Frankfurter
+        <strong>Currency rates.</strong> The Currency Calculator gets hourly exchange rates from our own rate server
+        (atlas-fx-proxy.up.railway.app, hosted on Railway), which fetches them from fxRatesAPI; your device does not contact
+        fxRatesAPI. The request to our rate server contains no personal data. Like any web request it receives your IP address
+        and browser details; the server keeps your IP address in memory for at most 10 minutes only to limit how often
+        rates can be requested, never writes it to a log or disk, and stores nothing else about you. Our host Railway may
+        keep standard request logs. The calculator also downloads public exchange-rate files from Frankfurter
         (api.frankfurter.dev), jsDelivr (cdn.jsdelivr.net) and Cloudflare Pages (currency-api.pages.dev). These requests
         contain no personal data from us, but like any web request those services receive your IP address and browser
         details under their own privacy policies.

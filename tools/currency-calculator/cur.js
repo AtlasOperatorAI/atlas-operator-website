@@ -9,6 +9,10 @@ var SOURCES=[
 /* Official USD/MXN: Banco de México FIX (SIE series SF43718), keyless through Frankfurter's provider filter. Daily, published around midday CDMX time. */
 var MXN_FIX={id:"banxico-fix",name:"Banco de México FIX (via Frankfurter)",url:"https://api.frankfurter.dev/v2/rates?base=USD&quotes=MXN&providers=BANXICO",kind:"fix"};
 var FIX_MAXDEV=0.10;/* a FIX more than 10% away from the daily USD/MXN is treated as bad data and ignored */
+/* Hourly rates, tried FIRST: fxRatesAPI through our own proxy (tools/currency-proxy, a Railway Function that holds the key and calls the API
+   at most once an hour). Used only when fresh (provider time within 3 hours) and within 10% of the daily rates; otherwise the daily chain below is shown. */
+var HOURLY={id:"fxratesapi-hourly",name:"fxRatesAPI hourly (via Atlas proxy)",url:"https://atlas-fx-proxy.up.railway.app/v1/rates",kind:"hourly"};
+var HOURLY_MAXAGE=3*3600000,HOURLY_MAXDEV=0.10,HOURLY_CHECK=["EUR","GBP","JPY","MXN","CAD"];
 /* Provider adapter: every source is {id,name,url,kind}; parse(kind,json) normalizes it. To swap providers, edit SOURCES and add a parse kind. */
 var TTL=300000;/* re-check for a newer daily file when the shown rates were checked more than 5 minutes ago */
 function ok(x){return typeof x==="number"&&isFinite(x)&&x>0}
@@ -28,9 +32,30 @@ function applyFix(p,fix){if(!p||!fix||!ok(fix.rate)||!ok(p.rates.USD)||!ok(p.rat
  var usdmxn=p.rates.MXN/p.rates.USD;if(Math.abs(fix.rate/usdmxn-1)>FIX_MAXDEV)return p;
  var out={},k;for(k in p)out[k]=p[k];out.rates={};for(k in p.rates)out.rates[k]=p.rates[k];out.rates.MXN=p.rates.USD*fix.rate;out.fix={date:fix.date,rate:fix.rate,src:MXN_FIX.id};return out}
 /* Daily set (load) and the Banxico FIX in parallel. The FIX never blocks or breaks the daily set. */
-function loadAll(fetchFn,skip){skip=skip||[];
- var fx=skip.indexOf(MXN_FIX.id)>=0?Promise.resolve(null):Promise.resolve().then(function(){return fetchFn(MXN_FIX.url)}).then(parseFix,function(){return null});
- return Promise.all([load(fetchFn,skip),fx]).then(function(a){return applyFix(a[0],a[1])})}
+/* Hourly proxy, daily set (load) and Banxico FIX in parallel. Hourly wins when it passes applyHourly's checks; otherwise the daily set
+   (with the FIX for MXN) is returned exactly as before. Rejects only when neither hourly nor daily rates are available. */
+function opt(fetchFn,s,skip,parser){return !s.url||skip.indexOf(s.id)>=0?Promise.resolve(null):Promise.resolve().then(function(){return fetchFn(s.url)}).then(parser,function(){return null})}
+function loadAll(fetchFn,skip,now){skip=skip||[];var err=null;
+ var daily=load(fetchFn,skip).catch(function(e){err=e;return null});
+ return Promise.all([daily,opt(fetchFn,MXN_FIX,skip,parseFix),opt(fetchFn,HOURLY,skip,parseHourly)]).then(function(a){
+  var d=a[0]?applyFix(a[0],a[1]):null,out=applyHourly(d,a[2],now);if(!out)throw err||new Error("no rates");return out})}
+/* Proxy JSON {base:"USD",rates:{EUR:0.91,..},timestamp:<unix s>} -> {asOf:ms, rates (per USD, fiat only, USD=1)} or null */
+function parseHourly(j){if(!j||typeof j!=="object"||j.base!=="USD"||!j.rates||typeof j.rates!=="object"||!ok(j.timestamp))return null;
+ var r={USD:1},n=0;for(var k in j.rates){if(FIAT_SET[k]&&ok(j.rates[k])){r[k]=j.rates[k];n++}}if(n<20)return null;return{asOf:j.timestamp*1000,rates:r}}
+/* Put hourly rates over the daily set d (which may be null). Every currency is anchored on USD: hourly codes use hourly USD crosses, the rest keep
+   their daily USD cross. Ignored (d returned unchanged) when the hourly set is older than 3 hours, from the future, or more than 10% away
+   from the daily rate on any of HOURLY_CHECK. Returns a new set with .hourly {asOf, codes}; the Banxico FIX is dropped when MXN is hourly. */
+function applyHourly(d,h,now){now=now||Date.now();if(!h||now-h.asOf>HOURLY_MAXAGE||h.asOf>now+600000)return d;
+ var dr=d&&d.rates,k,i;
+ if(dr&&ok(dr.USD))for(i=0;i<HOURLY_CHECK.length;i++){k=HOURLY_CHECK[i];if(ok(h.rates[k])&&ok(dr[k])&&Math.abs(h.rates[k]/(dr[k]/dr.USD)-1)>HOURLY_MAXDEV)return d}
+ /* per-currency guard: any hourly code with a daily rate that is more than 10% off is dropped, so it keeps its daily cross and daily label */
+ var hr={};for(k in h.rates){if(k!=="USD"&&dr&&ok(dr.USD)&&ok(dr[k])&&Math.abs(h.rates[k]/(dr[k]/dr.USD)-1)>HOURLY_MAXDEV)continue;hr[k]=h.rates[k]}
+ var U=ok(hr.EUR)?1/hr.EUR:(dr&&ok(dr.USD)?dr.USD:0);if(!U)return d;
+ var out={},R={};if(d)for(k in d)out[k]=d[k];
+ if(dr&&ok(dr.USD))for(k in dr)if(ok(dr[k]))R[k]=U*dr[k]/dr.USD;
+ for(k in hr)R[k]=U*hr[k];
+ out.rates=R;out.base="EUR";if(!d){out.date=new Date(h.asOf).toISOString().slice(0,10);out.src=HOURLY.id;out.srcName=HOURLY.name}
+ out.hourly={asOf:h.asOf,codes:Object.keys(hr),src:HOURLY.id};out.fetched=now;if(hr.MXN)delete out.fix;return out}
 function rate(from,to,R){if(!R||!ok(R[from])||!ok(R[to]))return NaN;return R[to]/R[from]}
 function convert(amt,from,to,R){amt=+amt;if(!isFinite(amt))return NaN;return amt*rate(from,to,R)}
 function tip(amt,pct){amt=+amt;pct=+pct;if(!isFinite(amt))return{tip:NaN,total:NaN};if(!isFinite(pct)||pct<0)pct=0;var t=amt*pct/100;return{tip:t,total:amt+t}}
@@ -48,9 +73,19 @@ function load(fetchFn,skip){var errs=[];skip=skip||[];
   return next()})}
 function stale(meta,now){return !meta||!meta.fetched||((now||Date.now())-meta.fetched)>=TTL}
 /* Freshness text. meta {date, fetched, offline, failed} or null; busy = a refresh is running. Returns {top, foot}. Never says "live" or "updated <now>". */
-function clock(ms,now){var t=new Date(ms),n=new Date(now||Date.now()),o={hour:"numeric",minute:"2-digit"};if(t.toDateString()!==n.toDateString()){o.month="short";o.day="numeric"}return t.toLocaleString("en-US",o)}
+function clock(ms,now,full){var t=new Date(ms),n=new Date(now||Date.now()),o={hour:"numeric",minute:"2-digit"};if(full||t.toDateString()!==n.toDateString()){o.month="short";o.day="numeric"}return t.toLocaleString("en-US",o)}
 /* pair {from,to} (optional): when it involves MXN and the Banxico FIX was applied, the line under the rate names the FIX. */
 function stamp(meta,busy,now,pair){if(!meta)return{top:busy?"Updating…":"No rates yet",foot:"No rates yet. Connect to the internet once to load them."};
+ var hr=meta.hourly;if(hr&&hr.asOf){var codes=hr.codes||[],inH=!pair||(codes.indexOf(pair.from)>=0&&codes.indexOf(pair.to)>=0);
+  var hc="(checked "+clock(meta.fetched||hr.asOf,now)+")",at=clock(hr.asOf,now),hs="Updated hourly, rates as of "+clock(hr.asOf,now,1)+" "+hc+" · fxRatesAPI"+(meta.src===HOURLY.id?"":" · other currencies: daily reference rates dated "+meta.date);
+  if(inH){var ht="Updated hourly, rates as of "+at+" "+hc;
+   /* offline/failed: when the rates and the last check are on the same earlier day, the date is shown once so the line fits */
+   var fc=meta.fetched||hr.asOf,hc2=at.indexOf(",")>0&&new Date(fc).toDateString()===new Date(hr.asOf).toDateString()?"(checked "+new Date(fc).toLocaleString("en-US",{hour:"numeric",minute:"2-digit"})+")":hc;
+   var rest=hs.slice("Updated hourly, rates as of ".length);/* "<date, time> (checked …) · fxRatesAPI[ · other currencies…]" */
+   if(meta.offline){hs="Offline · saved hourly rates as of "+rest;ht="Offline · saved hourly "+at+" "+hc2}
+   else if(meta.failed){hs="Couldn't refresh · showing hourly rates as of "+rest;ht="Couldn't refresh · hourly "+at+" "+hc2}
+   return{top:busy?"Updating…":ht,foot:hs}}
+  var ds=stamp({date:meta.date,fetched:meta.fetched,offline:meta.offline,failed:meta.failed},busy,now,pair);ds.foot=ds.foot+" · "+hs.replace(/ \(checked [^)]*\)/,"");return ds}
  var chk="(checked "+clock(meta.fetched||Date.parse(meta.date+"T12:00:00Z"),now)+")",fx=meta.fix,d=day(meta.date,now),
   tail="dated "+meta.date+(fx?" · USD/MXN: Banxico FIX dated "+fx.date:"")+" "+chk,s="Daily reference rates "+tail,
   mx=fx&&pair&&(pair.from==="MXN"||pair.to==="MXN"),usd=mx&&(pair.from==="USD"||pair.to==="USD"),fd=fx?day(fx.date,now):"",
@@ -79,6 +114,6 @@ function key(s,k,fresh){s=String(s==null?"0":s);if(k==="C")return "0";if(k==="B"
  if(parts.length>1){if(parts[1].length>=6)return s;return s+k}
  if(parts[0].replace(/^0+/,"").length>=12)return s;return s==="0"?k:s+k}
 function show(s){s=String(s);var p=s.split("."),i=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");return p.length>1?i+"."+p[1]:i}
-var API={MXN_FIX:MXN_FIX,parseFix:parseFix,applyFix:applyFix,loadAll:loadAll,TTL:TTL,stale:stale,stamp:stamp,clock:clock,flag:flag,key:key,show:show,FIAT:FIAT,SOURCES:SOURCES,parse:parse,rate:rate,convert:convert,tip:tip,decimals:decimals,load:load,budget:budget,csv:csv};
+var API={HOURLY:HOURLY,parseHourly:parseHourly,applyHourly:applyHourly,MXN_FIX:MXN_FIX,parseFix:parseFix,applyFix:applyFix,loadAll:loadAll,TTL:TTL,stale:stale,stamp:stamp,clock:clock,flag:flag,key:key,show:show,FIAT:FIAT,SOURCES:SOURCES,parse:parse,rate:rate,convert:convert,tip:tip,decimals:decimals,load:load,budget:budget,csv:csv};
 if(typeof module!=="undefined"&&module.exports)module.exports=API;else root.CUR=API;
 })(this);
