@@ -87,6 +87,19 @@ ok("flags: USD US, MXN MX, EUR EU, XOF neutral-ish",C.flag("USD")==="\u{1F1FA}\u
  ok("applyHourly: future timestamp -> ignored",C.applyHourly(dd,C.parseHourly(hourlyBody(-30)),T0)===dd);
  ok("applyHourly: >10% off daily on a check currency -> daily set unchanged",C.applyHourly(dd,C.parseHourly(hourlyBody(5,{MXN:22})),T0)===dd&&C.applyHourly(dd,C.parseHourly(hourlyBody(5,{EUR:1/1.3})),T0)===dd&&!!C.applyHourly(dd,C.parseHourly(hourlyBody(5,{MXN:20.5})),T0).hourly);
  ok("applyHourly: no daily set -> hourly alone (EUR-based)",(()=>{const o=C.applyHourly(null,hh,T0);return o&&near(o.rates.EUR,1)&&near(C.rate("USD","MXN",o.rates),19.07)&&o.src===C.HOURLY.id&&o.date==="2026-11-20"})());
+ /* r3: per-currency 10% guard (QG's doubled-ARS case) */
+ const dARS=Object.assign(C.parse("fawaz",{date:"2026-11-20",eur:Object.assign({},fz.eur,{ars:1700})}),{src:"fawaz-jsdelivr",srcName:"fawazahmed0",fetched:5});
+ const hARS=C.parseHourly(hourlyBody(10,{ARS:2*1700/1.1,ERN:15}));
+ const xA=C.applyHourly(dARS,hARS,T0);
+ ok("r3 per-currency guard: ARS at 2x daily is dropped -> USD/ARS = daily "+C.rate("USD","ARS",xA.rates).toFixed(2)+" (daily "+C.rate("USD","ARS",dARS.rates).toFixed(2)+"), not hourly",xA&&xA.hourly&&xA.hourly.codes.indexOf("ARS")<0&&near(C.rate("USD","ARS",xA.rates),C.rate("USD","ARS",dARS.rates)));
+ ok("r3 per-currency guard: the rest of the set is still hourly (USD/MXN 19.07)",xA.hourly.codes.indexOf("MXN")>=0&&near(C.rate("USD","MXN",xA.rates),19.07));
+ ok("r3 per-currency guard: a code with no daily rate (ERN) is accepted",xA.hourly.codes.indexOf("ERN")>=0&&near(C.rate("USD","ERN",xA.rates),15));
+ st=C.stamp({date:xA.date,src:xA.src,fetched:T0,hourly:{asOf:xA.hourly.asOf,codes:xA.hourly.codes}},false,T0,{from:"USD",to:"ARS"});
+ ok("r3 USD/ARS gets the daily label: "+st.top,/^Daily rates dated Nov 20 \(checked \d{1,2}:\d{2} [AP]M\)$/.test(st.top));
+ ok("r3 USD/MXN keeps the hourly label",/^Updated hourly, rates as of /.test(C.stamp({date:xA.date,src:xA.src,fetched:T0,hourly:{asOf:xA.hourly.asOf,codes:xA.hourly.codes}},false,T0,{from:"USD",to:"MXN"}).top));
+ const xB=C.applyHourly(dARS,C.parseHourly(hourlyBody(10,{ARS:1.08*1700/1.1})),T0);ok("r3 ARS within 10% (+8%) stays hourly",xB.hourly.codes.indexOf("ARS")>=0);
+ ok("r3 the 5-currency all-or-nothing check is kept (MXN +20% -> whole set daily)",C.applyHourly(dARS,C.parseHourly(hourlyBody(10,{MXN:19.07*1.2})),T0)===dARS);
+ ok("r3 dropping ARS leaves MXN hourly, so the Banxico FIX is not shown",!xA.fix);
  const mkH=(opts)=>u=>{calls.push(u);if((opts.fail||[]).some(h=>u.includes(h)))return Promise.reject(new Error("blocked"));if(u===C.HOURLY.url)return Promise.resolve(opts.hourly||hourlyBody(10));if(u.includes("providers=BANXICO"))return Promise.resolve([{date:fz.date,base:"USD",quote:"MXN",rate:18.5}]);if(u.includes("frankfurter"))return Promise.resolve(fr);return Promise.resolve(fz)};
  calls=[];r=await C.loadAll(mkH({}),[],T0);ok("loadAll: proxy is called and wins when fresh",calls[calls.length-1]===C.HOURLY.url||calls.includes(C.HOURLY.url))||0;ok("loadAll proxy-first: hourly applied",r.hourly&&near(C.rate("USD","MXN",r.rates),19.07)&&!r.fix);
  r=await C.loadAll(mkH({fail:["atlas-fx-proxy"]}),[],T0);ok("loadAll: proxy down -> daily chain + Banxico FIX, exactly as before",!r.hourly&&r.fix&&near(C.rate("USD","MXN",r.rates),18.5));

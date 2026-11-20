@@ -138,3 +138,24 @@ test("F3 X-Robots-Tag: noindex on every response (200, 403, 404, 405, 429, 503, 
   const r2 = rig({ mode: "down" }); rs.push(await r2.get()); expect(rs[rs.length - 1].status).toBe(503);
   for (const x of rs) expect(x.headers.get("x-robots-tag")).toBe("noindex");
 });
+/* r3: IP retention and X-Real-IP */
+test("r3 IP retention: 0 IPs held 10 min + 1 s after the last request (pruned on the next request of any kind, and by prune())", async () => {
+  const r = rig({ p: { ipLimit: 30 } });
+  for (const ip of ["198.51.100.11", "198.51.100.12", "198.51.100.13", "198.51.100.14", "198.51.100.15"]) await r.get(OK, "/v1/rates", "GET", ip);
+  expect(r.p._state().trackedIps).toBe(5);
+  r.tick(600_001); await r.get(null, "/health"); expect(r.p._state().trackedIps).toBe(0);
+  await r.get(OK, "/v1/rates", "GET", "198.51.100.16"); expect(r.p._state().trackedIps).toBe(1);
+  r.tick(600_001); r.p.prune(); expect(r.p._state().trackedIps).toBe(0); /* the 60 s timer calls prune() when idle */
+});
+test("r3 an IP seen at t0 is gone at t0+10m+1s after any request, while a newer IP is kept", async () => {
+  const r = rig({ p: { ipLimit: 30 } });
+  await r.get(OK, "/v1/rates", "GET", "192.0.2.1"); r.tick(300_000); await r.get(OK, "/v1/rates", "GET", "192.0.2.2");
+  r.tick(300_001); await r.get(OK, "/v1/rates", "GET", "192.0.2.2"); expect(r.p._state().trackedIps).toBe(1);
+});
+test("r3 client IP comes from X-Real-IP (Railway edge); a spoofed X-Forwarded-For does not dodge the limit", async () => {
+  const r = rig({ p: { ipLimit: 30 } });
+  const req = (xff: string) => r.p.fetch(new Request("https://px.test/v1/rates", { headers: { origin: OK, "x-real-ip": "203.0.113.99", "x-forwarded-for": xff } }));
+  for (let i = 0; i < 30; i++) expect((await req("10.9.9." + i)).status).toBe(200);
+  expect((await req("10.9.9.200")).status).toBe(429);
+  expect(r.calls.length).toBe(1); /* the limiter never costs fxRatesAPI calls */
+});

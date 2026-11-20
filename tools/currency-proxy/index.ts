@@ -10,7 +10,8 @@
    a numeric X-RateLimit-Reset) or, if it reports none, the next UTC midnight; then it tries once and backs off again.
    State is in memory (no volume): restarts clear it, so the deploy requires 1 replica, sleep off and restart policy
    ON_FAILURE with max 10 retries (README "Post-deploy checks").
-   Per-IP limit: 30 requests per 10 minutes per client IP on /v1/rates (in memory, IPs never logged) -> 429.
+   Per-IP limit: 30 requests per 10 minutes per client IP (X-Real-IP) on /v1/rates -> 429. Kept in memory only, expired
+   entries pruned on every request and every 60 s, IPs never logged.
    Every response carries X-Robots-Tag: noindex.
 
    GET /v1/rates -> {base:"USD", rates:{EUR:..}, timestamp:<provider unix s>, date:<provider ISO>, fetched_at:<ISO>, stale, source, attribution}
@@ -44,10 +45,12 @@ export function makeProxy(o: Opts = {}) {
   let snap: Snap | null = null, lastAttempt = -Infinity, inflight: Promise<void> | null = null, blockedUntil = 0;
   const ipLimit = o.ipLimit ?? 30, ipWindow = o.ipWindowMs ?? 600_000;
   const hitsByIp = new Map<string, { start: number; n: number }>(); /* in memory only; never logged */
+  /* drop every entry older than the window; runs on every request and on a 60 s timer, so no IP is held longer than 10 minutes (+ at most 60 s when idle) */
+  function prune() { const t = now(); for (const [k, v] of hitsByIp) if (t - v.start >= ipWindow) hitsByIp.delete(k); }
   function limited(req: Request) {
-    const ip = ((req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || req.headers.get("x-real-ip") || "unknown").slice(0, 64);
+    /* Railway's edge sets X-Real-IP to the client address (overwriting any client value); X-Forwarded-For only as a fallback */
+    const ip = ((req.headers.get("x-real-ip") ?? "").trim() || (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown").slice(0, 64);
     const t = now();
-    if (hitsByIp.size > 10_000) for (const [k, v] of hitsByIp) if (t - v.start >= ipWindow) hitsByIp.delete(k);
     const e = hitsByIp.get(ip);
     if (!e || t - e.start >= ipWindow) { hitsByIp.set(ip, { start: t, n: 1 }); return 0; }
     e.n++;
@@ -93,6 +96,7 @@ export function makeProxy(o: Opts = {}) {
   const json = (body: unknown, status: number, h: Headers) => { h.set("Content-Type", "application/json"); h.set("X-Content-Type-Options", "nosniff"); return new Response(JSON.stringify(body), { status, headers: h }); };
 
   async function handle(req: Request): Promise<Response> {
+    prune();
     const u = new URL(req.url), h = new Headers();
     h.set("X-Robots-Tag", "noindex");
     if (u.pathname === "/health") { h.set("Cache-Control", "no-store"); return json({ ok: true, has_rates: !!snap, upstream_blocked_until: blockedUntil > now() ? new Date(blockedUntil).toISOString() : null, age_s: snap ? Math.round((now() - Date.parse(snap.fetched_at)) / 1000) : null, upstream_calls_since_start: calls }, 200, h); }
@@ -107,12 +111,13 @@ export function makeProxy(o: Opts = {}) {
     h.set("Cache-Control", "private, max-age=300");
     return json({ ...snap, stale: now() - snap.timestamp * 1000 > 3 * HOUR, source: "fxRatesAPI", attribution: "https://fxratesapi.com" }, 200, h);
   }
-  return { fetch: handle, _state: () => ({ calls, today, hasSnap: !!snap, lastAttempt, blockedUntil, trackedIps: hitsByIp.size }) };
+  return { fetch: handle, prune, _state: () => ({ calls, today, hasSnap: !!snap, lastAttempt, blockedUntil, trackedIps: hitsByIp.size }) };
 }
 
 if (!Bun.env.FXPROXY_NO_SERVE) {
   const p = makeProxy({ key: Bun.env.FXRATESAPI_KEY, origins: (Bun.env.ALLOWED_ORIGINS ?? "https://atlasoperator.ai").split(",").map(s => s.trim()).filter(Boolean), upstream: Bun.env.FX_UPSTREAM || undefined });
   if (!Bun.env.FXRATESAPI_KEY) console.log("FXRATESAPI_KEY is not set: /v1/rates will answer 503");
   Bun.serve({ port: Number(Bun.env.PORT ?? 3000), fetch: p.fetch });
+  setInterval(p.prune, 60_000); /* memory hygiene only (no upstream calls): expires idle IP entries */
   console.log("atlas currency proxy up");
 }

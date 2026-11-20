@@ -48,12 +48,14 @@ function parseHourly(j){if(!j||typeof j!=="object"||j.base!=="USD"||!j.rates||ty
 function applyHourly(d,h,now){now=now||Date.now();if(!h||now-h.asOf>HOURLY_MAXAGE||h.asOf>now+600000)return d;
  var dr=d&&d.rates,k,i;
  if(dr&&ok(dr.USD))for(i=0;i<HOURLY_CHECK.length;i++){k=HOURLY_CHECK[i];if(ok(h.rates[k])&&ok(dr[k])&&Math.abs(h.rates[k]/(dr[k]/dr.USD)-1)>HOURLY_MAXDEV)return d}
- var U=ok(h.rates.EUR)?1/h.rates.EUR:(dr&&ok(dr.USD)?dr.USD:0);if(!U)return d;
+ /* per-currency guard: any hourly code with a daily rate that is more than 10% off is dropped, so it keeps its daily cross and daily label */
+ var hr={};for(k in h.rates){if(k!=="USD"&&dr&&ok(dr.USD)&&ok(dr[k])&&Math.abs(h.rates[k]/(dr[k]/dr.USD)-1)>HOURLY_MAXDEV)continue;hr[k]=h.rates[k]}
+ var U=ok(hr.EUR)?1/hr.EUR:(dr&&ok(dr.USD)?dr.USD:0);if(!U)return d;
  var out={},R={};if(d)for(k in d)out[k]=d[k];
  if(dr&&ok(dr.USD))for(k in dr)if(ok(dr[k]))R[k]=U*dr[k]/dr.USD;
- for(k in h.rates)R[k]=U*h.rates[k];
+ for(k in hr)R[k]=U*hr[k];
  out.rates=R;out.base="EUR";if(!d){out.date=new Date(h.asOf).toISOString().slice(0,10);out.src=HOURLY.id;out.srcName=HOURLY.name}
- out.hourly={asOf:h.asOf,codes:Object.keys(h.rates),src:HOURLY.id};out.fetched=now;if(h.rates.MXN)delete out.fix;return out}
+ out.hourly={asOf:h.asOf,codes:Object.keys(hr),src:HOURLY.id};out.fetched=now;if(hr.MXN)delete out.fix;return out}
 function rate(from,to,R){if(!R||!ok(R[from])||!ok(R[to]))return NaN;return R[to]/R[from]}
 function convert(amt,from,to,R){amt=+amt;if(!isFinite(amt))return NaN;return amt*rate(from,to,R)}
 function tip(amt,pct){amt=+amt;pct=+pct;if(!isFinite(amt))return{tip:NaN,total:NaN};if(!isFinite(pct)||pct<0)pct=0;var t=amt*pct/100;return{tip:t,total:amt+t}}
