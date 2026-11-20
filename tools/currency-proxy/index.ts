@@ -57,7 +57,9 @@ export function makeProxy(o: Opts = {}) {
     return e.n > ipLimit ? Math.ceil((e.start + ipWindow - t) / 1000) : 0;
   }
   let day = "", today = 0, calls = 0;
-  const url = upstream + "?base=USD&resolution=1h&places=6&format=json&currencies=" + FIAT.filter(c => c !== "USD").join(",");
+  /* no currencies= list: fxRatesAPI rejects the whole request (400 invalid_currencies) if any listed code is unsupported,
+     so ask for all currencies and keep only the calculator's fiat codes locally (pull() filters by FIAT) */
+  const url = upstream + "?base=USD&resolution=1h&places=6&format=json";
 
   function due() {
     const t = now(), d = new Date(t).toISOString().slice(0, 10);

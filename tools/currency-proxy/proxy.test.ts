@@ -15,6 +15,8 @@ function rig(opts: any = {}) {
     if (mode === "429") return Response.json({ success: false, error: "too many requests" }, { status: 429 });
     if (mode === "429reset") return Response.json({ success: false }, { status: 429, headers: { "retry-after": "1800" } });
     if (mode === "quota") return Response.json({ success: false, error: "Your monthly usage limit has been reached" }, { status: 200 });
+    if (mode === "invalid") return Response.json({ success: false, error: "invalid_currencies", description: "The currencies parameter is not valid." }, { status: 400 });
+    if (mode === "extra") { const b: any = body(Math.floor(t / 1000) - 300); Object.assign(b.rates, { ADA: 3.7, ARB: 1.2, XAU: 0.0004, BTC: 0.00001, XPT: 0.001, ZMK: 9001.2, ARS: 1000 }); return Response.json(b); }
     if (mode === "quota403") return Response.json({ success: false, message: "Monthly quota exceeded" }, { status: 403 });
     return Response.json(body(Math.floor(t / 1000) - 300)); };
   /* per-IP limit off unless a test sets it (F3 tests below use the default 30/10 min) */
@@ -39,7 +41,7 @@ test("allowed Origin -> 200 {base, rates, timestamp, date, fetched_at}; CORS exa
 test("upstream gets the key only in the Authorization header (not the URL); base USD, hourly, calculator symbols only", async () => {
   const r = rig(); await r.get(); const c = r.calls[0];
   expect(c.init.headers.Authorization).toBe("Bearer " + KEY); expect(c.u).not.toContain(KEY); expect(c.u).not.toContain("api_key");
-  expect(c.u).toStartWith("https://api.fxratesapi.com/latest?base=USD&resolution=1h"); expect(c.u).toContain("currencies=AED,"); expect(c.u).toContain(",MXN,");
+  expect(c.u).toStartWith("https://api.fxratesapi.com/latest?base=USD&resolution=1h"); expect(c.u).not.toContain("currencies");
 });
 test("cache: many requests in the hour -> ONE upstream call; concurrent first requests share it", async () => {
   const r = rig(); await Promise.all(Array.from({ length: 20 }, () => r.get())); expect(r.calls.length).toBe(1);
@@ -158,4 +160,25 @@ test("r3 client IP comes from X-Real-IP (Railway edge); a spoofed X-Forwarded-Fo
   for (let i = 0; i < 30; i++) expect((await req("10.9.9." + i)).status).toBe(200);
   expect((await req("10.9.9.200")).status).toBe(429);
   expect(r.calls.length).toBe(1); /* the limiter never costs fxRatesAPI calls */
+});
+
+/* r3 request shape: fxRatesAPI 400s the whole call on one unsupported code in currencies= (seen live 2026-11-20: invalid_currencies) */
+test("request shape: exactly /latest?base=USD&resolution=1h&places=6&format=json, no currencies list, key not in URL", async () => {
+  const r = rig(); await r.get(); const u = new URL(r.calls[0].u);
+  expect(u.origin + u.pathname).toBe("https://api.fxratesapi.com/latest");
+  expect([...u.searchParams.keys()].sort()).toEqual(["base", "format", "places", "resolution"]);
+  expect(u.searchParams.get("base")).toBe("USD"); expect(u.searchParams.get("resolution")).toBe("1h"); expect(u.searchParams.get("places")).toBe("6"); expect(u.searchParams.get("format")).toBe("json");
+  expect(r.calls[0].u).not.toContain(KEY);
+});
+test("local filter: crypto/metals/retired codes from the all-currencies reply are dropped; fiat kept; missing fiat simply absent", async () => {
+  const r = rig({ mode: "extra" }); const j = await (await r.get()).json();
+  for (const c of ["ADA", "ARB", "XAU", "BTC", "XPT", "ZMK"]) expect(j.rates[c]).toBeUndefined();
+  expect(j.rates.ARS).toBe(1000); expect(j.rates.MXN).toBeGreaterThan(0); expect(j.rates.USD).toBe(1);
+  for (const c of ["MRU", "SLE", "SSP", "STN", "VES"]) expect(j.rates[c]).toBeUndefined();
+});
+test("400 invalid_currencies is not a limit: 503, no block, status-only log, one retry after the hour", async () => {
+  const r = rig({ mode: "invalid" }); const res = await r.get(); expect(res.status).toBe(503);
+  expect(r.p._state().blockedUntil).toBe(0); expect(r.logs).toEqual(["upstream HTTP 400"]);
+  for (let i = 0; i < 10; i++) await r.get(); expect(r.calls.length).toBe(1);
+  r.set("ok"); r.tick(HOUR); expect((await r.get()).status).toBe(200); expect(r.calls.length).toBe(2);
 });
