@@ -79,8 +79,9 @@ function stamp(meta,busy,now,pair){if(!meta)return{top:busy?"Updating…":"No ra
   if(inH){var ht="Updated hourly, rates as of "+at+" "+hc;
    /* offline/failed: when the rates and the last check are on the same earlier day, the date is shown once so the line fits */
    var fc=meta.fetched||hr.asOf,hc2=at.indexOf(",")>0&&new Date(fc).toDateString()===new Date(hr.asOf).toDateString()?"(checked "+new Date(fc).toLocaleString("en-US",{hour:"numeric",minute:"2-digit"})+")":hc;
-   if(meta.offline){hs="Offline · saved "+hs.charAt(0).toLowerCase()+hs.slice(1);ht="Offline · saved hourly "+at+" "+hc2}
-   else if(meta.failed){hs="Couldn't refresh · showing "+hs.charAt(0).toLowerCase()+hs.slice(1);ht="Couldn't refresh · hourly "+at+" "+hc2}
+   var rest=hs.slice("Updated hourly, rates as of ".length);/* "<date, time> (checked …) · fxRatesAPI[ · other currencies…]" */
+   if(meta.offline){hs="Offline · saved hourly rates as of "+rest;ht="Offline · saved hourly "+at+" "+hc2}
+   else if(meta.failed){hs="Couldn't refresh · showing hourly rates as of "+rest;ht="Couldn't refresh · hourly "+at+" "+hc2}
    return{top:busy?"Updating…":ht,foot:hs}}
   var ds=stamp({date:meta.date,fetched:meta.fetched,offline:meta.offline,failed:meta.failed},busy,now,pair);ds.foot=ds.foot+" · "+hs.replace(/ \(checked [^)]*\)/,"");return ds}
  var chk="(checked "+clock(meta.fetched||Date.parse(meta.date+"T12:00:00Z"),now)+")",fx=meta.fix,d=day(meta.date,now),
